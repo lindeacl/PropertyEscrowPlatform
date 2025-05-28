@@ -12,7 +12,7 @@ async function main() {
   const platformWallet = new ethers.Wallet("0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6", provider);
   
   console.log("📝 Deploying with account:", deployer.address);
-  console.log("💰 Account balance:", (await deployer.getBalance()).toString());
+  console.log("💰 Account balance:", (await provider.getBalance(deployer.address)).toString());
 
   // Load contract artifacts
   const mockTokenArt = JSON.parse(fs.readFileSync("./artifacts/contracts/mocks/MockERC20.sol/MockERC20.json"));
@@ -39,7 +39,7 @@ async function main() {
 
   // Whitelist the token
   console.log("\n🔐 Whitelisting token...");
-  await factory.whitelistToken(token.address);
+  await factory.whitelistToken(await token.getAddress());
   console.log("✅ Token whitelisted successfully");
 
   // Create a test escrow
@@ -48,8 +48,8 @@ async function main() {
     "123 Property Street",           // Property ID
     deployer.address,                // Buyer
     agent.address,                   // Seller (using agent address for demo)
-    token.address,                   // Payment token
-    hre.ethers.utils.parseEther("100"), // Purchase amount
+    await token.getAddress(),        // Payment token
+    ethers.parseEther("100"),        // Purchase amount
     Math.floor(Date.now() / 1000) + 86400, // Deposit deadline (24h)
     Math.floor(Date.now() / 1000) + 172800, // Verification deadline (48h)
     250,  // Agent fee (2.5%)
@@ -57,15 +57,20 @@ async function main() {
   );
   
   const receipt = await escrowTx.wait();
-  const escrowEvent = receipt.events?.find(e => e.event === 'EscrowContractDeployed');
-  const escrowAddress = escrowEvent?.args?.escrowContract;
+  const escrowEvent = receipt.logs?.find(log => {
+    try {
+      return factory.interface.parseLog(log)?.name === 'EscrowContractDeployed';
+    } catch { return false; }
+  });
+  const parsedLog = escrowEvent ? factory.interface.parseLog(escrowEvent) : null;
+  const escrowAddress = parsedLog?.args?.escrowContract;
   
   console.log("✅ Test escrow created at:", escrowAddress);
 
   console.log("\n🎉 DEPLOYMENT COMPLETE!");
   console.log("========================================");
-  console.log("🏭 EscrowFactory:", factory.address);
-  console.log("📄 Token:", token.address);
+  console.log("🏭 EscrowFactory:", await factory.getAddress());
+  console.log("📄 Token:", await token.getAddress());
   console.log("🏠 Test Escrow:", escrowAddress);
   console.log("========================================");
   console.log("\n✨ Your enterprise property escrow platform is now live!");
