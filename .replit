@@ -1,4 +1,4 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
@@ -30,6 +30,10 @@ args = "Run Escrow Tests"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "Local Blockchain"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Web Server"
 
 [[workflows.workflow]]
 name = "Hardhat Development Server"
@@ -72,8 +76,21 @@ task = "shell.exec"
 args = "npx hardhat node"
 waitForPort = 8545
 
+[[workflows.workflow]]
+name = "Web Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 -m http.server 5000"
+waitForPort = 5000
+
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
+
+[[ports]]
+localPort = 5000
+externalPort = 5000
 
 [[ports]]
 localPort = 8545
