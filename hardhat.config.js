@@ -13,16 +13,7 @@ const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "";
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
 
 module.exports = {
-  solidity: {
-    version: "0.8.22",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-      viaIR: true,
-    },
-  },
+  solidity: "0.8.22",
   
   networks: {
     hardhat: {
