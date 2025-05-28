@@ -1,0 +1,35 @@
+Compiled 24 Solidity files successfully (evm target: paris).
+An unexpected error occurred:
+
+Error: Cannot find module 'chai'
+Require stack:
+- /home/runner/workspace/test/EscrowFactory.test.js
+- /home/runner/workspace/node_modules/mocha/lib/mocha.js
+- /home/runner/workspace/node_modules/mocha/index.js
+- /home/runner/workspace/node_modules/hardhat/builtin-tasks/test.js
+- /home/runner/workspace/node_modules/hardhat/internal/core/tasks/builtin-tasks.js
+- /home/runner/workspace/node_modules/hardhat/internal/core/config/config-loading.js
+- /home/runner/workspace/node_modules/hardhat/internal/cli/cli.js
+- /home/runner/workspace/node_modules/hardhat/internal/cli/bootstrap.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (/home/runner/workspace/test/EscrowFactory.test.js:1:20)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/test/EscrowFactory.test.js',
+    '/home/runner/workspace/node_modules/mocha/lib/mocha.js',
+    '/home/runner/workspace/node_modules/mocha/index.js',
+    '/home/runner/workspace/node_modules/hardhat/builtin-tasks/test.js',
+    '/home/runner/workspace/node_modules/hardhat/internal/core/tasks/builtin-tasks.js',
+    '/home/runner/workspace/node_modules/hardhat/internal/core/config/config-loading.js',
+    '/home/runner/workspace/node_modules/hardhat/internal/cli/cli.js',
+    '/home/runner/workspace/node_modules/hardhat/internal/cli/bootstrap.js'
+  ]
+}

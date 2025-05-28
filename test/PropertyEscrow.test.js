@@ -438,8 +438,4 @@ describe("PropertyEscrow", function () {
   });
 });
 
-// Mock ERC20 contract for testing
-contract("MockERC20", () => {
-  // This would be implemented as a separate file in a real project
-  // For brevity, including the interface here
-});
+// Mock ERC20 contract is implemented in contracts/mocks/MockERC20.sol
