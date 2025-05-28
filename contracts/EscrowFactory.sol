@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -34,7 +34,7 @@ contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
         uint256 _platformFee,
         address _defaultAgent,
         address _defaultArbiter
-    ) {
+    ) Ownable(msg.sender) {
         require(_platformWallet != address(0), "Invalid platform wallet");
         require(_platformFee <= MAX_PLATFORM_FEE, "Platform fee too high");
 
