@@ -2,7 +2,7 @@
 pragma solidity ^0.8.22;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
 import "./PropertyEscrow.sol";
@@ -34,7 +34,7 @@ contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
         uint256 _platformFee,
         address _defaultAgent,
         address _defaultArbiter
-    ) Ownable(msg.sender) {
+    ) Ownable() {
         require(_platformWallet != address(0), "Invalid platform wallet");
         require(_platformFee <= MAX_PLATFORM_FEE, "Platform fee too high");
 
