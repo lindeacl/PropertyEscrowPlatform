@@ -25,25 +25,38 @@ describe("Property Escrow Platform - Critical Tests", function () {
   });
 
   it("Should deploy factory correctly", async function () {
-    expect(await factory.platformFee()).to.equal(250);
+    expect(await factory.platformWallet()).to.equal(owner.address);
+    expect(await factory.getDefaultAgent()).to.equal(agent.address);
+    expect(await factory.getDefaultArbiter()).to.equal(arbiter.address);
   });
 
   it("Should whitelist tokens", async function () {
-    await factory.whitelistToken(await token.getAddress());
+    await factory.whitelistToken(await token.getAddress(), true);
     expect(await factory.isTokenWhitelisted(await token.getAddress())).to.be.true;
   });
 
   it("Should create escrow", async function () {
-    const tx = await factory.createEscrow(
-      "Property123",
-      buyer.address,
-      seller.address,
-      await token.getAddress(),
-      ethers.parseEther("100"),
-      Math.floor(Date.now() / 1000) + 86400,
-      Math.floor(Date.now() / 1000) + 172800,
-      250, 250
-    );
+    const params = {
+      buyer: buyer.address,
+      seller: seller.address,
+      agent: agent.address,
+      arbiter: arbiter.address,
+      tokenAddress: await token.getAddress(),
+      depositAmount: ethers.parseEther("100"),
+      agentFee: 250,
+      platformFee: 250,
+      property: {
+        propertyId: "Property123",
+        description: "123 Main St",
+        salePrice: ethers.parseEther("100"),
+        documentHash: "QmTest123",
+        verified: false
+      },
+      depositDeadline: Math.floor(Date.now() / 1000) + 86400,
+      verificationDeadline: Math.floor(Date.now() / 1000) + 172800
+    };
+    
+    const tx = await factory.createEscrow(params);
     await tx.wait();
     expect(tx).to.be.ok;
   });
