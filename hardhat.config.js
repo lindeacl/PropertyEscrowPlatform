@@ -1,3 +1,4 @@
+require("@nomicfoundation/hardhat-network-helpers");
 require("@nomiclabs/hardhat-etherscan");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
