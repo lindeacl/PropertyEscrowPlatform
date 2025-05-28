@@ -126,7 +126,7 @@ contract EscrowFactoryUpgradeable is
 
         // Create new escrow contract
         escrowId = escrowCounter;
-        escrowContract = address(new PropertyEscrow());
+        escrowContract = address(new PropertyEscrow(platformWallet, platformFee));
         
         // Initialize the escrow
         PropertyEscrow(escrowContract).createEscrow(params);
