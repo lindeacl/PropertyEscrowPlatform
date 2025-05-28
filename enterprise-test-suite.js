@@ -163,6 +163,9 @@ describe("Enterprise Property Escrow Platform - Complete Test Suite", function (
       escrowId = 0;
       const escrowAddress = await factory.getEscrowContract(escrowId);
       escrowContract = await ethers.getContractAt("PropertyEscrow", escrowAddress);
+      
+      // Ensure proper token approval for each test
+      await token.connect(buyer).approve(escrowAddress, ethers.parseEther("1000"));
     });
 
     it("Test 26: Should complete successful sale flow", async function () {
@@ -174,9 +177,12 @@ describe("Enterprise Property Escrow Platform - Complete Test Suite", function (
       await escrowContract.connect(agent).completeVerification(escrowId);
       expect(await escrowContract.getEscrowState(escrowId)).to.equal(2);
 
-      // Give approvals and release
+      // Give approvals (all required parties)
       await escrowContract.connect(buyer).giveApproval(escrowId);
       await escrowContract.connect(seller).giveApproval(escrowId);
+      await escrowContract.connect(agent).giveApproval(escrowId);
+      
+      // Now release funds
       await escrowContract.connect(agent).releaseFunds(escrowId);
       
       expect(await escrowContract.getEscrowState(escrowId)).to.equal(3);
@@ -192,7 +198,9 @@ describe("Enterprise Property Escrow Platform - Complete Test Suite", function (
       await escrowContract.connect(buyer).depositFunds(escrowId);
       const initialBalance = await token.balanceOf(buyer.address);
       
-      await escrowContract.connect(arbiter).refundBuyer(escrowId);
+      // Use dispute resolution path for refund (which arbiter can execute)
+      await escrowContract.connect(buyer).raiseDispute(escrowId, "Refund request");
+      await escrowContract.connect(arbiter).resolveDispute(escrowId, true, "Refund approved");
       
       const finalBalance = await token.balanceOf(buyer.address);
       expect(finalBalance).to.be.gt(initialBalance);
