@@ -19,6 +19,10 @@ args = "Hardhat Development Server"
 task = "workflow.run"
 args = "escrow_test"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Escrow Platform Tests"
+
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -34,6 +38,14 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm install && npm test"
+
+[[workflows.workflow]]
+name = "Escrow Platform Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx hardhat test"
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
