@@ -1,0 +1,38 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @nomicfoundation/hardhat-chai-matchers@2.0.8
+npm error Found: chai@5.2.0
+npm error node_modules/chai
+npm error   chai@"^5.2.0" from the root project
+npm error   peer chai@">= 2.1.2 < 6" from chai-as-promised@7.1.2
+npm error   node_modules/chai-as-promised
+npm error     chai-as-promised@"^7.1.1" from @nomicfoundation/hardhat-chai-matchers@2.0.8
+npm error     node_modules/@nomicfoundation/hardhat-chai-matchers
+npm error       peer @nomicfoundation/hardhat-chai-matchers@"^2.0.0" from @nomicfoundation/hardhat-toolbox@5.0.0
+npm error       node_modules/@nomicfoundation/hardhat-toolbox
+npm error         @nomicfoundation/hardhat-toolbox@"^5.0.0" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peer chai@"^4.2.0" from @nomicfoundation/hardhat-chai-matchers@2.0.8
+npm error node_modules/@nomicfoundation/hardhat-chai-matchers
+npm error   peer @nomicfoundation/hardhat-chai-matchers@"^2.0.0" from @nomicfoundation/hardhat-toolbox@5.0.0
+npm error   node_modules/@nomicfoundation/hardhat-toolbox
+npm error     @nomicfoundation/hardhat-toolbox@"^5.0.0" from the root project
+npm error
+npm error Conflicting peer dependency: chai@4.5.0
+npm error node_modules/chai
+npm error   peer chai@"^4.2.0" from @nomicfoundation/hardhat-chai-matchers@2.0.8
+npm error   node_modules/@nomicfoundation/hardhat-chai-matchers
+npm error     peer @nomicfoundation/hardhat-chai-matchers@"^2.0.0" from @nomicfoundation/hardhat-toolbox@5.0.0
+npm error     node_modules/@nomicfoundation/hardhat-toolbox
+npm error       @nomicfoundation/hardhat-toolbox@"^5.0.0" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /home/runner/.npm/_logs/2025-05-28T18_40_33_717Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-05-28T18_40_33_717Z-debug-0.log
