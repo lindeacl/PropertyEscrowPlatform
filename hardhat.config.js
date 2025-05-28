@@ -1,3 +1,4 @@
+// Using ethers v6 directly
 require("@nomicfoundation/hardhat-network-helpers");
 require("@nomiclabs/hardhat-etherscan");
 require("hardhat-gas-reporter");

@@ -27,6 +27,10 @@ args = "Escrow Platform Tests"
 task = "workflow.run"
 args = "Run Escrow Tests"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Local Blockchain"
+
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -59,5 +63,18 @@ author = "agent"
 task = "shell.exec"
 args = "npx hardhat test"
 
+[[workflows.workflow]]
+name = "Local Blockchain"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx hardhat node"
+waitForPort = 8545
+
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
+
+[[ports]]
+localPort = 8545
+externalPort = 80

@@ -1,0 +1,630 @@
+
+
+  EscrowFactory
+    Deployment
+      1) Should deploy with correct initial values
+      2) Should reject invalid constructor parameters
+    Token Whitelisting
+      3) Should allow owner to whitelist tokens
+      4) Should reject non-owner trying to whitelist
+      5) Should reject zero address token
+    Escrow Creation
+      6) Should create escrow successfully with defaults
+      7) Should create escrow with custom agent and arbiter
+      8) Should fail with non-whitelisted token
+      9) Should create multiple escrows
+    Administrative Functions
+      10) Should allow owner to set default agent
+      11) Should allow owner to set default arbiter
+      12) Should allow owner to set platform fee
+      13) Should reject platform fee that's too high
+      14) Should reject non-owner trying to change settings
+    View Functions
+      15) Should return correct escrow contract address
+      16) Should revert for invalid escrow ID
+      17) Should return correct token whitelist status
+
+  PropertyEscrow
+    Deployment
+      18) Should deploy with correct initial values
+      19) Should set up roles correctly
+    Escrow Creation
+      20) Should create escrow successfully
+      21) Should fail with invalid parameters
+      22) Should fail with non-whitelisted token
+    Fund Deposit
+      23) Should allow buyer to deposit funds
+      24) Should fail if not buyer tries to deposit
+      25) Should fail if deposit deadline passed
+      26) Should fail if escrow not in Created state
+    Verification
+      27) Should allow agent to complete verification
+      28) Should allow admin to complete verification
+      29) Should fail if unauthorized user tries to verify
+      30) Should fail if verification deadline passed
+    Approvals
+      31) "before each" hook for "Should allow buyer to give approval"
+    Fund Release
+      32) Should release funds when all conditions met
+      33) Should fail if release conditions not met
+    Disputes
+      34) "before each" hook for "Should allow participants to raise dispute"
+    Emergency Functions
+      35) Should allow admin to pause contract
+      36) Should allow admin to unpause contract
+      37) Should allow admin to recover stuck tokens
+    View Functions
+      38) Should return correct escrow state
+      39) Should correctly check if funds can be released
+
+  Full Property Sale Flow Integration
+    Successful Property Sale Flow
+      40) Should complete full property sale successfully
+      41) Should handle property sale with no agent fee
+    Dispute Resolution Flow
+      42) Should handle dispute raised by buyer with refund
+      43) Should handle dispute resolved in favor of seller
+    Timeout and Deadline Scenarios
+      44) Should prevent deposit after deadline
+      45) Should prevent verification after deadline
+    Multiple Escrows Management
+      46) Should handle multiple concurrent escrows
+    Edge Cases and Error Conditions
+      47) Should handle escrow cancellation before deposit
+      48) Should handle insufficient token balance
+      49) Should handle emergency token recovery
+
+  Security Tests
+    Reentrancy Protection
+      50) Should prevent reentrancy attacks on fund release
+      51) Should prevent reentrancy on dispute resolution
+    Access Control
+      52) Should prevent unauthorized role assignments
+      53) Should prevent unauthorized function calls
+      54) Should prevent unauthorized token whitelisting
+    State Manipulation Protection
+      55) Should prevent state transitions in wrong order
+      56) Should prevent double spending
+      57) Should prevent approval after escrow completion
+    Token Security
+      58) Should prevent deposit with non-whitelisted tokens
+      59) Should handle token transfer failures gracefully
+      60) Should prevent manipulation of token balances during escrow
+    Integer Overflow/Underflow Protection
+      61) Should handle large deposit amounts safely
+      62) Should prevent fee calculations that could overflow
+    Time-based Attack Prevention
+      63) Should prevent manipulation of deadline checks
+    Emergency Security Features
+      64) Should allow emergency pause by admin
+      65) Should prevent non-admin from pausing
+
+
+  0 passing (46ms)
+  65 failing
+
+  1) EscrowFactory
+       Deployment
+         Should deploy with correct initial values:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:70:72)
+
+  2) EscrowFactory
+       Deployment
+         Should reject invalid constructor parameters:
+     TypeError: Cannot read properties of undefined (reading 'getContractFactory')
+      at Context.<anonymous> (test/EscrowFactory.test.js:80:42)
+      at processImmediate (node:internal/timers:483:21)
+
+  3) EscrowFactory
+       Token Whitelisting
+         Should allow owner to whitelist tokens:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:97:41)
+
+  4) EscrowFactory
+       Token Whitelisting
+         Should reject non-owner trying to whitelist:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:109:41)
+
+  5) EscrowFactory
+       Token Whitelisting
+         Should reject zero address token:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:116:34)
+
+  6) EscrowFactory
+       Escrow Creation
+         Should create escrow successfully with defaults:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:125:63)
+
+  7) EscrowFactory
+       Escrow Creation
+         Should create escrow with custom agent and arbiter:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:148:54)
+
+  8) EscrowFactory
+       Escrow Creation
+         Should fail with non-whitelisted token:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:168:47)
+
+  9) EscrowFactory
+       Escrow Creation
+         Should create multiple escrows:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:184:47)
+
+  10) EscrowFactory
+       Administrative Functions
+         Should allow owner to set default agent:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:210:41)
+
+  11) EscrowFactory
+       Administrative Functions
+         Should allow owner to set default arbiter:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:220:41)
+
+  12) EscrowFactory
+       Administrative Functions
+         Should allow owner to set platform fee:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:230:34)
+
+  13) EscrowFactory
+       Administrative Functions
+         Should reject platform fee that's too high:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:241:34)
+
+  14) EscrowFactory
+       Administrative Functions
+         Should reject non-owner trying to change settings:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:248:34)
+
+  15) EscrowFactory
+       View Functions
+         Should return correct escrow contract address:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:263:47)
+
+  16) EscrowFactory
+       View Functions
+         Should revert for invalid escrow ID:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:272:27)
+
+  17) EscrowFactory
+       View Functions
+         Should return correct token whitelist status:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFactoryFixture (test/EscrowFactory.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/EscrowFactory.test.js:279:34)
+
+  18) PropertyEscrow
+       Deployment
+         Should deploy with correct initial values:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:76:42)
+
+  19) PropertyEscrow
+       Deployment
+         Should set up roles correctly:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:84:49)
+
+  20) PropertyEscrow
+       Escrow Creation
+         Should create escrow successfully:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:95:76)
+
+  21) PropertyEscrow
+       Escrow Creation
+         Should fail with invalid parameters:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:109:46)
+
+  22) PropertyEscrow
+       Escrow Creation
+         Should fail with non-whitelisted token:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:128:46)
+
+  23) PropertyEscrow
+       Fund Deposit
+         Should allow buyer to deposit funds:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:142:68)
+
+  24) PropertyEscrow
+       Fund Deposit
+         Should fail if not buyer tries to deposit:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:155:54)
+
+  25) PropertyEscrow
+       Fund Deposit
+         Should fail if deposit deadline passed:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:164:53)
+
+  26) PropertyEscrow
+       Fund Deposit
+         Should fail if escrow not in Created state:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:176:53)
+
+  27) PropertyEscrow
+       Verification
+         Should allow agent to complete verification:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:189:60)
+
+  28) PropertyEscrow
+       Verification
+         Should allow admin to complete verification:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:204:60)
+
+  29) PropertyEscrow
+       Verification
+         Should fail if unauthorized user tries to verify:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:215:61)
+
+  30) PropertyEscrow
+       Verification
+         Should fail if verification deadline passed:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:225:60)
+
+  31) PropertyEscrow
+       Approvals
+         "before each" hook for "Should allow buyer to give approval":
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:240:60)
+
+  32) PropertyEscrow
+       Fund Release
+         Should release funds when all conditions met:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:282:90)
+
+  33) PropertyEscrow
+       Fund Release
+         Should fail if release conditions not met:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:307:60)
+
+  34) PropertyEscrow
+       Disputes
+         "before each" hook for "Should allow participants to raise dispute":
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:323:60)
+
+  35) PropertyEscrow
+       Emergency Functions
+         Should allow admin to pause contract:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:380:33)
+
+  36) PropertyEscrow
+       Emergency Functions
+         Should allow admin to unpause contract:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:392:33)
+
+  37) PropertyEscrow
+       Emergency Functions
+         Should allow admin to recover stuck tokens:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:400:40)
+
+  38) PropertyEscrow
+       View Functions
+         Should return correct escrow state:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:417:46)
+
+  39) PropertyEscrow
+       View Functions
+         Should correctly check if funds can be released:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployEscrowFixture (test/PropertyEscrow.test.js:8:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/PropertyEscrow.test.js:424:68)
+
+  40) Full Property Sale Flow Integration
+       Successful Property Sale Flow
+         Should complete full property sale successfully:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:87:11)
+
+  41) Full Property Sale Flow Integration
+       Successful Property Sale Flow
+         Should handle property sale with no agent fee:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:177:11)
+
+  42) Full Property Sale Flow Integration
+       Dispute Resolution Flow
+         Should handle dispute raised by buyer with refund:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:226:11)
+
+  43) Full Property Sale Flow Integration
+       Dispute Resolution Flow
+         Should handle dispute resolved in favor of seller:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:275:11)
+
+  44) Full Property Sale Flow Integration
+       Timeout and Deadline Scenarios
+         Should prevent deposit after deadline:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:324:11)
+
+  45) Full Property Sale Flow Integration
+       Timeout and Deadline Scenarios
+         Should prevent verification after deadline:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:348:11)
+
+  46) Full Property Sale Flow Integration
+       Multiple Escrows Management
+         Should handle multiple concurrent escrows:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:377:11)
+
+  47) Full Property Sale Flow Integration
+       Edge Cases and Error Conditions
+         Should handle escrow cancellation before deposit:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:432:11)
+
+  48) Full Property Sale Flow Integration
+       Edge Cases and Error Conditions
+         Should handle insufficient token balance:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:455:11)
+
+  49) Full Property Sale Flow Integration
+       Edge Cases and Error Conditions
+         Should handle emergency token recovery:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deployFullSystemFixture (test/integration/FullFlow.test.js:7:88)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/integration/FullFlow.test.js:478:11)
+
+  50) Security Tests
+       Reentrancy Protection
+         Should prevent reentrancy attacks on fund release:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:69:68)
+
+  51) Security Tests
+       Reentrancy Protection
+         Should prevent reentrancy on dispute resolution:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:106:69)
+
+  52) Security Tests
+       Access Control
+         Should prevent unauthorized role assignments:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:142:36)
+
+  53) Security Tests
+       Access Control
+         Should prevent unauthorized function calls:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:162:63)
+
+  54) Security Tests
+       Access Control
+         Should prevent unauthorized token whitelisting:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:186:36)
+
+  55) Security Tests
+       State Manipulation Protection
+         Should prevent state transitions in wrong order:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:200:60)
+
+  56) Security Tests
+       State Manipulation Protection
+         Should prevent double spending:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:218:75)
+
+  57) Security Tests
+       State Manipulation Protection
+         Should prevent approval after escrow completion:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:241:75)
+
+  58) Security Tests
+       Token Security
+         Should prevent deposit with non-whitelisted tokens:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:260:53)
+
+  59) Security Tests
+       Token Security
+         Should handle token transfer failures gracefully:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:277:53)
+
+  60) Security Tests
+       Token Security
+         Should prevent manipulation of token balances during escrow:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:287:67)
+
+  61) Security Tests
+       Integer Overflow/Underflow Protection
+         Should handle large deposit amounts safely:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:318:80)
+
+  62) Security Tests
+       Integer Overflow/Underflow Protection
+         Should prevent fee calculations that could overflow:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:354:42)
+
+  63) Security Tests
+       Time-based Attack Prevention
+         Should prevent manipulation of deadline checks:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:368:60)
+
+  64) Security Tests
+       Emergency Security Features
+         Should allow emergency pause by admin:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:399:53)
+
+  65) Security Tests
+       Emergency Security Features
+         Should prevent non-admin from pausing:
+     TypeError: Cannot read properties of undefined (reading 'getSigners')
+      at deploySecurityTestFixture (test/security/SecurityTests.test.js:7:98)
+      at loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:24)
+      at Context.<anonymous> (test/security/SecurityTests.test.js:417:36)
+
+
+
+
+Your solidity settings have viaIR enabled, which is not fully supported yet. You can still use Hardhat, but some features, like stack traces, might not work correctly.
+
+Learn more at https://hardhat.org/solc-viair
