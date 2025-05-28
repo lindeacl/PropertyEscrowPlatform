@@ -1,0 +1,115 @@
+Replit Dev Agent Brief: Smart Contract Escrow Platform for Property Sales on Polygon
+1. Purpose & Core Requirements
+Objective:
+Build a smart contract-based escrow platform on Polygon (EVM-compatible, ERC20) to facilitate secure, transparent property sales. The platform must allow intake of various payment forms (including cash equivalents) as part of the escrow process, with enterprise readiness as a non-negotiable.
+
+Key Capabilities:
+
+Escrow smart contract manages buyer/seller/property/agent relationships
+
+Supports deposit, lock, and release of funds (ERC20 and potentially other forms)
+
+Handles multi-step property sale flows: deposit, verification, conditional release, dispute resolution, and refunds
+
+Auditability, clear state transitions, and secure role-based access
+
+Designed for integration with external payment rails for fiat on/off-ramp
+
+2. High-Level Design Principles
+Security First: Prevent re-entrancy, unauthorized access, double spend, and front-running
+
+Transparency: All contract state transitions must be auditable on-chain
+
+Modular and Upgradeable: Separate contract logic, storage, and interfaces; consider using proxies if upgradeability is required
+
+Compliance Ready: Log all actions and include hooks for compliance checks (e.g., KYC)
+
+Gas Efficiency: Optimize all contract operations for Polygon’s cost model
+
+Fail-Safe: Funds must always be recoverable in case of any failure or dispute
+
+Extensible Payment Methods: Out of the box ERC20 support, but interfaces for integrating with fiat gateways (can stub for now)
+
+3. Test and Validation Requirements
+Test-Driven Development (TDD):
+
+Unit Tests: 100% coverage for all smart contract functions (use Hardhat or Foundry testing suite)
+
+Integration Tests: Simulate end-to-end property sale flows, including edge cases (failed payments, disputes, etc.)
+
+Security Tests: Include attack simulations (re-entrancy, overflow, access control)
+
+Regression Tests: For every new feature or fix, regression tests must be written and tracked
+
+Static Analysis: Run Slither, MythX, or equivalent for vulnerability scanning
+
+Audit-Ready:
+
+Follow OpenZeppelin contract standards
+
+Document all interfaces, roles, and security considerations
+
+4. Core Smart Contract Features
+Property Escrow Lifecycle:
+
+Escrow Creation: Seller (or platform) lists property, sets terms
+
+Deposit Funds: Buyer deposits ERC20 tokens (or other supported forms) into escrow
+
+Verification: Optional third-party (agent, platform, etc.) verifies off-chain conditions (e.g., property inspection, paperwork)
+
+Release Conditions: On successful verification, funds are released to the seller. If dispute, a resolution flow is triggered.
+
+Refunds: Buyer can be refunded if sale conditions are not met (with agreed rules)
+
+Dispute Resolution: Built-in, with roles for trusted arbiters or platform
+
+Roles & Permissions:
+
+Buyer, Seller, Escrow Agent/Arbiter, Admin
+
+Only authorized parties can trigger sensitive functions
+
+Events & Logging:
+
+Emit detailed events for all state changes (escrow creation, deposit, release, dispute, refund, etc.)
+
+5. Enterprise-Readiness Checklist
+Comprehensive README with architecture, deployment, and integration docs
+
+Full test suite with >90% coverage and automated CI for deployments
+
+Well-documented API and smart contract interfaces
+
+Compliance hooks for KYC/AML if needed (stub if not full implementation)
+
+Upgradeable contracts if required (optional—confirm with product owner)
+
+Production deployment scripts for Polygon mainnet/testnet
+
+Monitoring and alerting hooks (emit events for off-chain monitoring)
+
+6. Deliverables
+Smart Contract Codebase (Solidity, OpenZeppelin standards)
+
+Deployment Scripts (Hardhat, Foundry, or Truffle)
+
+Comprehensive Unit & Integration Tests
+
+Security Test Results and static analysis output
+
+User & Developer Documentation (incl. how to interact, example flows)
+
+Audit Preparation Package: Full documentation, threat model, test results
+
+Optional: Minimal UI/CLI for demoing basic flows
+
+7. Forward-Thinking Notes
+Design for multi-property and multi-escrow support
+
+Prepare for off-chain integration: Notarization, document upload, KYC, fiat on-ramp/off-ramp (future)
+
+Scalability: Consider using subgraphs (The Graph) or similar for property and escrow indexing
+
+Summary for Dev Agent
+"Deliver an enterprise-grade, fully tested escrow platform on Polygon for property sales, with security, extensibility, and auditable flows at its core. Don’t cut corners—think like an auditor, build like a Fintech startup, and test like a paranoid engineer. Use best-in-class frameworks and make sure every major business risk (fraud, dispute, funds lock, compliance) is mitigated. Documentation and test evidence are part of the definition of done."
