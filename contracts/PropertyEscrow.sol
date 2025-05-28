@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+// SafeMath not needed in Solidity 0.8+ (built-in overflow protection)
 
 import "./interfaces/IPropertyEscrow.sol";
 import "./libraries/EscrowStructs.sol";
@@ -18,7 +18,6 @@ import "./libraries/EscrowStructs.sol";
  */
 contract PropertyEscrow is IPropertyEscrow, ReentrancyGuard, Pausable, AccessControl {
     using SafeERC20 for IERC20;
-    using SafeMath for uint256;
 
     // Role definitions
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
@@ -221,9 +220,9 @@ contract PropertyEscrow is IPropertyEscrow, ReentrancyGuard, Pausable, AccessCon
         EscrowStructs.Escrow storage escrow = escrows[escrowId];
         
         // Calculate amounts
-        uint256 platformFeeAmount = escrow.depositAmount.mul(escrow.platformFee).div(BASIS_POINTS);
+        uint256 platformFeeAmount = (escrow.depositAmount * escrow.platformFee) / BASIS_POINTS;
         uint256 agentFeeAmount = escrow.agentFee;
-        uint256 sellerAmount = escrow.depositAmount.sub(platformFeeAmount).sub(agentFeeAmount);
+        uint256 sellerAmount = escrow.depositAmount - platformFeeAmount - agentFeeAmount;
 
         escrow.state = EscrowStructs.EscrowState.Released;
 
