@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.22;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
@@ -68,7 +68,7 @@ contract EscrowFactoryUpgradeable is
         address _defaultArbiter,
         address _complianceManager
     ) public initializer {
-        __Ownable_init();
+        __Ownable_init(msg.sender);
         __Pausable_init();
         __ReentrancyGuard_init();
         __UUPSUpgradeable_init();
