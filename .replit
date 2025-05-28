@@ -1,0 +1,39 @@
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Hardhat Development Server"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "escrow_test"
+
+[[workflows.workflow]]
+name = "Hardhat Development Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install && npm run test && npm run deploy:localhost"
+
+[[workflows.workflow]]
+name = "escrow_test"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install && npm test"
+
+[deployment]
+run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
