@@ -143,53 +143,53 @@ describe("Enterprise Property Escrow Platform - Comprehensive Test Suite", funct
 
     it("Should complete full successful property sale flow", async function () {
       // 1. Deposit funds
-      await escrowContract.connect(buyer).depositFunds();
-      expect(await escrowContract.getState()).to.equal(1); // Deposited
+      await escrowContract.connect(buyer).depositFunds(escrowId);
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(1); // Deposited
 
       // 2. Verify property
-      await escrowContract.connect(agent).verifyProperty();
-      expect(await escrowContract.getState()).to.equal(2); // Verified
+      await escrowContract.connect(agent).completeVerification(escrowId);
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(2); // Verified
 
       // 3. Release funds
-      await escrowContract.connect(buyer).approveFundRelease();
-      await escrowContract.connect(seller).approveFundRelease();
-      await escrowContract.connect(agent).releaseFunds();
+      await escrowContract.connect(buyer).giveApproval(escrowId);
+      await escrowContract.connect(seller).giveApproval(escrowId);
+      await escrowContract.connect(agent).releaseFunds(escrowId);
       
-      expect(await escrowContract.getState()).to.equal(3); // Released
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(3); // Released
     });
 
     it("Should handle property verification failure", async function () {
-      await escrowContract.connect(buyer).depositFunds();
+      await escrowContract.connect(buyer).depositFunds(escrowId);
       
-      // Agent rejects verification
-      await escrowContract.connect(agent).rejectVerification("Property condition unsatisfactory");
+      // Raise dispute due to verification failure
+      await escrowContract.connect(agent).raiseDispute(escrowId, "Property condition unsatisfactory");
       
-      expect(await escrowContract.getState()).to.equal(4); // Disputed
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(4); // Disputed
     });
 
     it("Should process refunds correctly", async function () {
-      await escrowContract.connect(buyer).depositFunds();
+      await escrowContract.connect(buyer).depositFunds(escrowId);
       
       const initialBuyerBalance = await token.balanceOf(buyer.address);
       
       // Process refund
-      await escrowContract.connect(arbiter).refundBuyer("Sale cancelled");
+      await escrowContract.connect(arbiter).refundBuyer(escrowId);
       
       const finalBuyerBalance = await token.balanceOf(buyer.address);
       expect(finalBuyerBalance).to.be.gt(initialBuyerBalance);
-      expect(await escrowContract.getState()).to.equal(5); // Refunded
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(5); // Refunded
     });
 
     it("Should handle dispute resolution", async function () {
-      await escrowContract.connect(buyer).depositFunds();
+      await escrowContract.connect(buyer).depositFunds(escrowId);
       
       // Raise dispute
-      await escrowContract.connect(buyer).raiseDispute("Property not as described");
-      expect(await escrowContract.getState()).to.equal(4); // Disputed
+      await escrowContract.connect(buyer).raiseDispute(escrowId, "Property not as described");
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(4); // Disputed
       
       // Arbiter resolves dispute
-      await escrowContract.connect(arbiter).resolveDispute(true, "Dispute resolved in favor of buyer");
-      expect(await escrowContract.getState()).to.equal(5); // Refunded
+      await escrowContract.connect(arbiter).resolveDispute(escrowId, true, "Dispute resolved in favor of buyer");
+      expect(await escrowContract.getEscrowState(escrowId)).to.equal(5); // Refunded
     });
 
     it("Should enforce deposit deadline", async function () {
@@ -198,7 +198,7 @@ describe("Enterprise Property Escrow Platform - Comprehensive Test Suite", funct
       await ethers.provider.send("evm_mine");
       
       await expect(
-        escrowContract.connect(buyer).depositFunds()
+        escrowContract.connect(buyer).depositFunds(escrowId)
       ).to.be.revertedWith("Deposit deadline passed");
     });
   });
