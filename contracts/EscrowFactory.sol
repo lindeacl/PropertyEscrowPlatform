@@ -90,8 +90,7 @@ contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
         escrowContracts[escrowCounter] = escrowContract;
         escrowCounter++;
 
-        // Transfer ownership to the factory (optional, for management)
-        newEscrow.transferOwnership(owner());
+        // Note: PropertyEscrow doesn't inherit Ownable, so no ownership transfer needed
 
         emit EscrowContractDeployed(escrowContract, msg.sender, escrowId);
 
