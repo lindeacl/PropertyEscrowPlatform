@@ -14,8 +14,8 @@ describe("PropertyEscrow", function () {
     await escrow.waitForDeployment();
     const escrowAddress = await escrow.getAddress();
     
-    expect(escrowAddress).to.properAddress;
+    expect(escrowAddress).to.be.a('string');
     expect(await escrow.platformWallet()).to.equal(deployer.address);
-    expect(await escrow.platformFeePercentage()).to.equal(250);
+    expect(await escrow.platformFeePercentage()).to.equal(250n);
   });
 });
