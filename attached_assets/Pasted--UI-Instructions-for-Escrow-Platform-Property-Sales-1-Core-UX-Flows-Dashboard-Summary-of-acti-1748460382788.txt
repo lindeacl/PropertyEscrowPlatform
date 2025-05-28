@@ -1,0 +1,166 @@
+🟦 UI Instructions for Escrow Platform (Property Sales)
+1. Core UX Flows
+Dashboard:
+
+Summary of active, pending, and historical escrow transactions
+
+Quick actions: “Start New Escrow”, “View Properties”, “Withdraw Funds”, “Resolve Dispute”
+
+Escrow Details Page:
+
+Step-by-step timeline: Initiated → Deposited → Verified → Completed/Disputed
+
+Key metadata: Property details, parties involved, funds status, contract address, state
+
+Action buttons contextual to user role (Buyer/Seller/Agent/Admin)
+
+Start Escrow Flow:
+
+Simple, form-driven modal (choose property, set price, select counterparty)
+
+Option to upload off-chain docs (KYC, property paperwork)
+
+Deposit & Release:
+
+Deposit funds (ERC20)—clear wallet integration (MetaMask, WalletConnect)
+
+Visual confirmation on-chain events
+
+Dispute/Refund Flow:
+
+“Raise Dispute” is visible but not in-your-face (nobody wants a panic button at eye-level)
+
+Timeline view of dispute process
+
+Notifications:
+
+Toasts for transaction status, warnings, successes, errors
+
+2. User Roles
+Role-based views:
+
+Buyers see “Deposit” & “Request Refund”
+
+Sellers see “Release Funds” & “Mark as Complete”
+
+Agents/Admins see all plus “Override/Resolve”
+
+🟩 UI Style Guide: “Fintech Real Estate, Minus the Cheese”
+Color Palette
+Primary: #2962FF (Royal Blue)—trust, stability, tech-forward
+
+Secondary: #F4F6FB (Soft Grey)—clean, uncluttered backgrounds
+
+Accent: #FFCA28 (Sun Gold)—highlights, warnings, success states
+
+Danger/Alert: #E53935 (Confident Red)—errors, disputes
+
+Success: #43A047 (Emerald Green)—transaction completed
+
+Typography
+Headings:
+
+font-family: Inter, Segoe UI, sans-serif
+
+font-weight: 700, crisp and clear
+
+All-caps for section titles (e.g., “ACTIVE ESCROWS”)
+
+Body:
+
+font-family: Inter, Segoe UI, sans-serif
+
+font-size: 16px base; 14px for secondary info
+
+Clean, max 2 font weights (400, 700)
+
+Components & Layout
+Cards:
+
+Soft shadows (box-shadow: 0 2px 16px rgba(41,98,255,0.07))
+
+12px–16px border-radius—no sharp corners (unless you’re making a point)
+
+Buttons:
+
+Pill-shaped, bold font, subtle hover scale/shine
+
+Use primary for actions, accent for warnings, success for confirmations
+
+Navigation:
+
+Left-side vertical nav or top nav (for web)
+
+Sticky nav with active item highlighted in primary blue
+
+Modals:
+
+Use frosted glass or soft shadow background
+
+Clear, single-action modals; never leave the user guessing
+
+Interactions
+Wallet Connection:
+
+Prominent, but never blocks the whole UI
+
+Show wallet address, network, and balance after connect
+
+Loading:
+
+Use non-blocking spinners (“Escrow is loading… almost there!”)
+
+Progress bars for long operations
+
+Feedback:
+
+Use toasts for actions (“Funds deposited!”), snackbars for warnings
+
+Confirmations require explicit “Yes, I’m sure” for critical actions
+
+Visuals & Imagery
+Icons:
+
+Use Feather, Lucide, or Heroicons (line only—no gradients or cartoon vibes)
+
+Illustrations:
+
+Minimal, vector-style. If using property imagery, keep it grayscale with one accent color overlay
+
+Branding:
+
+Optional logo: stylized key or lock, blue/gold colorway
+
+No “clip art” houses, ever. We’re not an estate agent from 1999.
+
+Accessibility
+All buttons and links >44px touch target
+
+Minimum AA color contrast
+
+Keyboard navigation, tab order logical
+
+Focus rings visible
+
+Dark Mode
+Use #181C27 backgrounds, #F4F6FB text, maintain blue/gold accents
+
+Bonus: Forward-Thinking Features
+Mobile-First: Responsive down to iPhone SE
+
+QR Code Integration: For sharing escrow details securely
+
+Audit Log Page: Visible timeline of all escrow contract events (with blockchain tx links)
+
+Multilingual Ready: Start with English, keep string resources separate
+
+Sample Tone for Microcopy
+“Your funds are protected—escrowed, not ghosted.”
+
+“Dispute? Don’t panic—our agent will step in.”
+
+“Almost there! Your transaction is confirming on Polygon.”
+
+Hand-off to Dev Agent
+“Bring this UI to life with clean, modern components. Prioritize clarity, trust, and ease-of-use. Follow the style guide for that ‘Fintech cool’—and if you’re ever in doubt, keep it simple, elegant, and ruthlessly functional. We’re here to impress CFOs, compliance, and your favorite tech hipster—simultaneously.”
+

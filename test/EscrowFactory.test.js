@@ -8,7 +8,7 @@ describe("EscrowFactory", function () {
 
     // Deploy mock ERC20 token
     const MockToken = await ethers.getContractFactory("MockERC20");
-    const token = await MockToken.deploy("Test Token", "TEST", ethers.utils.parseEther("1000000"));
+    const token = await MockToken.deploy("Test Token", "TEST", ethers.parseEther("1000000"));
 
     // Deploy EscrowFactory
     const EscrowFactory = await ethers.getContractFactory("EscrowFactory");
@@ -24,8 +24,8 @@ describe("EscrowFactory", function () {
     await factory.whitelistToken(token.address, true);
 
     // Mint tokens to buyer
-    const depositAmount = ethers.utils.parseEther("100");
-    await token.transfer(buyer.address, depositAmount.mul(2));
+    const depositAmount = ethers.parseEther("100");
+    await token.transfer(buyer.address, depositAmount * 2n);
 
     const property = {
       propertyId: "PROP001",
@@ -38,11 +38,11 @@ describe("EscrowFactory", function () {
     const createEscrowParams = {
       buyer: buyer.address,
       seller: seller.address,
-      agent: ethers.constants.AddressZero, // Will use default
-      arbiter: ethers.constants.AddressZero, // Will use default
+      agent: ethers.ZeroAddress, // Will use default
+      arbiter: ethers.ZeroAddress, // Will use default
       tokenAddress: token.address,
       depositAmount: depositAmount,
-      agentFee: ethers.utils.parseEther("5"),
+      agentFee: ethers.parseEther("5"),
       platformFee: 0, // Will use default
       property: property,
       depositDeadline: Math.floor(Date.now() / 1000) + 86400,
