@@ -9,7 +9,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -35,6 +35,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -56,7 +59,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -82,6 +85,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -101,7 +107,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -127,6 +133,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -148,7 +157,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -174,6 +183,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -193,7 +205,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -219,6 +231,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -238,7 +253,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -264,6 +279,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -285,7 +303,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -311,6 +329,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -332,7 +353,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -358,6 +379,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -382,7 +406,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -408,6 +432,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -427,7 +454,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -453,6 +480,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -476,7 +506,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -502,6 +532,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -521,7 +554,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -547,6 +580,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -569,7 +605,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -595,6 +631,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -616,7 +655,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -642,6 +681,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -661,7 +703,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -687,6 +729,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -706,7 +751,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -732,6 +777,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -751,7 +799,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -777,6 +825,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -796,7 +847,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -822,6 +873,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -841,7 +895,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -867,6 +921,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -888,7 +945,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -914,6 +971,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -937,7 +997,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -963,6 +1023,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -986,7 +1049,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1012,6 +1075,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1126,7 +1192,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1152,6 +1218,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1174,7 +1243,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1200,6 +1269,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1221,7 +1293,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1247,6 +1319,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1270,7 +1345,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1296,6 +1371,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1317,7 +1395,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1343,6 +1421,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1362,7 +1443,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1388,6 +1469,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1407,7 +1491,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1433,6 +1517,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1459,7 +1546,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1485,6 +1572,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1504,7 +1594,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1530,6 +1620,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1549,7 +1642,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1575,6 +1668,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1594,7 +1690,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1620,6 +1716,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1642,7 +1741,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1668,6 +1767,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1694,7 +1796,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1720,6 +1822,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -1747,7 +1852,7 @@
         "version": "0.8.22",
         "settings": {
           "optimizer": {
-            "enabled": true,
+            "enabled": false,
             "runs": 1,
             "details": {
               "yul": true,
@@ -1773,6 +1878,9 @@
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
