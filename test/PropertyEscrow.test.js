@@ -118,15 +118,15 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     });
 
     it("Should allow agent to approve release", async function () {
-      await propertyEscrow.connect(agent).approveRelease(escrowId);
+      await propertyEscrow.connect(agent).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
       expect(escrow.agentApproved).to.be.true;
     });
 
     it("Should complete release when both parties approve", async function () {
-      await propertyEscrow.connect(agent).approveRelease(escrowId);
-      await propertyEscrow.connect(buyer).approveRelease(escrowId);
+      await propertyEscrow.connect(agent).giveApproval(escrowId);
+      await propertyEscrow.connect(buyer).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
       expect(escrow.status).to.equal(2); // COMPLETED
@@ -136,8 +136,8 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       const initialSellerBalance = await mockToken.balanceOf(seller.address);
       const initialPlatformBalance = await mockToken.balanceOf(owner.address);
       
-      await propertyEscrow.connect(agent).approveRelease(escrowId);
-      await propertyEscrow.connect(buyer).approveRelease(escrowId);
+      await propertyEscrow.connect(agent).giveApproval(escrowId);
+      await propertyEscrow.connect(buyer).giveApproval(escrowId);
       
       const finalSellerBalance = await mockToken.balanceOf(seller.address);
       const finalPlatformBalance = await mockToken.balanceOf(owner.address);
