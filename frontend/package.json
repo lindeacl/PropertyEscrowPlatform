@@ -27,6 +27,9 @@
     "start": "PORT=5000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ui": "react-scripts test --testPathPattern=__tests__",
+    "test:coverage": "react-scripts test --coverage --testPathPattern=__tests__ --watchAll=false",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
