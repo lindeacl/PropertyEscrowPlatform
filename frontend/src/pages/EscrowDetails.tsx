@@ -16,6 +16,8 @@ import {
 import toast from 'react-hot-toast';
 import { EscrowData, EscrowStatus, UserRole } from '../types';
 import DisputeModal from '../components/modals/DisputeModal';
+import { Card, Button, StatusChip, CopyButton, Tooltip, AuditLog, AccessibleModal } from '../components/ui';
+import { microcopy, getTooltipContent, getReassurance } from '../utils/microcopy';
 
 const EscrowDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,6 +33,8 @@ const EscrowDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [showDisputeModal, setShowDisputeModal] = useState(false);
+  const [showAuditLog, setShowAuditLog] = useState(false);
+  const [auditEntries, setAuditEntries] = useState<any[]>([]);
 
   useEffect(() => {
     if (isConnected && id) {

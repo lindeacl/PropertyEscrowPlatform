@@ -7,3 +7,6 @@ export { default as FileUpload } from './FileUpload';
 export { default as Toast } from './Toast';
 export { default as Table } from './Table';
 export { default as CopyButton } from './CopyButton';
+export { default as Tooltip } from './Tooltip';
+export { default as AuditLog } from './AuditLog';
+export { default as AccessibleModal } from './AccessibleModal';
