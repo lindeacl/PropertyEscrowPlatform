@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { WalletProvider } from './contexts/WalletContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { Toaster } from 'react-hot-toast';
 import './styles/index.css';
 
@@ -15,10 +16,11 @@ import Settings from './pages/Settings';
 
 function App() {
   return (
-    <WalletProvider>
-      <Router>
-        <div className="App">
-          <MainLayout>
+    <ThemeProvider>
+      <WalletProvider>
+        <Router>
+          <div className="App">
+            <MainLayout>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/create" element={<CreateEscrow />} />
