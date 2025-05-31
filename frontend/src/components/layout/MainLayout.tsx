@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Plus, Settings, Moon, Sun } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -58,9 +58,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             {navigation.map((item) => {
               const Icon = item.icon;
               return (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className={`${
                     item.current
                       ? 'bg-primary text-white'
@@ -73,7 +73,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     } mr-3 flex-shrink-0 h-5 w-5`}
                   />
                   {item.name}
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -131,9 +131,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     onClick={() => setSidebarOpen(false)}
                     className={`${
                       item.current
@@ -147,7 +147,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                       } mr-3 flex-shrink-0 h-5 w-5`}
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 );
               })}
             </nav>
