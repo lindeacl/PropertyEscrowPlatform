@@ -170,13 +170,6 @@ contract PropertyEscrow is IPropertyEscrow, ReentrancyGuard, Pausable, AccessCon
     }
 
     /**
-     * @dev Convenience function to approve release for escrow 0
-     */
-    function approveRelease() external {
-        giveApproval(0);
-    }
-
-    /**
      * @dev Allows participants to give their approval for fund release
      * @param escrowId The ID of the escrow
      */
@@ -208,6 +201,33 @@ contract PropertyEscrow is IPropertyEscrow, ReentrancyGuard, Pausable, AccessCon
         }
 
         emit ApprovalGiven(escrowId, msg.sender, role);
+    }
+
+    /**
+     * @dev Convenience function to approve release for escrow 0
+     */
+    function approveRelease() external {
+        // Duplicate the logic from giveApproval for escrow 0
+        EscrowStructs.Escrow storage escrow = escrows[0];
+        EscrowStructs.Role role;
+
+        if (msg.sender == escrow.buyer) {
+            require(!escrow.buyerApproval, "Buyer already approved");
+            escrow.buyerApproval = true;
+            role = EscrowStructs.Role.Buyer;
+        } else if (msg.sender == escrow.seller) {
+            require(!escrow.sellerApproval, "Seller already approved");
+            escrow.sellerApproval = true;
+            role = EscrowStructs.Role.Seller;
+        } else if (msg.sender == escrow.agent) {
+            require(!escrow.agentApproval, "Agent already approved");
+            escrow.agentApproval = true;
+            role = EscrowStructs.Role.Agent;
+        } else {
+            revert("Not authorized to approve");
+        }
+
+        emit ApprovalGiven(0, msg.sender, role);
     }
 
     /**

@@ -50,8 +50,7 @@ class EscrowCLI {
       this.contracts.token = await MockERC20.deploy(
         "Demo USDC",
         "USDC",
-        6,
-        ethers.parseUnits("1000000", 6),
+        ethers.parseUnits("1000000", 18),
         { gasLimit: 3000000 }
       );
       await this.contracts.token.waitForDeployment();
