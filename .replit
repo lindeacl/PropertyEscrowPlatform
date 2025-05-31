@@ -39,6 +39,10 @@ args = "CLI Demo"
 task = "workflow.run"
 args = "Frontend Development Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "UI Test Suite"
+
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -96,6 +100,14 @@ author = "agent"
 task = "shell.exec"
 args = "cd frontend && npm start"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "UI Test Suite"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm run test:coverage"
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
