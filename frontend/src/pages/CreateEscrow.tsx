@@ -84,7 +84,7 @@ const CreateEscrow: React.FC = () => {
     setCurrentStep(currentStep - 1);
   };
 
-  const handleInputChange = (field: keyof CreateEscrowParams, value: string | number) => {
+  const handleInputChange = (field: string, value: string | number) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
