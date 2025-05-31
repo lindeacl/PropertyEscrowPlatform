@@ -2,15 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Light mode colors */
+  --background: #F4F6FB;
+  --surface: #FFFFFF;
+  --border: #E0E5ED;
+  --text-primary: #1A2233;
+  --text-secondary: #707A94;
+  --primary: #2962FF;
+  --accent: #FFCA28;
+  --success: #43A047;
+  --danger: #E53935;
+}
+
+.dark {
+  /* Dark mode colors */
+  --background: #0F1419;
+  --surface: #1A2233;
+  --border: #2A3441;
+  --text-primary: #F4F6FB;
+  --text-secondary: #9CA3AF;
+  --primary: #2962FF;
+  --accent: #FFCA28;
+  --success: #43A047;
+  --danger: #E53935;
+}
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-background dark:bg-background-dark text-text-primary dark:text-text-primary-dark antialiased;
+    background-color: var(--background);
+    color: var(--text-primary);
   }
 }
 
