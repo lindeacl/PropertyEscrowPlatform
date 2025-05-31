@@ -122,10 +122,13 @@ describe("Integration Tests - Full Property Sale Flow", function () {
       await mockToken.connect(buyer).approve(escrowAddress, ethers.parseEther("100"));
       await escrow.connect(buyer).depositFunds(0);
       
+      // Complete verification first
+      await escrow.connect(agent).completeVerification(0);
+      
       // Approve release
-      await escrow.connect(buyer).approveRelease();
-      await escrow.connect(seller).approveRelease();
-      await escrow.connect(agent).approveRelease();
+      await escrow.connect(buyer).giveApproval(0);
+      await escrow.connect(seller).giveApproval(0);
+      await escrow.connect(agent).giveApproval(0);
       
       // Try to release funds multiple times
       await escrow.connect(seller).releaseFunds(0);
@@ -134,11 +137,15 @@ describe("Integration Tests - Full Property Sale Flow", function () {
         await escrow.connect(seller).releaseFunds(0);
         expect.fail("Should have reverted");
       } catch (error) {
-        expect(error.message).to.include("Invalid status");
+        expect(error.message).to.include("Invalid escrow state");
       }
     });
 
     it("Should handle emergency pause functionality", async function () {
+      // Grant PAUSER_ROLE to owner first
+      const PAUSER_ROLE = await escrow.PAUSER_ROLE();
+      await escrow.connect(owner).grantRole(PAUSER_ROLE, owner.address);
+      
       await escrow.connect(owner).pause();
       
       try {
