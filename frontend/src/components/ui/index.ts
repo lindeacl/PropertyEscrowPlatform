@@ -1,11 +1,9 @@
-export { default as Button } from './Button';
+// Export all UI components from a single file for easier imports
 export { default as Card } from './Card';
-export { default as Grid } from './Grid';
+export { default as Button } from './Button';
 export { default as Input } from './Input';
+export { default as Grid } from './Grid';
 export { default as StatusChip } from './StatusChip';
-export { default as FileUpload } from './FileUpload';
-export { default as Toast } from './Toast';
-export { default as Table } from './Table';
 export { default as CopyButton } from './CopyButton';
 export { default as Tooltip } from './Tooltip';
 export { default as AuditLog } from './AuditLog';

@@ -3,17 +3,15 @@ import React from 'react';
 interface CardProps {
   children: React.ReactNode;
   className?: string;
-  hover?: boolean;
   padding?: 'sm' | 'md' | 'lg';
-  onClick?: () => void;
+  hover?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({ 
   children, 
   className = '', 
-  hover = false, 
   padding = 'md',
-  onClick 
+  hover = false 
 }) => {
   const paddingClasses = {
     sm: 'p-4',
@@ -21,20 +19,15 @@ const Card: React.FC<CardProps> = ({
     lg: 'p-8'
   };
 
-  const baseClasses = `
-    bg-surface dark:bg-surface-dark 
-    rounded-2xl 
-    shadow-card
-    border border-border/20 dark:border-border-dark/20
-    transition-all duration-200
-    ${paddingClasses[padding]}
-    ${hover ? 'hover:shadow-card-hover hover:scale-[1.02] cursor-pointer' : ''}
-    ${onClick ? 'cursor-pointer' : ''}
-    ${className}
-  `;
-
   return (
-    <div className={baseClasses} onClick={onClick}>
+    <div className={`
+      bg-white dark:bg-gray-800 
+      border border-gray-200 dark:border-gray-700 
+      rounded-lg shadow-sm
+      ${paddingClasses[padding]}
+      ${hover ? 'hover:shadow-md transition-shadow' : ''}
+      ${className}
+    `}>
       {children}
     </div>
   );
