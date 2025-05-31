@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for compliance/ComplianceManager.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">compliance/</a> ComplianceManager.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">63.46% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>33/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.59% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>23/54</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85.71% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70.59% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>48/68</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.22;
+&nbsp;
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+&nbsp;
+/**
+ * @title ComplianceManager
+ * @dev Enterprise compliance management system for KYC/AML validation
+ * Provides hooks for regulatory compliance in property transactions
+ */
+contract ComplianceManager is AccessControl, Pausable, ReentrancyGuard {
+    bytes32 public constant COMPLIANCE_OFFICER_ROLE = keccak256("COMPLIANCE_OFFICER_ROLE");
+    bytes32 public constant KYC_PROVIDER_ROLE = keccak256("KYC_PROVIDER_ROLE");
+    bytes32 public constant AML_PROVIDER_ROLE = keccak256("AML_PROVIDER_ROLE");
+&nbsp;
+    // Compliance status enumeration
+    enum ComplianceStatus {
+        Pending,     // Initial state
+        Approved,    // Compliance approved
+        Rejected,    // Compliance rejected
+        Expired,     // Compliance expired
+        Suspended    // Compliance suspended
+    }
+&nbsp;
+    // KYC verification levels
+    enum KYCLevel {
+        None,        // No KYC
+        Basic,       // Basic identity verification
+        Enhanced,    // Enhanced due diligence
+        Corporate    // Corporate KYC
+    }
+&nbsp;
+    // AML risk levels
+    enum AMLRisk {
+        Low,         // Low risk
+        Medium,      // Medium risk
+        High,        // High risk
+        Prohibited   // Prohibited jurisdiction/entity
+    }
+&nbsp;
+    // Compliance record structure
+    struct ComplianceRecord {
+        address user;
+        KYCLevel kycLevel;
+        AMLRisk amlRisk;
+        ComplianceStatus status;
+        uint256 approvedAt;
+        uint256 expiresAt;
+        string jurisdiction;
+        string providerRef;
+        bool sanctionsCheck;
+        bool pepCheck;
+    }
+&nbsp;
+    // Storage
+    mapping(address =&gt; ComplianceRecord) public complianceRecords;
+    mapping(string =&gt; bool) public approvedJurisdictions;
+    mapping(string =&gt; bool) public restrictedJurisdictions;
+    
+    // Configuration
+    uint256 public kycExpiryPeriod = 365 days;
+    uint256 public amlExpiryPeriod = 90 days;
+    uint256 public minimumKYCLevel = uint256(KYCLevel.Basic);
+    bool public complianceRequired = true;
+&nbsp;
+    // Events
+    event ComplianceRecordCreated(
+        address indexed user,
+        KYCLevel kycLevel,
+        AMLRisk amlRisk,
+        string jurisdiction
+    );
+&nbsp;
+    event ComplianceStatusUpdated(
+        address indexed user,
+        ComplianceStatus oldStatus,
+        ComplianceStatus newStatus
+    );
+&nbsp;
+    event JurisdictionUpdated(
+        string indexed jurisdiction,
+        bool approved
+    );
+&nbsp;
+    event ComplianceConfigUpdated(
+        uint256 kycExpiryPeriod,
+        uint256 amlExpiryPeriod,
+        uint256 minimumKYCLevel
+    );
+&nbsp;
+    event ComplianceViolation(
+        address indexed user,
+        string reason,
+        uint256 timestamp
+    );
+&nbsp;
+    constructor(address admin) {
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+        _grantRole(COMPLIANCE_OFFICER_ROLE, admin);
+        
+        // Initialize common approved jurisdictions
+        approvedJurisdictions["US"] = true;
+        approvedJurisdictions["UK"] = true;
+        approvedJurisdictions["EU"] = true;
+        approvedJurisdictions["CA"] = true;
+        approvedJurisdictions["AU"] = true;
+    }
+&nbsp;
+    /**
+     * @dev Create or update compliance record for a user
+     */
+    function createComplianceRecord(
+        address user,
+        KYCLevel kycLevel,
+        AMLRisk amlRisk,
+        string calldata jurisdiction,
+        string calldata providerRef,
+        bool sanctionsCheck,
+        bool pepCheck
+    ) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyRole(COMPLIANCE_OFFICER_ROLE) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(user != address(0), "Invalid user address");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(approvedJurisdictions[jurisdiction], "Jurisdiction not approved");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!restrictedJurisdictions[jurisdiction], "Jurisdiction restricted");
+&nbsp;
+        ComplianceRecord storage record = complianceRecords[user];
+        
+        ComplianceStatus oldStatus = record.status;
+        uint256 currentTime = block.timestamp;
+        
+        record.user = user;
+        record.kycLevel = kycLevel;
+        record.amlRisk = amlRisk;
+        record.status = _determineComplianceStatus(kycLevel, amlRisk, sanctionsCheck, pepCheck);
+        record.approvedAt = currentTime;
+        record.expiresAt = currentTime + _getExpiryPeriod(kycLevel, amlRisk);
+        record.jurisdiction = jurisdiction;
+        record.providerRef = providerRef;
+        record.sanctionsCheck = sanctionsCheck;
+        record.pepCheck = pepCheck;
+&nbsp;
+        emit ComplianceRecordCreated(user, kycLevel, amlRisk, jurisdiction);
+        
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (oldStatus != record.status) {
+            emit ComplianceStatusUpdated(user, oldStatus, record.status);
+        }
+    }
+&nbsp;
+    /**
+     * @dev Check if user is compliant for transaction
+     */
+    function isCompliant(address user) external view returns (bool) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!complianceRequired) {
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        }
+&nbsp;
+        ComplianceRecord memory record = complianceRecords[user];
+        
+        // Check if record exists
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (record.user == address(0)) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+&nbsp;
+        // Check status
+        if (record.status != ComplianceStatus.Approved) {
+            return false;
+        }
+&nbsp;
+        // Check expiry
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (record.expiresAt &lt;= block.timestamp) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+&nbsp;
+        // Check minimum KYC level
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (uint256(record.kycLevel) &lt; minimumKYCLevel) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+&nbsp;
+        // Check AML risk level
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (record.amlRisk == AMLRisk.Prohibited) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+&nbsp;
+        return true;
+    }
+&nbsp;
+    /**
+     * @dev Validate transaction compliance before execution
+     */
+    function validateTransaction(
+        address buyer,
+        address seller,
+        uint256 amount
+    ) external view returns (bool valid, string memory reason) {
+        // Check if compliance is required
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!complianceRequired) {
+<span class="cstat-no" title="statement not covered" >            return (true, "Compliance not required");</span>
+        }
+&nbsp;
+        // Validate transaction amount limits
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (amount == 0) {
+<span class="cstat-no" title="statement not covered" >            return (false, "Invalid transaction amount");</span>
+        }
+&nbsp;
+        // Basic amount validation - using amount parameter properly
+        // Additional threshold validation can be added based on compliance requirements
+&nbsp;
+        // Validate buyer compliance
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.isCompliant(buyer)) {
+<span class="cstat-no" title="statement not covered" >            return (false, "Buyer not compliant");</span>
+        }
+&nbsp;
+        // Validate seller compliance
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.isCompliant(seller)) {
+<span class="cstat-no" title="statement not covered" >            return (false, "Seller not compliant");</span>
+        }
+&nbsp;
+        return (true, "Transaction compliant");
+    }
+&nbsp;
+    /**
+     * @dev Update compliance status (for ongoing monitoring)
+     */
+<span class="fstat-no" title="function not covered" >    function updateComplianceStatus(</span>
+        address user,
+        ComplianceStatus newStatus,
+        string calldata reason
+    ) external onlyRole(COMPLIANCE_OFFICER_ROLE) {
+<span class="cstat-no" title="statement not covered" >        ComplianceRecord storage record = complianceRecords[user];</span>
+<span class="cstat-no" title="statement not covered" >        require(record.user != address(0), "Compliance record not found")</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        ComplianceStatus oldStatus = record.status;</span>
+        record.status = newStatus;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit ComplianceStatusUpdated(user, oldStatus, newStatus);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (newStatus == ComplianceStatus.Rejected || newStatus == ComplianceStatus.Suspended) {</span>
+<span class="cstat-no" title="statement not covered" >            emit ComplianceViolation(user, reason, block.timestamp);</span>
+        }
+    }
+&nbsp;
+    /**
+     * @dev Internal function to determine compliance status
+     */
+    function _determineComplianceStatus(
+        KYCLevel kycLevel,
+        AMLRisk amlRisk,
+        bool sanctionsCheck,
+        bool pepCheck
+    ) internal pure returns (ComplianceStatus) {
+        // Automatic rejection criteria
+        if (amlRisk == AMLRisk.Prohibited || <span class="branch-1 cbranch-no" title="branch not covered" >!sanctionsCheck</span>) {
+            return ComplianceStatus.Rejected;
+        }
+&nbsp;
+        // Enhanced scrutiny for high-risk cases
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (amlRisk == AMLRisk.High || pepCheck) {
+<span class="cstat-no" title="statement not covered" >            return ComplianceStatus.Pending;</span> // Requires manual review
+        }
+&nbsp;
+        // Standard approval criteria
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (kycLevel &gt;= KYCLevel.Basic &amp;&amp; amlRisk &lt;= AMLRisk.Medium) {
+            return ComplianceStatus.Approved;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return ComplianceStatus.Pending;</span>
+    }
+&nbsp;
+    /**
+     * @dev Internal function to calculate expiry period
+     */
+    function _getExpiryPeriod(
+        KYCLevel kycLevel,
+        AMLRisk amlRisk
+    ) internal view returns (uint256) {
+        // Shorter expiry for higher risk
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (amlRisk == AMLRisk.High) {
+<span class="cstat-no" title="statement not covered" >            return amlExpiryPeriod / 2;</span> // 45 days for high risk
+        }
+&nbsp;
+        // Enhanced KYC gets longer validity
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (kycLevel == KYCLevel.Enhanced || kycLevel == KYCLevel.Corporate) {
+<span class="cstat-no" title="statement not covered" >            return kycExpiryPeriod;</span> // 365 days
+        }
+&nbsp;
+        // Standard expiry
+        return (kycExpiryPeriod + amlExpiryPeriod) / 2; // ~227 days
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 31 2025 09:33:24 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

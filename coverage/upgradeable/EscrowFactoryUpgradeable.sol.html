@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for upgradeable/EscrowFactoryUpgradeable.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">upgradeable/</a> EscrowFactoryUpgradeable.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/70</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/62</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.22;
+&nbsp;
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+&nbsp;
+import "../libraries/EscrowStructs.sol";
+import "../compliance/IComplianceManager.sol";
+import "../core/PropertyEscrow.sol";
+&nbsp;
+/**
+ * @title EscrowFactoryUpgradeable
+ * @dev Upgradeable version of EscrowFactory with compliance integration
+ * Uses UUPS proxy pattern for future updates
+ */
+contract EscrowFactoryUpgradeable is 
+    Initializable,
+    OwnableUpgradeable,
+    PausableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    UUPSUpgradeable
+{
+    // Storage
+    address public platformWallet;
+    uint256 public platformFee; // in basis points (100 = 1%)
+    address public defaultAgent;
+    address public defaultArbiter;
+    IComplianceManager public complianceManager;
+    
+    uint256 public escrowCounter;
+    mapping(uint256 =&gt; address) public escrowContracts;
+    mapping(address =&gt; bool) public whitelistedTokens;
+    
+    // Compliance settings
+    bool public complianceEnabled;
+    uint256 public complianceThreshold; // Minimum amount requiring compliance
+    
+    // Events
+    event EscrowCreated(
+        uint256 indexed escrowId,
+        address indexed buyer,
+        address indexed seller,
+        address escrowContract
+    );
+    
+    event TokenWhitelisted(address indexed token, bool whitelisted);
+    event PlatformFeeUpdated(uint256 newFee);
+    event DefaultAgentSet(address indexed agent);
+    event DefaultArbiterSet(address indexed arbiter);
+    event ComplianceManagerUpdated(address indexed newManager);
+    event ComplianceSettingsUpdated(bool enabled, uint256 threshold);
+&nbsp;
+    /// @custom:oz-upgrades-unsafe-allow constructor
+<span class="fstat-no" title="function not covered" >    constructor() {</span>
+<span class="cstat-no" title="statement not covered" >        _disableInitializers()</span>;
+    }
+&nbsp;
+    /**
+     * @dev Initialize the upgradeable contract
+     */
+<span class="fstat-no" title="function not covered" >    function initialize(</span>
+        address _platformWallet,
+        uint256 _platformFee,
+        address _defaultAgent,
+        address _defaultArbiter,
+        address _complianceManager
+    ) public initializer {
+<span class="cstat-no" title="statement not covered" >        __Ownable_init()</span>;
+<span class="cstat-no" title="statement not covered" >        __Pausable_init()</span>;
+<span class="cstat-no" title="statement not covered" >        __ReentrancyGuard_init()</span>;
+<span class="cstat-no" title="statement not covered" >        __UUPSUpgradeable_init()</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        require(_platformWallet != address(0), "Invalid platform wallet")</span>;
+<span class="cstat-no" title="statement not covered" >        require(_defaultAgent != address(0), "Invalid default agent")</span>;
+<span class="cstat-no" title="statement not covered" >        require(_defaultArbiter != address(0), "Invalid default arbiter")</span>;
+<span class="cstat-no" title="statement not covered" >        require(_platformFee &lt;= 1000, "Platform fee too high")</span>; // Max 10%
+&nbsp;
+        platformWallet = _platformWallet;
+        platformFee = _platformFee;
+        defaultAgent = _defaultAgent;
+        defaultArbiter = _defaultArbiter;
+        
+<span class="cstat-no" title="statement not covered" >        if (_complianceManager != address(0)) {</span>
+            complianceManager = IComplianceManager(_complianceManager);
+            complianceEnabled = true;
+            complianceThreshold = 1000 ether; // Default threshold
+        }
+    }
+&nbsp;
+    /**
+     * @dev Create new property escrow with compliance checks
+     */
+<span class="fstat-no" title="function not covered" >    function createEscrow(</span>
+        EscrowStructs.CreateEscrowParams calldata params
+    ) external nonReentrant whenNotPaused returns (address escrowContract, uint256 escrowId) {
+        // Input validation
+<span class="cstat-no" title="statement not covered" >        require(params.buyer != address(0), "Invalid buyer address")</span>;
+<span class="cstat-no" title="statement not covered" >        require(params.seller != address(0), "Invalid seller address")</span>;
+<span class="cstat-no" title="statement not covered" >        require(params.tokenAddress != address(0), "Invalid token address")</span>;
+<span class="cstat-no" title="statement not covered" >        require(params.depositAmount &gt; 0, "Invalid deposit amount")</span>;
+<span class="cstat-no" title="statement not covered" >        require(whitelistedTokens[params.tokenAddress], "Token not whitelisted")</span>;
+<span class="cstat-no" title="statement not covered" >        require(params.depositDeadline &gt; block.timestamp, "Invalid deposit deadline")</span>;
+<span class="cstat-no" title="statement not covered" >        require(params.verificationDeadline &gt; params.depositDeadline, "Invalid verification deadline")</span>;
+&nbsp;
+        // Compliance validation
+<span class="cstat-no" title="statement not covered" >        if (complianceEnabled &amp;&amp; params.depositAmount &gt;= complianceThreshold) {</span>
+<span class="cstat-no" title="statement not covered" >            require(address(complianceManager) != address(0), "Compliance manager not set")</span>;
+            
+            // Validate buyer compliance
+<span class="cstat-no" title="statement not covered" >            require(complianceManager.isCompliant(params.buyer), "Buyer not compliant")</span>;
+            
+            // Validate seller compliance
+<span class="cstat-no" title="statement not covered" >            require(complianceManager.isCompliant(params.seller), "Seller not compliant")</span>;
+            
+            // Transaction-level compliance check
+<span class="cstat-no" title="statement not covered" >            (bool valid, string memory reason) = complianceManager.validateTransaction(</span>
+                params.buyer,
+                params.seller,
+                params.depositAmount
+            );
+<span class="cstat-no" title="statement not covered" >            require(valid, reason)</span>;
+        }
+&nbsp;
+        // Create new escrow contract
+        escrowId = escrowCounter;
+        escrowContract = address(new PropertyEscrow(platformWallet, platformFee));
+        
+        // Initialize the escrow
+<span class="cstat-no" title="statement not covered" >        PropertyEscrow(escrowContract).createEscrow(params)</span>;
+        
+        // Store escrow reference
+        escrowContracts[escrowId] = escrowContract;
+        escrowCounter++;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit EscrowCreated(escrowId, params.buyer, params.seller, escrowContract);</span>
+    }
+&nbsp;
+    /**
+     * @dev Update compliance manager (admin only)
+     */
+<span class="fstat-no" title="function not covered" >    function setComplianceManager(</span>
+        address _complianceManager
+    ) external onlyOwner {
+        complianceManager = IComplianceManager(_complianceManager);
+<span class="cstat-no" title="statement not covered" >        emit ComplianceManagerUpdated(_complianceManager);</span>
+    }
+&nbsp;
+    /**
+     * @dev Update compliance settings
+     */
+<span class="fstat-no" title="function not covered" >    function updateComplianceSettings(</span>
+        bool _enabled,
+        uint256 _threshold
+    ) external onlyOwner {
+        complianceEnabled = _enabled;
+        complianceThreshold = _threshold;
+<span class="cstat-no" title="statement not covered" >        emit ComplianceSettingsUpdated(_enabled, _threshold);</span>
+    }
+&nbsp;
+    /**
+     * @dev Whitelist or remove token
+     */
+<span class="fstat-no" title="function not covered" >    function whitelistToken(address token, bool whitelisted) external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require(token != address(0), "Invalid token address")</span>;
+        whitelistedTokens[token] = whitelisted;
+<span class="cstat-no" title="statement not covered" >        emit TokenWhitelisted(token, whitelisted);</span>
+    }
+&nbsp;
+    /**
+     * @dev Set platform fee
+     */
+<span class="fstat-no" title="function not covered" >    function setPlatformFee(uint256 fee) external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require(fee &lt;= 1000, "Fee too high")</span>; // Max 10%
+        platformFee = fee;
+<span class="cstat-no" title="statement not covered" >        emit PlatformFeeUpdated(fee);</span>
+    }
+&nbsp;
+    /**
+     * @dev Set default agent
+     */
+<span class="fstat-no" title="function not covered" >    function setDefaultAgent(address agent) external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require(agent != address(0), "Invalid agent address")</span>;
+        defaultAgent = agent;
+<span class="cstat-no" title="statement not covered" >        emit DefaultAgentSet(agent);</span>
+    }
+&nbsp;
+    /**
+     * @dev Set default arbiter
+     */
+<span class="fstat-no" title="function not covered" >    function setDefaultArbiter(address arbiter) external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require(arbiter != address(0), "Invalid arbiter address")</span>;
+        defaultArbiter = arbiter;
+<span class="cstat-no" title="statement not covered" >        emit DefaultArbiterSet(arbiter);</span>
+    }
+&nbsp;
+    /**
+     * @dev Get escrow contract address
+     */
+<span class="fstat-no" title="function not covered" >    function getEscrowContract(uint256 escrowId) external view returns (address) {</span>
+<span class="cstat-no" title="statement not covered" >        require(escrowId &lt; escrowCounter, "Invalid escrow ID")</span>;
+<span class="cstat-no" title="statement not covered" >        return escrowContracts[escrowId];</span>
+    }
+&nbsp;
+    /**
+     * @dev Check if token is whitelisted
+     */
+<span class="fstat-no" title="function not covered" >    function isTokenWhitelisted(address token) external view returns (bool) {</span>
+<span class="cstat-no" title="statement not covered" >        return whitelistedTokens[token];</span>
+    }
+&nbsp;
+    /**
+     * @dev Get default agent address
+     */
+<span class="fstat-no" title="function not covered" >    function getDefaultAgent() external view returns (address) {</span>
+<span class="cstat-no" title="statement not covered" >        return defaultAgent;</span>
+    }
+&nbsp;
+    /**
+     * @dev Get default arbiter address
+     */
+<span class="fstat-no" title="function not covered" >    function getDefaultArbiter() external view returns (address) {</span>
+<span class="cstat-no" title="statement not covered" >        return defaultArbiter;</span>
+    }
+&nbsp;
+    /**
+     * @dev Emergency pause
+     */
+<span class="fstat-no" title="function not covered" >    function pause() external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        _pause()</span>;
+    }
+&nbsp;
+    /**
+     * @dev Resume operations
+     */
+<span class="fstat-no" title="function not covered" >    function unpause() external onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        _unpause()</span>;
+    }
+&nbsp;
+    /**
+     * @dev Authorize upgrade (UUPS pattern)
+     */
+<span class="fstat-no" title="function not covered" >    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {</span>
+        // Only owner can authorize upgrades - implementation address validation handled by UUPS
+<span class="cstat-no" title="statement not covered" >        require(newImplementation != address(0), "Invalid implementation address")</span>;
+    }
+&nbsp;
+    /**
+     * @dev Get implementation version for upgrade tracking
+     */
+<span class="fstat-no" title="function not covered" >    function getVersion() external pure returns (string memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return "1.0.0";</span>
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 31 2025 09:33:24 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for core/EscrowFactory.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">core/</a> EscrowFactory.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">82.14% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>23/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.63% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>13/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">66.67% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">74.42% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/43</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.22;
+&nbsp;
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
+&nbsp;
+import "./PropertyEscrow.sol";
+import "../interfaces/IEscrowFactory.sol";
+import "../libraries/EscrowStructs.sol";
+&nbsp;
+/**
+ * @title EscrowFactory
+ * @dev Factory contract for creating and managing PropertyEscrow contracts
+ */
+contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
+    using Address for address;
+&nbsp;
+    // State variables
+    mapping(uint256 =&gt; address) private escrowContracts;
+    mapping(address =&gt; bool) public whitelistedTokens;
+    
+    address private defaultAgent;
+    address private defaultArbiter;
+    address public immutable platformWallet;
+    uint256 private platformFee;
+    uint256 private escrowCounter;
+&nbsp;
+    // Constants
+    uint256 public constant MAX_PLATFORM_FEE = 500; // 5%
+&nbsp;
+    constructor(
+        address _platformWallet,
+        uint256 _platformFee,
+        address _defaultAgent,
+        address _defaultArbiter
+    ) Ownable() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_platformWallet != address(0), "Invalid platform wallet");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_platformFee &lt;= MAX_PLATFORM_FEE, "Platform fee too high");
+&nbsp;
+        platformWallet = _platformWallet;
+        platformFee = _platformFee;
+        defaultAgent = _defaultAgent;
+        defaultArbiter = _defaultArbiter;
+    }
+&nbsp;
+    /**
+     * @dev Creates a new escrow contract and initializes it
+     * @param params The escrow creation parameters
+     * @return escrowContract The address of the created escrow contract
+     * @return escrowId The ID of the created escrow
+     */
+    function createEscrow(
+        EscrowStructs.CreateEscrowParams calldata params
+    ) external override <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant returns (address escrowContract, uint256 escrowId) {
+        // Validate token is whitelisted
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(whitelistedTokens[params.tokenAddress], "Token not whitelisted");
+&nbsp;
+        // Use defaults if not provided
+        EscrowStructs.CreateEscrowParams memory finalParams = params;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (finalParams.agent == address(0)) {
+            finalParams.agent = defaultAgent;
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (finalParams.arbiter == address(0)) {
+            finalParams.arbiter = defaultArbiter;
+        }
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (finalParams.platformFee == 0) {
+            finalParams.platformFee = platformFee;
+        }
+&nbsp;
+        // Deploy new PropertyEscrow contract
+        PropertyEscrow newEscrow = new PropertyEscrow(platformWallet, finalParams.platformFee);
+        escrowContract = address(newEscrow);
+&nbsp;
+        // Whitelist the token in the new contract
+        newEscrow.whitelistToken(finalParams.tokenAddress, true);
+&nbsp;
+        // Grant necessary roles
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (finalParams.agent != address(0)) {
+            newEscrow.grantRole(newEscrow.AGENT_ROLE(), finalParams.agent);
+        }
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (finalParams.arbiter != address(0)) {
+            newEscrow.grantRole(newEscrow.ARBITER_ROLE(), finalParams.arbiter);
+        }
+&nbsp;
+        // Create the escrow in the new contract
+        escrowId = newEscrow.createEscrow(finalParams);
+&nbsp;
+        // Store the mapping
+        escrowContracts[escrowCounter] = escrowContract;
+        escrowCounter++;
+&nbsp;
+        // Note: PropertyEscrow doesn't inherit Ownable, so no ownership transfer needed
+&nbsp;
+        emit EscrowContractDeployed(escrowContract, msg.sender, escrowId);
+&nbsp;
+        return (escrowContract, escrowId);
+    }
+&nbsp;
+    /**
+     * @dev Sets the default agent for new escrows
+     * @param agent The new default agent address
+     */
+<span class="fstat-no" title="function not covered" >    function setDefaultAgent(address agent) external override onlyOwner {</span>
+        defaultAgent = agent;
+<span class="cstat-no" title="statement not covered" >        emit DefaultAgentSet(agent);</span>
+    }
+&nbsp;
+    /**
+     * @dev Sets the default arbiter for new escrows
+     * @param arbiter The new default arbiter address
+     */
+<span class="fstat-no" title="function not covered" >    function setDefaultArbiter(address arbiter) external override onlyOwner {</span>
+        defaultArbiter = arbiter;
+<span class="cstat-no" title="statement not covered" >        emit DefaultArbiterSet(arbiter);</span>
+    }
+&nbsp;
+    /**
+     * @dev Sets the platform fee for new escrows
+     * @param fee The new platform fee in basis points
+     */
+<span class="fstat-no" title="function not covered" >    function setPlatformFee(uint256 fee) external override onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require(fee &lt;= MAX_PLATFORM_FEE, "Fee too high")</span>;
+        platformFee = fee;
+<span class="cstat-no" title="statement not covered" >        emit PlatformFeeUpdated(fee);</span>
+    }
+&nbsp;
+    /**
+     * @dev Whitelists or removes a token from the whitelist
+     * @param token The token address
+     * @param whitelisted Whether to whitelist the token
+     */
+    function whitelistToken(address token, bool whitelisted) external override onlyOwner {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(token != address(0), "Invalid token address");
+        whitelistedTokens[token] = whitelisted;
+        emit TokenWhitelisted(token, whitelisted);
+    }
+&nbsp;
+    /**
+     * @dev Gets the escrow contract address for a given escrow ID
+     * @param escrowId The escrow ID from the factory
+     * @return The address of the escrow contract
+     */
+    function getEscrowContract(uint256 escrowId) external view override returns (address) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(escrowId &lt; escrowCounter, "Invalid escrow ID");
+        return escrowContracts[escrowId];
+    }
+&nbsp;
+    /**
+     * @dev Checks if a token is whitelisted
+     * @param token The token address to check
+     * @return Whether the token is whitelisted
+     */
+    function isTokenWhitelisted(address token) external view override returns (bool) {
+        return whitelistedTokens[token];
+    }
+&nbsp;
+    /**
+     * @dev Gets the default agent address
+     * @return The default agent address
+     */
+    function getDefaultAgent() external view override returns (address) {
+        return defaultAgent;
+    }
+&nbsp;
+    /**
+     * @dev Gets the default arbiter address
+     * @return The default arbiter address
+     */
+    function getDefaultArbiter() external view override returns (address) {
+        return defaultArbiter;
+    }
+&nbsp;
+    /**
+     * @dev Gets the platform fee
+     * @return The platform fee in basis points
+     */
+    function getPlatformFee() external view override returns (uint256) {
+        return platformFee;
+    }
+&nbsp;
+    /**
+     * @dev Gets the total number of escrow contracts created
+     * @return The total number of escrow contracts
+     */
+<span class="fstat-no" title="function not covered" >    function getTotalEscrowContracts() external view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        return escrowCounter;</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 31 2025 09:33:24 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
