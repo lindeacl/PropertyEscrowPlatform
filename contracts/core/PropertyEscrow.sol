@@ -170,6 +170,13 @@ contract PropertyEscrow is IPropertyEscrow, ReentrancyGuard, Pausable, AccessCon
     }
 
     /**
+     * @dev Convenience function to approve release for escrow 0
+     */
+    function approveRelease() external {
+        giveApproval(0);
+    }
+
+    /**
      * @dev Allows participants to give their approval for fund release
      * @param escrowId The ID of the escrow
      */

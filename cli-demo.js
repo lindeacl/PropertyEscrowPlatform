@@ -51,13 +51,14 @@ class EscrowCLI {
         "Demo USDC",
         "USDC",
         6,
-        ethers.parseUnits("1000000", 6)
+        ethers.parseUnits("1000000", 6),
+        { gasLimit: 3000000 }
       );
       await this.contracts.token.waitForDeployment();
 
       // Deploy EscrowFactory
       const EscrowFactory = await ethers.getContractFactory("EscrowFactory");
-      this.contracts.factory = await EscrowFactory.deploy();
+      this.contracts.factory = await EscrowFactory.deploy({ gasLimit: 5000000 });
       await this.contracts.factory.waitForDeployment();
 
       console.log(`✅ MockERC20 deployed: ${await this.contracts.token.getAddress()}`);

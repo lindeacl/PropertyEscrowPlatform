@@ -117,7 +117,7 @@ describe("Integration Tests - Full Property Sale Flow", function () {
     it("Should prevent state manipulation", async function () {
       try {
         // Try to release funds without deposit
-        await escrow.connect(seller).approveFundRelease(0);
+        await escrow.connect(seller).approveRelease();
         expect.fail("Should have reverted");
       } catch (error) {
         expect(error.message).to.include("Invalid escrow state");
