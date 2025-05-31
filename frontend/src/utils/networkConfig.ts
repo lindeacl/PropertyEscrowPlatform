@@ -7,8 +7,8 @@ export const NETWORK_CONFIG = {
       symbol: 'ETH',
       decimals: 18,
     },
-    rpcUrls: ['http://localhost:8545'],
-    blockExplorerUrls: ['http://localhost:8545'],
+    rpcUrls: ['http://127.0.0.1:8545'],
+    blockExplorerUrls: null,
   },
   polygon: {
     chainId: 137,
