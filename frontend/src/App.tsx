@@ -45,6 +45,7 @@ function App() {
         </div>
       </Router>
     </WalletProvider>
+  </ThemeProvider>
   );
 }
 
