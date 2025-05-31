@@ -118,15 +118,136 @@ describe("Integration Tests - Full Property Sale Flow", function () {
       }
     });
 
+    it("Should prevent reentrancy attacks", async function () {
+      await mockToken.connect(buyer).approve(escrowAddress, ethers.parseEther("100"));
+      await escrow.connect(buyer).depositFunds(0);
+      
+      // Approve release
+      await escrow.connect(buyer).approveRelease();
+      await escrow.connect(seller).approveRelease();
+      await escrow.connect(agent).approveRelease();
+      
+      // Try to release funds multiple times
+      await escrow.connect(seller).releaseFunds(0);
+      
+      try {
+        await escrow.connect(seller).releaseFunds(0);
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Invalid status");
+      }
+    });
+
+    it("Should handle emergency pause functionality", async function () {
+      await escrow.connect(owner).pause();
+      
+      try {
+        await mockToken.connect(buyer).approve(escrowAddress, ethers.parseEther("100"));
+        await escrow.connect(buyer).depositFunds(0);
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Pausable: paused");
+      }
+      
+      await escrow.connect(owner).unpause();
+    });
+
+    it("Should validate token whitelist enforcement", async function () {
+      const MockERC20 = await ethers.getContractFactory("MockERC20");
+      const unauthorizedToken = await MockERC20.deploy("Unauthorized", "UNAUTH", ethers.parseEther("1000"));
+      
+      try {
+        await factory.createEscrow(
+          buyer.address,
+          seller.address,
+          agent.address,
+          arbiter.address,
+          await unauthorizedToken.getAddress(),
+          ethers.parseEther("100"),
+          currentTime + 86400,
+          "Unauthorized Token Property"
+        );
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Token not whitelisted");
+      }
+    });
+
     it("Should prevent state manipulation", async function () {
       try {
         // Try to release funds without deposit
-        await escrow.connect(seller).approveRelease();
+        await escrow.connect(seller).releaseFunds(0);
         expect.fail("Should have reverted");
       } catch (error) {
-        // Accept any revert error - the important thing is that it reverted
-        expect(error.message).to.include("revert");
+        expect(error.message).to.include("Invalid status");
       }
+    });
+  });
+
+  describe("Edge Cases", function () {
+    it("Should handle expired escrow deadlines", async function () {
+      // Create escrow with past deadline
+      const pastTime = Math.floor(Date.now() / 1000) - 86400;
+      
+      await factory.createEscrow(
+        buyer.address,
+        seller.address,
+        agent.address,
+        arbiter.address,
+        await mockToken.getAddress(),
+        ethers.parseEther("100"),
+        pastTime,
+        "Expired Property"
+      );
+
+      const expiredEscrowAddress = await factory.escrows(1);
+      const expiredEscrow = await ethers.getContractAt("PropertyEscrow", expiredEscrowAddress);
+      
+      const escrowData = await expiredEscrow.getEscrow(1);
+      expect(escrowData.deadline).to.be.lessThan(Math.floor(Date.now() / 1000));
+    });
+
+    it("Should handle large transaction amounts", async function () {
+      const largeAmount = ethers.parseEther("1000000");
+      await mockToken.transfer(buyer.address, largeAmount);
+      
+      await factory.createEscrow(
+        buyer.address,
+        seller.address,
+        agent.address,
+        arbiter.address,
+        await mockToken.getAddress(),
+        largeAmount,
+        currentTime + 86400,
+        "High Value Property"
+      );
+
+      const largeEscrowAddress = await factory.escrows(1);
+      const largeEscrow = await ethers.getContractAt("PropertyEscrow", largeEscrowAddress);
+      const escrowData = await largeEscrow.getEscrow(1);
+      
+      expect(escrowData.amount).to.equal(largeAmount);
+    });
+
+    it("Should validate correct fee calculations", async function () {
+      await mockToken.connect(buyer).approve(escrowAddress, ethers.parseEther("100"));
+      await escrow.connect(buyer).depositFunds(0);
+      
+      const platformWallet = await factory.platformWallet();
+      const initialPlatformBalance = await mockToken.balanceOf(platformWallet);
+      
+      // Complete escrow
+      await escrow.connect(buyer).approveRelease();
+      await escrow.connect(seller).approveRelease();
+      await escrow.connect(agent).approveRelease();
+      await escrow.connect(seller).releaseFunds(0);
+      
+      const finalPlatformBalance = await mockToken.balanceOf(platformWallet);
+      const platformFee = finalPlatformBalance - initialPlatformBalance;
+      
+      // 2.5% fee on 100 tokens = 2.5 tokens
+      const expectedFee = ethers.parseEther("100") * 250n / 10000n;
+      expect(platformFee).to.equal(expectedFee);
     });
   });
 });

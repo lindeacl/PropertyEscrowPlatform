@@ -49,6 +49,38 @@ describe("EscrowFactory", function () {
         expect(error.message).to.include("caller is not the owner");
       }
     });
+
+    it("Should remove tokens from whitelist", async function () {
+      const tokenAddr = await mockToken.getAddress();
+      await factory.whitelistToken(tokenAddr, false);
+      expect(await factory.isTokenWhitelisted(tokenAddr)).to.be.false;
+      
+      // Re-whitelist for other tests
+      await factory.whitelistToken(tokenAddr, true);
+    });
+
+    it("Should reject escrow creation with non-whitelisted token", async function () {
+      const MockERC20 = await ethers.getContractFactory("MockERC20");
+      const unauthorizedToken = await MockERC20.deploy("Unauthorized", "UNAUTH", ethers.parseEther("1000"));
+      
+      const currentTime = Math.floor(Date.now() / 1000);
+      
+      try {
+        await factory.createEscrow(
+          buyer.address,
+          seller.address,
+          agent.address,
+          arbiter.address,
+          await unauthorizedToken.getAddress(),
+          ethers.parseEther("1000"),
+          currentTime + 86400,
+          "Test Property"
+        );
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Token not whitelisted");
+      }
+    });
   });
 
   describe("Escrow Creation", function () {
