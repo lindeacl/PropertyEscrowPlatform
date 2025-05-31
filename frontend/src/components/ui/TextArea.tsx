@@ -1,25 +1,24 @@
 import React, { forwardRef } from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
   helperText?: string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
-  variant?: 'default' | 'filled' | 'outlined';
   fullWidth?: boolean;
+  variant?: 'default' | 'filled' | 'outlined';
+  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   label,
   error,
   helperText,
-  leftIcon,
-  rightIcon,
-  variant = 'default',
   fullWidth = false,
+  variant = 'default',
+  resize = 'vertical',
   className = '',
   disabled,
+  rows = 3,
   ...props
 }, ref) => {
   const baseClasses = 'px-3 py-2 border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed';
@@ -30,9 +29,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
     outlined: 'border-2 border-gray-300 dark:border-gray-600 bg-transparent text-gray-900 dark:text-white'
   };
 
+  const resizeClasses = {
+    none: 'resize-none',
+    vertical: 'resize-y',
+    horizontal: 'resize-x',
+    both: 'resize'
+  };
+
   const errorClasses = error ? 'border-red-500 focus:ring-red-500' : '';
   const widthClasses = fullWidth ? 'w-full' : '';
-  const paddingClasses = leftIcon ? 'pl-10' : rightIcon ? 'pr-10' : '';
 
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
@@ -41,28 +46,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
           {label}
         </label>
       )}
-      <div className="relative">
-        {leftIcon && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <div className="text-gray-400 dark:text-gray-500">
-              {leftIcon}
-            </div>
-          </div>
-        )}
-        <input
-          ref={ref}
-          className={`${baseClasses} ${variantClasses[variant]} ${errorClasses} ${widthClasses} ${paddingClasses} ${className}`}
-          disabled={disabled}
-          {...props}
-        />
-        {rightIcon && (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <div className="text-gray-400 dark:text-gray-500">
-              {rightIcon}
-            </div>
-          </div>
-        )}
-      </div>
+      <textarea
+        ref={ref}
+        rows={rows}
+        className={`${baseClasses} ${variantClasses[variant]} ${resizeClasses[resize]} ${errorClasses} ${widthClasses} ${className}`}
+        disabled={disabled}
+        {...props}
+      />
       {error && (
         <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
@@ -73,6 +63,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   );
 });
 
-Input.displayName = 'Input';
+TextArea.displayName = 'TextArea';
 
-export default Input;
+export default TextArea;
