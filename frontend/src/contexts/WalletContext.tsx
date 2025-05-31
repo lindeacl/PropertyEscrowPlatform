@@ -54,7 +54,12 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
+      
+      // Request account access
+      const accounts = await provider.send('eth_requestAccounts', []);
+      if (accounts.length === 0) {
+        throw new Error('No accounts available');
+      }
       
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
@@ -70,9 +75,16 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       });
 
       await updateBalance(address, provider);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to connect wallet:', error);
-      throw error;
+      // Don't throw error to prevent app crashes - just log and let UI handle it
+      if (error.code === 4001) {
+        throw new Error('User rejected the connection request');
+      } else if (error.code === -32002) {
+        throw new Error('Connection request already pending');
+      } else {
+        throw new Error('Failed to connect wallet. Please ensure MetaMask is installed and try again.');
+      }
     }
   };
 
@@ -111,7 +123,10 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       if (accounts.length === 0) {
         disconnectWallet();
       } else if (accounts[0] !== walletState.address) {
-        connectWallet();
+        // Only reconnect if we were already connected
+        if (walletState.isConnected) {
+          connectWallet().catch(console.error);
+        }
       }
     };
 
@@ -128,13 +143,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
 
-      // Check if already connected
-      window.ethereum.request({ method: 'eth_accounts' })
-        .then((accounts: string[]) => {
-          if (accounts.length > 0) {
-            connectWallet();
-          }
-        });
+      // Don't automatically connect - let users manually connect when they're ready
     }
 
     return () => {
@@ -143,7 +152,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         window.ethereum.removeListener('chainChanged', handleChainChanged);
       }
     };
-  }, []);
+  }, [walletState.isConnected, walletState.address]);
 
   return (
     <WalletContext.Provider

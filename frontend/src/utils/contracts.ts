@@ -1,10 +1,10 @@
 import { ethers } from 'ethers';
 
-// Contract addresses (update these with your deployed contract addresses)
+// Contract addresses (updated with deployed contract addresses)
 export const CONTRACT_ADDRESSES = {
-  ESCROW_FACTORY: process.env.REACT_APP_ESCROW_FACTORY_ADDRESS || '',
+  ESCROW_FACTORY: process.env.REACT_APP_ESCROW_FACTORY_ADDRESS || '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
   PROPERTY_ESCROW: process.env.REACT_APP_PROPERTY_ESCROW_ADDRESS || '',
-  MOCK_TOKEN: process.env.REACT_APP_MOCK_TOKEN_ADDRESS || '',
+  MOCK_TOKEN: process.env.REACT_APP_MOCK_TOKEN_ADDRESS || '0x5FbDB2315678afecb367f032d93F642f64180aa3',
 };
 
 // Contract ABIs
