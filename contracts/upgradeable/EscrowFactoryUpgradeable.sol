@@ -9,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 import "../libraries/EscrowStructs.sol";
 import "../compliance/IComplianceManager.sol";
-import "../PropertyEscrow.sol";
+import "../core/PropertyEscrow.sol";
 
 /**
  * @title EscrowFactoryUpgradeable

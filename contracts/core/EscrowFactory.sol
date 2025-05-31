@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
 import "./PropertyEscrow.sol";
-import "./interfaces/IEscrowFactory.sol";
-import "./libraries/EscrowStructs.sol";
+import "../interfaces/IEscrowFactory.sol";
+import "../libraries/EscrowStructs.sol";
 
 /**
  * @title EscrowFactory

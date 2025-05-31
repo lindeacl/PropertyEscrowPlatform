@@ -8,8 +8,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 // SafeMath not needed in Solidity 0.8+ (built-in overflow protection)
 
-import "./interfaces/IPropertyEscrow.sol";
-import "./libraries/EscrowStructs.sol";
+import "../interfaces/IPropertyEscrow.sol";
+import "../libraries/EscrowStructs.sol";
 
 /**
  * @title PropertyEscrow

@@ -1,95 +1,6 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/runner/workspace/contracts/EscrowFactory.sol": {
-      "lastModificationDate": 1748464620313,
-      "contentHash": "66d49d5e17389de06b28c88b973d33da",
-      "sourceName": "contracts/EscrowFactory.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-        "@openzeppelin/contracts/utils/Address.sol",
-        "./PropertyEscrow.sol",
-        "./interfaces/IEscrowFactory.sol",
-        "./libraries/EscrowStructs.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "EscrowFactory"
-      ]
-    },
-    "/home/runner/workspace/contracts/PropertyEscrow.sol": {
-      "lastModificationDate": 1748464604582,
-      "contentHash": "2e5e731493a2044a6fdf52da016599c9",
-      "sourceName": "contracts/PropertyEscrow.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-        "@openzeppelin/contracts/security/Pausable.sol",
-        "@openzeppelin/contracts/access/AccessControl.sol",
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-        "./interfaces/IPropertyEscrow.sol",
-        "./libraries/EscrowStructs.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "PropertyEscrow"
-      ]
-    },
     "/home/runner/workspace/contracts/interfaces/IEscrowFactory.sol": {
       "lastModificationDate": 1748464544443,
       "contentHash": "27293dc2f765499dca0c73cf26e94513",
@@ -900,8 +811,8 @@
       ]
     },
     "/home/runner/workspace/contracts/upgradeable/EscrowFactoryUpgradeable.sol": {
-      "lastModificationDate": 1748682883773,
-      "contentHash": "f66a83f32168328e3e075c2a7a184ef8",
+      "lastModificationDate": 1748683132930,
+      "contentHash": "e80459091c28c47b641bcefa9c1a63ff",
       "sourceName": "contracts/upgradeable/EscrowFactoryUpgradeable.sol",
       "solcConfig": {
         "version": "0.8.22",
@@ -936,7 +847,7 @@
         "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
         "../libraries/EscrowStructs.sol",
         "../compliance/IComplianceManager.sol",
-        "../PropertyEscrow.sol"
+        "../core/PropertyEscrow.sol"
       ],
       "versionPragmas": [
         "^0.8.22"
@@ -1487,6 +1398,95 @@
       ],
       "artifacts": [
         "MockERC20"
+      ]
+    },
+    "/home/runner/workspace/contracts/core/EscrowFactory.sol": {
+      "lastModificationDate": 1748683123401,
+      "contentHash": "063b92caaf8bda6c1046f10ed6bf806c",
+      "sourceName": "contracts/core/EscrowFactory.sol",
+      "solcConfig": {
+        "version": "0.8.22",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/utils/Address.sol",
+        "./PropertyEscrow.sol",
+        "../interfaces/IEscrowFactory.sol",
+        "../libraries/EscrowStructs.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
+        "EscrowFactory"
+      ]
+    },
+    "/home/runner/workspace/contracts/core/PropertyEscrow.sol": {
+      "lastModificationDate": 1748683127573,
+      "contentHash": "e3879612f622b630d147b0991f359bec",
+      "sourceName": "contracts/core/PropertyEscrow.sol",
+      "solcConfig": {
+        "version": "0.8.22",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/security/Pausable.sol",
+        "@openzeppelin/contracts/access/AccessControl.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "../interfaces/IPropertyEscrow.sol",
+        "../libraries/EscrowStructs.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
+        "PropertyEscrow"
       ]
     }
   }

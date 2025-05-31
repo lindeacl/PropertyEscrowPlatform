@@ -79,8 +79,8 @@ describe("Integration Tests - Full Property Sale Flow", function () {
       
       // Release funds
       const sellerBalanceBefore = await mockToken.balanceOf(seller.address);
-      await escrow.connect(buyer).approveFundRelease(0);
-      await escrow.connect(seller).approveFundRelease(0);
+      await escrow.connect(buyer).approveRelease();
+      await escrow.connect(seller).approveRelease();
       
       // Check funds were released
       const sellerBalanceAfter = await mockToken.balanceOf(seller.address);
