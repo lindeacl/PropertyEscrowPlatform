@@ -55,9 +55,15 @@ class EscrowCLI {
       );
       await this.contracts.token.waitForDeployment();
 
-      // Deploy EscrowFactory
+      // Deploy EscrowFactory with required constructor parameters
       const EscrowFactory = await ethers.getContractFactory("EscrowFactory");
-      this.contracts.factory = await EscrowFactory.deploy({ gasLimit: 5000000 });
+      this.contracts.factory = await EscrowFactory.deploy(
+        this.accounts.deployer.address, // platformWallet
+        250, // platformFee (2.5% in basis points)
+        this.accounts.agent.address, // defaultAgent
+        this.accounts.arbiter.address, // defaultArbiter
+        { gasLimit: 5000000 }
+      );
       await this.contracts.factory.waitForDeployment();
 
       console.log(`✅ MockERC20 deployed: ${await this.contracts.token.getAddress()}`);
