@@ -39,17 +39,35 @@ const EscrowDetails: React.FC = () => {
   const loadEscrowDetails = async () => {
     try {
       setLoading(true);
-      // This will load real escrow data once contracts are deployed
-      // For now, show placeholder state
-      setEscrow(null);
+      
+      // Sample escrow data for demonstration
+      const sampleEscrow: EscrowData = {
+        escrowId: parseInt(id || '1'),
+        propertyId: 'PROP-2025-001',
+        buyer: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+        seller: '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',
+        agent: '0x90F79bf6EB2c4f870365E785982E1f101E93b906',
+        arbiter: '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',
+        tokenAddress: '0x0000000000000000000000000000000000000000',
+        depositAmount: '2.5',
+        depositDeadline: Math.floor(Date.now() / 1000) + 604800, // 1 week from now
+        createdAt: Math.floor(Date.now() / 1000) - 86400, // 1 day ago
+        status: EscrowStatus.VERIFIED,
+        isVerified: true,
+        buyerApproval: true,
+        sellerApproval: false,
+        agentApproval: true
+      };
+      
+      setEscrow(sampleEscrow);
       
       if (address) {
         // Determine user role based on their address
         setUserRole({
-          isBuyer: false,
-          isSeller: false,
-          isAgent: false,
-          isArbiter: false
+          isBuyer: address.toLowerCase() === sampleEscrow.buyer.toLowerCase(),
+          isSeller: address.toLowerCase() === sampleEscrow.seller.toLowerCase(),
+          isAgent: address.toLowerCase() === sampleEscrow.agent.toLowerCase(),
+          isArbiter: address.toLowerCase() === sampleEscrow.arbiter.toLowerCase()
         });
       }
     } catch (error) {
@@ -249,53 +267,201 @@ const EscrowDetails: React.FC = () => {
               <p className="text-sm text-text-secondary mt-1">{statusInfo.description}</p>
             </div>
 
-            {/* Progress Steps */}
-            <div className="space-y-3">
+            {/* Enhanced Progress Stepper */}
+            <div className="relative">
               {[
-                { status: EscrowStatus.CREATED, title: 'Escrow Created' },
-                { status: EscrowStatus.FUNDED, title: 'Funds Deposited' },
-                { status: EscrowStatus.VERIFIED, title: 'Property Verified' },
-                { status: EscrowStatus.APPROVED, title: 'All Approvals Given' },
-                { status: EscrowStatus.COMPLETED, title: 'Transaction Completed' }
+                { 
+                  status: EscrowStatus.CREATED, 
+                  title: 'Escrow Created',
+                  description: 'Smart contract deployed and initialized',
+                  icon: FileText
+                },
+                { 
+                  status: EscrowStatus.FUNDED, 
+                  title: 'Funds Deposited',
+                  description: 'Buyer has deposited the required amount',
+                  icon: DollarSign
+                },
+                { 
+                  status: EscrowStatus.VERIFIED, 
+                  title: 'Property Verified',
+                  description: 'Agent has completed property verification',
+                  icon: CheckCircle
+                },
+                { 
+                  status: EscrowStatus.APPROVED, 
+                  title: 'All Approvals Given',
+                  description: 'All parties have approved the transaction',
+                  icon: Users
+                },
+                { 
+                  status: EscrowStatus.COMPLETED, 
+                  title: 'Transaction Completed',
+                  description: 'Funds released and ownership transferred',
+                  icon: CheckCircle
+                }
               ].map((step, index) => {
-                const isCompleted = escrow.status >= step.status;
+                const isCompleted = escrow.status > step.status;
                 const isCurrent = escrow.status === step.status;
+                const isUpcoming = escrow.status < step.status;
+                const Icon = step.icon;
                 
                 return (
-                  <div key={index} className="flex items-center">
-                    <div className={`w-3 h-3 rounded-full mr-3 ${
-                      isCompleted ? 'bg-success' : isCurrent ? 'bg-primary' : 'bg-border'
-                    }`} />
-                    <span className={`text-sm ${
-                      isCompleted ? 'text-text-primary' : 'text-text-secondary'
-                    }`}>
-                      {step.title}
-                    </span>
+                  <div key={index} className="relative">
+                    {index > 0 && (
+                      <div className={`absolute left-4 -top-6 w-0.5 h-6 ${
+                        isCompleted ? 'bg-success' : 'bg-border'
+                      }`} />
+                    )}
+                    <div className="flex items-start space-x-3 pb-6">
+                      <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
+                        isCompleted 
+                          ? 'bg-success border-success text-white' 
+                          : isCurrent 
+                            ? 'bg-primary border-primary text-white'
+                            : 'bg-background border-border text-text-secondary'
+                      }`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className={`text-sm font-medium ${
+                          isCompleted || isCurrent ? 'text-text-primary' : 'text-text-secondary'
+                        }`}>
+                          {step.title}
+                        </p>
+                        <p className="text-xs text-text-secondary mt-1">
+                          {step.description}
+                        </p>
+                        {isCurrent && (
+                          <div className="mt-2">
+                            <div className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-50 text-primary">
+                              <Clock className="w-3 h-3 mr-1" />
+                              Current Step
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          {/* Transaction Details */}
+          {/* Property Details */}
           <div className="card">
-            <h2 className="text-lg font-semibold text-text-primary mb-4">Transaction Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="text-lg font-semibold text-text-primary mb-4">Property Information</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Property ID</label>
+                  <p className="text-text-primary font-mono">{escrow.propertyId}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Property Address</label>
+                  <p className="text-text-primary">123 Blockchain Avenue, Crypto City, CC 12345</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Property Type</label>
+                  <p className="text-text-primary">Single Family Home</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Square Footage</label>
+                  <p className="text-text-primary">2,500 sq ft</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Sale Price</label>
+                  <p className="text-text-primary font-mono text-lg">250.0 ETH</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Deposit Amount (10%)</label>
+                  <p className="text-text-primary font-mono text-lg">{escrow.depositAmount} ETH</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Listing Date</label>
+                  <p className="text-text-primary">March 15, 2025</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary">Expected Closing</label>
+                  <p className="text-text-primary">June 30, 2025</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Transaction Timeline */}
+          <div className="card">
+            <h2 className="text-lg font-semibold text-text-primary mb-4">Transaction Timeline</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-text-secondary">Deposit Amount</label>
-                <p className="font-mono text-lg text-text-primary">{escrow.depositAmount} ETH</p>
+                <label className="block text-sm font-medium text-text-secondary">Created</label>
+                <p className="text-text-primary">{new Date(escrow.createdAt * 1000).toLocaleDateString()}</p>
+                <p className="text-xs text-text-secondary">{new Date(escrow.createdAt * 1000).toLocaleTimeString()}</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-secondary">Deposit Deadline</label>
-                <p className="text-text-primary">{new Date(escrow.depositDeadline * 1000).toLocaleString()}</p>
+                <p className="text-text-primary">{new Date(escrow.depositDeadline * 1000).toLocaleDateString()}</p>
+                <p className="text-xs text-text-secondary">{new Date(escrow.depositDeadline * 1000).toLocaleTimeString()}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary">Created</label>
-                <p className="text-text-primary">{new Date(escrow.createdAt * 1000).toLocaleString()}</p>
+                <label className="block text-sm font-medium text-text-secondary">Days Remaining</label>
+                <p className="text-text-primary font-semibold">
+                  {Math.max(0, Math.ceil((escrow.depositDeadline * 1000 - Date.now()) / (1000 * 60 * 60 * 24)))} days
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-text-secondary">Property ID</label>
-                <p className="text-text-primary">{escrow.propertyId}</p>
+            </div>
+          </div>
+
+          {/* Documents & Verification */}
+          <div className="card">
+            <h2 className="text-lg font-semibold text-text-primary mb-4">Documents & Verification</h2>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-background rounded-lg">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 text-text-secondary mr-3" />
+                  <div>
+                    <p className="font-medium text-text-primary">Property Deed</p>
+                    <p className="text-sm text-text-secondary">Uploaded by Seller</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-success" />
+                  <button className="text-primary hover:text-primary-600 text-sm">
+                    <ExternalLink className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-background rounded-lg">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 text-text-secondary mr-3" />
+                  <div>
+                    <p className="font-medium text-text-primary">Inspection Report</p>
+                    <p className="text-sm text-text-secondary">Uploaded by Agent</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-success" />
+                  <button className="text-primary hover:text-primary-600 text-sm">
+                    <ExternalLink className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-background rounded-lg border-2 border-dashed border-border">
+                <div className="flex items-center">
+                  <Upload className="h-5 w-5 text-text-secondary mr-3" />
+                  <div>
+                    <p className="font-medium text-text-primary">Appraisal Report</p>
+                    <p className="text-sm text-text-secondary">Pending upload</p>
+                  </div>
+                </div>
+                <button className="btn-secondary text-sm">
+                  <Upload className="h-4 w-4 mr-1" />
+                  Upload
+                </button>
               </div>
             </div>
           </div>
@@ -340,6 +506,17 @@ const EscrowDetails: React.FC = () => {
                 </button>
               )}
 
+              {userRole.isAgent && escrow.status === EscrowStatus.FUNDED && (
+                <button
+                  onClick={handleApproval}
+                  disabled={actionLoading}
+                  className="w-full btn-primary"
+                >
+                  <CheckCircle className="mr-2 h-4 w-4" />
+                  Verify Property
+                </button>
+              )}
+
               {(userRole.isBuyer || userRole.isSeller || userRole.isAgent) && 
                escrow.status === EscrowStatus.VERIFIED && (
                 <button
@@ -362,6 +539,28 @@ const EscrowDetails: React.FC = () => {
                   Release Funds
                 </button>
               )}
+
+              {(userRole.isBuyer || userRole.isSeller || userRole.isAgent) && (
+                <button
+                  onClick={() => document.getElementById('file-upload')?.click()}
+                  className="w-full btn-secondary"
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Document
+                </button>
+              )}
+
+              <input
+                id="file-upload"
+                type="file"
+                className="hidden"
+                accept=".pdf,.doc,.docx,.jpg,.png"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    toast.success(`Document "${e.target.files[0].name}" uploaded successfully`);
+                  }
+                }}
+              />
 
               {escrow.status < EscrowStatus.COMPLETED && escrow.status !== EscrowStatus.DISPUTED && (
                 <button
@@ -396,6 +595,30 @@ const EscrowDetails: React.FC = () => {
                   {escrow.isVerified ? 'Yes' : 'No'}
                 </span>
               </div>
+              <div className="flex justify-between">
+                <span className="text-text-secondary">Approvals:</span>
+                <span className="text-text-primary">
+                  {[escrow.buyerApproval, escrow.sellerApproval, escrow.agentApproval].filter(Boolean).length}/3
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Communication */}
+          <div className="card">
+            <h2 className="text-lg font-semibold text-text-primary mb-4">Communication</h2>
+            <div className="space-y-3">
+              <button className="w-full btn-secondary">
+                <MessageSquare className="mr-2 h-4 w-4" />
+                Message Participants
+              </button>
+              
+              {userRole.isArbiter && escrow.status === EscrowStatus.DISPUTED && (
+                <button className="w-full btn-primary">
+                  <CheckCircle className="mr-2 h-4 w-4" />
+                  Resolve Dispute
+                </button>
+              )}
             </div>
           </div>
         </div>
