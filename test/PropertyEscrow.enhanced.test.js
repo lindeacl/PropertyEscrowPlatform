@@ -66,13 +66,13 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
       const ADMIN_ROLE = await propertyEscrow.ADMIN_ROLE();
       await expect(
         propertyEscrow.connect(unauthorized).grantRole(ADMIN_ROLE, unauthorized.address)
-      ).to.be.revertedWith("AccessControl");
+      ).to.be.revertedWithCustomError(propertyEscrow, "AccessControlUnauthorizedAccount");
     });
 
     it("Should reject unauthorized pause attempts", async function () {
       await expect(
         propertyEscrow.connect(unauthorized).pause()
-      ).to.be.revertedWith("AccessControl");
+      ).to.be.revertedWithCustomError(propertyEscrow, "AccessControlUnauthorizedAccount");
     });
 
     it("Should reject unauthorized unpause attempts", async function () {
@@ -80,7 +80,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
       // This tests the access control for unpause only
       await expect(
         propertyEscrow.connect(unauthorized).unpause()
-      ).to.be.revertedWith("AccessControl");
+      ).to.be.revertedWithCustomError(propertyEscrow, "AccessControlUnauthorizedAccount");
     });
 
     it("Should prevent operations when paused", async function () {
@@ -307,7 +307,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
       const ADMIN_ROLE = await propertyEscrow.ADMIN_ROLE();
       await expect(
         propertyEscrow.connect(unauthorized).grantRole(ADMIN_ROLE, unauthorized.address)
-      ).to.be.revertedWith("AccessControl");
+      ).to.be.revertedWithCustomError(propertyEscrow, "AccessControlUnauthorizedAccount");
     });
   });
 });
