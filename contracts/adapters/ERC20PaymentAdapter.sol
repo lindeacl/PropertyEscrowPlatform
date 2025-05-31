@@ -16,7 +16,9 @@ contract ERC20PaymentAdapter is IPaymentAdapter, Ownable {
     mapping(address => bool) public supportedTokens;
     mapping(address => uint256) public minimumAmounts;
 
-    constructor() {}
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
 
     function processPayment(
         address from,
