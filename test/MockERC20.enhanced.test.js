@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+require("@nomicfoundation/hardhat-chai-matchers");
 
 describe("MockERC20 - Enhanced Coverage Tests", function () {
   let mockToken;
@@ -20,7 +21,7 @@ describe("MockERC20 - Enhanced Coverage Tests", function () {
     });
 
     it("Should set correct decimals", async function () {
-      expect(await mockToken.decimals()).to.equal(18);
+      expect(await mockToken.decimals()).to.equal(18n);
     });
 
     it("Should mint initial supply to deployer", async function () {
@@ -70,12 +71,12 @@ describe("MockERC20 - Enhanced Coverage Tests", function () {
         .withArgs(ethers.ZeroAddress, user1.address, mintAmount);
     });
 
-    it("Should allow minting to zero address", async function () {
+    it("Should reject minting to zero address", async function () {
       // This tests the underlying ERC20 behavior
       const mintAmount = ethers.parseEther("1000");
       await expect(
         mockToken.mint(ethers.ZeroAddress, mintAmount)
-      ).to.not.be.reverted;
+      ).to.be.revertedWith("ERC20: mint to the zero address");
     });
   });
 
