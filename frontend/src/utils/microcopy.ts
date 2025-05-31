@@ -1,87 +1,154 @@
+/**
+ * Microcopy and help text utilities for enhanced user experience
+ */
+
+// Friendly, clear messages for all user interactions
 export const microcopy = {
-  // Tooltips for advanced terms
-  tooltips: {
-    escrow: "An escrow is a secure holding account where funds are kept safely until all conditions of a sale are met. Think of it as a trusted middleman that protects both buyers and sellers.",
-    polygon: "Polygon is a blockchain network that makes transactions faster and cheaper than Ethereum while maintaining the same security. Your funds are protected by blockchain technology.",
-    smartContract: "A smart contract is like a digital agreement that automatically executes when conditions are met. No human intervention needed - it's programmed to be fair and transparent.",
-    arbiter: "An arbiter is a neutral third party who can help resolve disputes if buyers and sellers disagree. They're like a digital judge for your transaction.",
-    gasFeeBuy: "Gas fees are small transaction costs paid to the blockchain network. They're usually just a few cents and ensure your transaction is processed securely.",
-    deadline: "The deadline is when the escrow automatically expires if not completed. This protects both parties from indefinite waiting.",
-    kycVerification: "KYC (Know Your Customer) verification helps ensure all participants are legitimate, making transactions safer for everyone involved."
+  // Action confirmations
+  confirmations: {
+    escrowCreated: "Great! Your escrow has been created successfully. All parties will be notified.",
+    fundsDeposited: "Perfect! Your funds are now securely held in escrow.",
+    approvalGiven: "Thank you for your approval. The transaction is one step closer to completion.",
+    fundsReleased: "Excellent! Funds have been released and the transaction is complete.",
+    escrowCancelled: "The escrow has been cancelled and any deposited funds will be returned."
   },
 
-  // Reassuring messages
-  reassurance: {
-    fundsSecure: "Your funds are securely held in a smart contract and cannot be accessed by anyone until all conditions are met.",
-    blockchainProtected: "Protected by blockchain technology - the same security used by major financial institutions worldwide.",
-    noMiddleman: "No bank or middleman can freeze or control your funds. The smart contract automatically handles everything.",
-    instantWithdrawal: "Once conditions are met, funds are released instantly to your wallet - no waiting for bank transfers.",
-    disputeProtection: "If there's a disagreement, a qualified arbiter will review the case and ensure a fair resolution.",
-    transparentProcess: "Every action is recorded on the blockchain - you can verify everything independently.",
-    lowCosts: "Blockchain technology eliminates most traditional fees, saving you money on your property transaction."
-  },
-
-  // Helpful explanations
-  explanations: {
-    escrowCreated: "Great! Your escrow has been created successfully. The buyer can now deposit funds to begin the property purchase process.",
-    fundsDeposited: "Excellent! Funds have been securely deposited. The seller can now proceed with property transfer knowing payment is guaranteed.",
-    documentsRequired: "Please upload property documents, inspection reports, and any other relevant files to keep all parties informed.",
-    pendingApproval: "Waiting for the other party to approve. They'll receive a notification and can take action from their dashboard.",
-    disputeRaised: "A dispute has been raised. Don't worry - an experienced arbiter will review all evidence and ensure a fair outcome.",
-    transactionComplete: "Congratulations! Your property transaction has been completed successfully. Funds have been released to the seller.",
-    refundProcessed: "Your refund has been processed and returned to your wallet. The transaction is now closed."
-  },
-
-  // Progress indicators
-  progress: {
-    step1: "Setting up your secure escrow account",
-    step2: "Awaiting buyer's fund deposit",
-    step3: "Funds secured - proceeding with property transfer",
-    step4: "Finalizing transaction and releasing funds",
-    step5: "Transaction completed successfully"
-  },
-
-  // Error messages (user-friendly)
+  // Error messages - friendly and actionable
   errors: {
-    walletNotConnected: "Please connect your wallet to continue. We support MetaMask and other popular wallets.",
-    insufficientFunds: "You don't have enough funds in your wallet for this transaction. Please add more funds and try again.",
-    transactionFailed: "The transaction couldn't be completed. This is usually temporary - please try again in a moment.",
-    networkError: "Connection issue detected. Please check your internet connection and try again.",
-    invalidAddress: "This wallet address doesn't look right. Please double-check and enter a valid address.",
-    documentUploadFailed: "Document upload failed. Please ensure your file is under 10MB and try again.",
-    disputeAlreadyExists: "A dispute is already active for this escrow. Please wait for the arbiter's decision."
+    walletNotConnected: "Please connect your wallet to continue with this transaction.",
+    insufficientFunds: "You don't have enough funds for this transaction. Please check your balance.",
+    networkError: "We're having trouble connecting to the blockchain. Please try again in a moment.",
+    invalidAddress: "This wallet address doesn't look right. Please double-check and try again.",
+    transactionFailed: "The transaction couldn't be completed. Please review the details and try again.",
+    unauthorized: "You don't have permission to perform this action.",
+    escrowNotFound: "We couldn't find this escrow. It may have been completed or cancelled.",
+    deadlinePassed: "The deadline for this escrow has passed."
+  },
+
+  // Loading states
+  loading: {
+    connecting: "Connecting to your wallet...",
+    creating: "Creating your escrow...",
+    depositing: "Depositing funds securely...",
+    approving: "Processing your approval...",
+    releasing: "Releasing funds...",
+    cancelling: "Cancelling escrow...",
+    verifying: "Verifying transaction..."
   },
 
   // Success messages
   success: {
-    walletConnected: "Wallet connected successfully! You're ready to start using the platform.",
-    escrowCreated: "Escrow created! The buyer will be notified and can now deposit funds.",
-    fundsDeposited: "Funds deposited successfully! Your payment is now secure and guaranteed.",
-    documentsUploaded: "Documents uploaded successfully. All parties can now view and download them.",
-    transactionApproved: "Transaction approved! The escrow will proceed to the next step automatically.",
-    disputeResolved: "Dispute resolved successfully. The transaction can now continue as planned.",
-    fundsReleased: "Funds released! The transaction is complete and all parties have been notified."
+    connected: "Wallet connected successfully!",
+    created: "Escrow created and ready for deposits",
+    deposited: "Funds deposited and secured",
+    approved: "Approval recorded successfully",
+    released: "Transaction completed successfully",
+    cancelled: "Escrow cancelled successfully"
   },
 
-  // Action prompts
-  actions: {
-    connectWallet: "Connect your wallet to get started with secure property transactions",
-    depositFunds: "Deposit funds to guarantee your property purchase and protect the seller",
-    uploadDocuments: "Upload property documents to keep everyone informed and build trust",
-    approveTransaction: "Review and approve to move the transaction to the next step",
-    raiseDispute: "If there's an issue, raise a dispute and an arbiter will help resolve it",
-    releaseFunds: "Release funds to complete the property sale and transfer ownership"
+  // Warnings
+  warnings: {
+    deadlineApproaching: "This escrow expires soon. Please complete any pending actions.",
+    largeAmount: "This is a large transaction. Please double-check all details.",
+    irreversible: "This action cannot be undone. Please confirm you want to proceed.",
+    networkFee: "Network fees will apply to this transaction.",
+    experimental: "This feature is new. Please proceed with caution."
   }
 };
 
-export const getTooltipContent = (term: keyof typeof microcopy.tooltips): string => {
-  return microcopy.tooltips[term] || '';
+// Tooltip content for technical terms and complex actions
+export const getTooltipContent = (key: string): string => {
+  const tooltips: Record<string, string> = {
+    escrow: "A secure holding account where funds are kept until all conditions are met",
+    smartContract: "Automated agreement that executes when conditions are fulfilled",
+    gasFeе: "Small fee paid to process transactions on the blockchain",
+    deadline: "Date by which all escrow conditions must be met",
+    multiSig: "Requires multiple approvals before funds can be released",
+    arbiter: "Neutral party who can resolve disputes if they arise",
+    verification: "Process to confirm all escrow conditions have been met",
+    platformFee: "Small service fee to maintain and improve the platform",
+    blockchain: "Secure, transparent ledger that records all transactions",
+    wallet: "Digital account that holds your cryptocurrency and tokens",
+    deposit: "Funds placed into secure escrow until transaction completes",
+    approval: "Confirmation that conditions have been met",
+    release: "Final step where funds are transferred to the seller",
+    cancellation: "Ending the escrow and returning funds to the buyer",
+    dispute: "Process to resolve disagreements about transaction conditions"
+  };
+
+  return tooltips[key] || "Additional information about this feature";
 };
 
-export const getReassurance = (key: keyof typeof microcopy.reassurance): string => {
-  return microcopy.reassurance[key] || '';
+// Reassuring messages to build trust
+export const getReassurance = (context: string): string => {
+  const reassurances: Record<string, string> = {
+    fundsSecure: "Your funds are protected by smart contracts and cannot be accessed by anyone else",
+    transparentProcess: "Every action is recorded on the blockchain for complete transparency",
+    professionalSupport: "Our support team is available 24/7 to help with any questions",
+    provenTechnology: "Built on battle-tested blockchain technology used by millions",
+    regulatoryCompliant: "Fully compliant with financial regulations and security standards",
+    rapidSupport: "Most issues are resolved within minutes, not hours",
+    noHiddenFees: "All fees are clearly displayed upfront with no surprises",
+    easyRefunds: "If something goes wrong, refunds are automatic and instant"
+  };
+
+  return reassurances[context] || "You're in safe hands with our secure platform";
 };
 
-export const getExplanation = (key: keyof typeof microcopy.explanations): string => {
-  return microcopy.explanations[key] || '';
+// Step-by-step guidance for complex processes
+export const getStepGuidance = (step: string): string => {
+  const guidance: Record<string, string> = {
+    connectWallet: "Click 'Connect Wallet' and select your preferred wallet from the list. Approve the connection when prompted.",
+    createEscrow: "Fill in the property details, set the purchase price, and add all parties involved. Review everything carefully before submitting.",
+    depositFunds: "Transfer the agreed amount to the escrow. Your funds will be held securely until all conditions are met.",
+    verifyConditions: "Upload any required documents and confirm all conditions have been satisfied.",
+    giveApproval: "Review the transaction details one final time, then approve to authorize fund release.",
+    releaseCompletes: "Once approved by all parties, funds are automatically released and the transaction is complete."
+  };
+
+  return guidance[step] || "Follow the on-screen instructions to complete this step";
+};
+
+// Context-sensitive help text
+export const getContextHelp = (context: string): string => {
+  const contextHelp: Record<string, string> = {
+    firstTime: "New to escrow? Don't worry - we'll guide you through each step.",
+    returning: "Welcome back! Your previous transactions are available in your dashboard.",
+    mobile: "Using mobile? Tap and hold any term for more information.",
+    desktop: "Hover over any question mark icon for helpful explanations.",
+    slow: "Network busy? Transactions may take a few extra minutes to process.",
+    fast: "Network is fast today! Your transaction should complete quickly.",
+    highValue: "For large transactions, we recommend extra verification steps.",
+    international: "Cross-border transaction? Currency conversion happens automatically."
+  };
+
+  return contextHelp[context] || "Need help? Contact our support team anytime.";
+};
+
+// Progress indicators with encouraging messages
+export const getProgressMessage = (step: number, total: number): string => {
+  const progress = Math.round((step / total) * 100);
+  
+  if (progress < 25) return `Getting started... (${progress}% complete)`;
+  if (progress < 50) return `Making great progress! (${progress}% complete)`;
+  if (progress < 75) return `Almost there! (${progress}% complete)`;
+  if (progress < 100) return `Final steps... (${progress}% complete)`;
+  return "All done! 🎉";
+};
+
+// Accessibility announcements for screen readers
+export const getA11yAnnouncement = (action: string): string => {
+  const announcements: Record<string, string> = {
+    modalOpened: "Dialog opened. Use Tab to navigate, Escape to close.",
+    modalClosed: "Dialog closed. Focus returned to previous element.",
+    formError: "Form contains errors. Please review the highlighted fields.",
+    formSuccess: "Form submitted successfully.",
+    pageLoaded: "Page loaded successfully.",
+    actionCompleted: "Action completed successfully.",
+    actionFailed: "Action failed. Please try again.",
+    loading: "Loading in progress. Please wait.",
+    networkIssue: "Network connection issue detected."
+  };
+
+  return announcements[action] || "Status update available.";
 };

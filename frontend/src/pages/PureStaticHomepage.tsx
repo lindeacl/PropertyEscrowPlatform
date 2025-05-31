@@ -14,6 +14,9 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import Tooltip from '../components/ui/Tooltip';
+import AccessibleButton from '../components/ui/AccessibleButton';
+import { getTooltipContent, microcopy } from '../utils/microcopy';
 
 const PureStaticHomepage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -80,13 +83,25 @@ const PureStaticHomepage: React.FC = () => {
             and efficient real estate transactions for buyers, sellers, and agents.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg flex items-center justify-center">
+            <AccessibleButton
+              variant="primary"
+              size="lg"
+              rightIcon={<ArrowRight className="h-5 w-5" />}
+              aria-describedby="start-transaction-help"
+            >
               Start Transaction
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
-            <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-semibold text-lg">
+            </AccessibleButton>
+            <AccessibleButton
+              variant="outline"
+              size="lg"
+              aria-describedby="learn-more-help"
+            >
               Learn More
-            </button>
+            </AccessibleButton>
+          </div>
+          <div className="sr-only">
+            <div id="start-transaction-help">Begin your secure property escrow transaction</div>
+            <div id="learn-more-help">Discover how our escrow platform works</div>
           </div>
         </div>
       </section>

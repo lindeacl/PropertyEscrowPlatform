@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { HelpCircle } from 'lucide-react';
+import { ariaUtils, focusRingStyles } from '../../utils/accessibility';
 
 interface TooltipProps {
   content: string;
   children?: React.ReactNode;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  trigger?: 'hover' | 'click';
   icon?: boolean;
-  className?: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  trigger?: 'hover' | 'click' | 'focus';
+  delay?: number;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
   content,
   children,
+  icon = false,
   position = 'top',
   trigger = 'hover',
-  icon = false,
-  className = ''
+  delay = 300
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+  const tooltipId = useRef(ariaUtils.generateId('tooltip'));
+
+  const showTooltip = () => {
+    if (timeoutId) clearTimeout(timeoutId);
+    const id = setTimeout(() => setIsVisible(true), delay);
+    setTimeoutId(id);
+  };
+
+  const hideTooltip = () => {
+    if (timeoutId) clearTimeout(timeoutId);
+    setIsVisible(false);
+  };
+
+  const toggleTooltip = () => {
+    setIsVisible(!isVisible);
+  };
 
   const positionClasses = {
     top: 'bottom-full left-1/2 transform -translate-x-1/2 mb-2',
@@ -28,61 +46,77 @@ const Tooltip: React.FC<TooltipProps> = ({
   };
 
   const arrowClasses = {
-    top: 'top-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-b-transparent border-t-gray-800',
-    bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-t-transparent border-b-gray-800',
-    left: 'left-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-r-transparent border-l-gray-800',
-    right: 'right-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-l-transparent border-r-gray-800'
+    top: 'top-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900',
+    bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900',
+    left: 'left-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900',
+    right: 'right-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900'
   };
 
-  const handleShow = () => {
-    if (trigger === 'hover') {
-      setIsVisible(true);
-    } else {
-      setIsVisible(!isVisible);
-    }
+  const triggerProps = {
+    'aria-describedby': isVisible ? tooltipId.current : undefined,
+    ...(trigger === 'hover' && {
+      onMouseEnter: showTooltip,
+      onMouseLeave: hideTooltip,
+      onFocus: showTooltip,
+      onBlur: hideTooltip
+    }),
+    ...(trigger === 'click' && {
+      onClick: toggleTooltip,
+      'aria-expanded': isVisible
+    }),
+    ...(trigger === 'focus' && {
+      onFocus: showTooltip,
+      onBlur: hideTooltip
+    })
   };
 
-  const handleHide = () => {
-    if (trigger === 'hover') {
-      setIsVisible(false);
+  const TriggerElement = () => {
+    if (children) {
+      return React.cloneElement(children as React.ReactElement, triggerProps);
     }
-  };
+    
+    if (icon) {
+      return (
+        <button
+          type="button"
+          className={`
+            inline-flex items-center justify-center w-5 h-5 
+            text-gray-400 hover:text-gray-600 
+            ${focusRingStyles.base} rounded-full
+          `}
+          aria-label="More information"
+          {...triggerProps}
+        >
+          <HelpCircle className="w-4 h-4" aria-hidden="true" />
+        </button>
+      );
+    }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setIsVisible(false);
-    }
+    return null;
   };
 
   return (
-    <div className={`relative inline-block ${className}`}>
-      <div
-        onMouseEnter={handleShow}
-        onMouseLeave={handleHide}
-        onClick={trigger === 'click' ? handleShow : undefined}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-        role="button"
-        aria-describedby={isVisible ? 'tooltip' : undefined}
-        aria-expanded={isVisible}
-        className="inline-flex items-center cursor-help focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
-      >
-        {children || (icon && <HelpCircle className="h-4 w-4 text-text-secondary hover:text-text-primary transition-colors" />)}
-      </div>
-
+    <div className="relative inline-block">
+      <TriggerElement />
+      
       {isVisible && (
         <div
-          id="tooltip"
+          id={tooltipId.current}
           role="tooltip"
           className={`
-            absolute z-50 px-3 py-2 text-sm text-white bg-gray-800 rounded-lg shadow-lg
-            max-w-xs break-words animate-in fade-in duration-200
+            absolute z-50 px-3 py-2 text-sm text-white bg-gray-900 rounded-md
+            shadow-lg max-w-xs whitespace-normal break-words
             ${positionClasses[position]}
           `}
         >
           {content}
+          {/* Arrow */}
           <div
-            className={`absolute w-0 h-0 border-4 ${arrowClasses[position]}`}
+            className={`
+              absolute w-0 h-0 border-4
+              ${arrowClasses[position]}
+            `}
+            aria-hidden="true"
           />
         </div>
       )}

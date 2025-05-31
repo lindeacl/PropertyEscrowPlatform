@@ -1,0 +1,266 @@
+/* Enhanced Accessibility Styles for WCAG AA Compliance */
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast focus rings for better visibility */
+.focus-ring {
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.focus-ring:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Enhanced focus for buttons */
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Input focus states with high contrast */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2563eb;
+  ring-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Ensure minimum touch target sizes (44px x 44px) */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* High contrast colors for text readability */
+.text-high-contrast {
+  color: #1f2937; /* Meets AA standard against white */
+}
+
+.text-high-contrast-inverse {
+  color: #f9fafb; /* Meets AA standard against dark backgrounds */
+}
+
+/* Error states with high contrast */
+.error-text {
+  color: #dc2626; /* High contrast red */
+}
+
+.error-border {
+  border-color: #dc2626;
+}
+
+/* Success states with high contrast */
+.success-text {
+  color: #059669; /* High contrast green */
+}
+
+.success-border {
+  border-color: #059669;
+}
+
+/* Warning states with high contrast */
+.warning-text {
+  color: #d97706; /* High contrast orange */
+}
+
+.warning-border {
+  border-color: #d97706;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #2563eb;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-blue-600 {
+    background-color: #1e40af;
+  }
+  
+  .text-gray-600 {
+    color: #374151;
+  }
+  
+  .border-gray-300 {
+    border-color: #6b7280;
+  }
+}
+
+/* Dark mode accessibility */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-text {
+    color: #f9fafb;
+  }
+  
+  .dark-mode-bg {
+    background-color: #1f2937;
+  }
+  
+  .dark-mode-border {
+    border-color: #4b5563;
+  }
+}
+
+/* Responsive design for small screens */
+@media (max-width: 640px) {
+  /* Increase touch target sizes on mobile */
+  .mobile-touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Increase text size for better readability */
+  .mobile-text-base {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Better spacing for mobile */
+  .mobile-spacing {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-optimized {
+    padding: 1.5rem;
+  }
+  
+  .tablet-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1025px) {
+  .desktop-optimized {
+    padding: 2rem;
+  }
+  
+  .desktop-text {
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+}
+
+/* Print styles for accessibility */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-friendly {
+    color: #000 !important;
+    background: white !important;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+}
+
+/* Animation preferences */
+.animate-gentle {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gentle {
+    animation: none;
+  }
+}
+
+/* Custom scrollbar for better accessibility */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 6px;
+  border: 2px solid #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Ensure proper line height for readability */
+.readable-text {
+  line-height: 1.6;
+  letter-spacing: 0.025em;
+}
+
+/* Status indicators with patterns for colorblind users */
+.status-success::before {
+  content: "✓ ";
+  font-weight: bold;
+}
+
+.status-error::before {
+  content: "✗ ";
+  font-weight: bold;
+}
+
+.status-warning::before {
+  content: "⚠ ";
+  font-weight: bold;
+}
+
+.status-info::before {
+  content: "ℹ ";
+  font-weight: bold;
+}

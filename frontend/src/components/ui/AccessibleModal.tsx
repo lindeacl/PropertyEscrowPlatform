@@ -1,33 +1,34 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
-import { Button } from './index';
+import { keyboardNavigation, ariaUtils, focusRingStyles } from '../../utils/accessibility';
 
 interface AccessibleModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  description?: string;
   children: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  className?: string;
   closeOnOverlayClick?: boolean;
   showCloseButton?: boolean;
-  ariaDescribedBy?: string;
 }
 
 const AccessibleModal: React.FC<AccessibleModalProps> = ({
   isOpen,
   onClose,
   title,
+  description,
   children,
   size = 'md',
-  className = '',
   closeOnOverlayClick = true,
-  showCloseButton = true,
-  ariaDescribedBy
+  showCloseButton = true
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const previousActiveElement = useRef<Element | null>(null);
+  const titleId = useRef(ariaUtils.generateId('modal-title'));
+  const descriptionId = useRef(ariaUtils.generateId('modal-description'));
+  const previousFocus = useRef<HTMLElement | null>(null);
 
+  // Size configurations
   const sizeClasses = {
     sm: 'max-w-md',
     md: 'max-w-lg',
@@ -37,119 +38,116 @@ const AccessibleModal: React.FC<AccessibleModalProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      // Store the currently focused element
-      previousActiveElement.current = document.activeElement;
-      
-      // Focus the modal
-      modalRef.current?.focus();
+      // Store the previously focused element
+      previousFocus.current = document.activeElement as HTMLElement;
       
       // Prevent body scroll
       document.body.style.overflow = 'hidden';
       
-      // Add escape key listener
-      const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          onClose();
-        }
-      };
+      // Focus the modal
+      setTimeout(() => {
+        modalRef.current?.focus();
+      }, 100);
+
+      // Setup keyboard navigation
+      const cleanupFocusTrap = modalRef.current 
+        ? keyboardNavigation.trapFocus(modalRef.current)
+        : () => {};
       
-      document.addEventListener('keydown', handleEscape);
-      
+      const cleanupEscape = keyboardNavigation.handleEscape(onClose);
+
+      // Announce modal opening to screen readers
+      ariaUtils.announce(`Modal opened: ${title}`, 'assertive');
+
       return () => {
-        document.removeEventListener('keydown', handleEscape);
+        cleanupFocusTrap();
+        cleanupEscape();
         document.body.style.overflow = 'unset';
         
-        // Restore focus to the previously focused element
-        if (previousActiveElement.current && 'focus' in previousActiveElement.current) {
-          (previousActiveElement.current as HTMLElement).focus();
+        // Restore focus to previously focused element
+        if (previousFocus.current) {
+          previousFocus.current.focus();
         }
       };
     }
-  }, [isOpen, onClose]);
+  }, [isOpen, title, onClose]);
 
-  // Trap focus within modal
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Tab') {
-      const modal = modalRef.current;
-      if (!modal) return;
-
-      const focusableElements = modal.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      
-      const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement?.focus();
-        }
-      } else {
-        if (document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement?.focus();
-        }
-      }
-    }
-  };
+  if (!isOpen) return null;
 
   const handleOverlayClick = (e: React.MouseEvent) => {
-    if (closeOnOverlayClick && e.target === e.currentTarget) {
+    if (e.target === e.currentTarget && closeOnOverlayClick) {
       onClose();
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      onClick={handleOverlayClick}
+      className="fixed inset-0 z-50 overflow-y-auto"
+      aria-labelledby={titleId.current}
+      aria-describedby={description ? descriptionId.current : undefined}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
-      aria-describedby={ariaDescribedBy}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" />
-      
-      {/* Modal */}
+      {/* Overlay */}
       <div
-        ref={modalRef}
-        className={`
-          relative bg-surface rounded-xl shadow-2xl border border-border
-          w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden
-          transform transition-all duration-200 scale-100
-          ${className}
-        `}
-        onKeyDown={handleKeyDown}
-        tabIndex={-1}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border">
-          <h2
-            id="modal-title"
-            className="text-xl font-semibold text-text-primary"
-          >
-            {title}
-          </h2>
-          {showCloseButton && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={onClose}
-              aria-label="Close modal"
-              className="p-2"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          )}
-        </div>
-        
-        {/* Content */}
-        <div className="overflow-y-auto max-h-[calc(90vh-120px)]">
-          {children}
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={handleOverlayClick}
+        aria-hidden="true"
+      />
+
+      {/* Modal Container */}
+      <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+        <div
+          ref={modalRef}
+          className={`
+            relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl 
+            transition-all w-full ${sizeClasses[size]} mx-auto
+            ${focusRingStyles.modal}
+          `}
+          tabIndex={-1}
+        >
+          {/* Header */}
+          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <h3
+                  id={titleId.current}
+                  className="text-lg font-medium leading-6 text-gray-900"
+                >
+                  {title}
+                </h3>
+              </div>
+              
+              {showCloseButton && (
+                <button
+                  type="button"
+                  className={`
+                    rounded-md bg-white text-gray-400 hover:text-gray-500
+                    p-2 ${focusRingStyles.button}
+                  `}
+                  onClick={onClose}
+                  aria-label="Close modal"
+                >
+                  <span className="sr-only">Close</span>
+                  <X className="h-5 w-5" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+            
+            {description && (
+              <p
+                id={descriptionId.current}
+                className="mt-2 text-sm text-gray-500"
+              >
+                {description}
+              </p>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
+            {children}
+          </div>
         </div>
       </div>
     </div>
