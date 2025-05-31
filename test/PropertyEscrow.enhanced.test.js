@@ -19,6 +19,9 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
     escrowFactory = await EscrowFactory.deploy();
     await escrowFactory.waitForDeployment();
 
+    // Whitelist token
+    await escrowFactory.whitelistToken(await mockToken.getAddress());
+
     // Create escrow
     await escrowFactory.createEscrow(
       "PROP-001",

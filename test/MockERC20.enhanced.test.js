@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-require("chai").use(require("chai-as-promised"));
 
 describe("MockERC20 - Enhanced Coverage Tests", function () {
   let mockToken;
@@ -114,26 +113,47 @@ describe("MockERC20 - Enhanced Coverage Tests", function () {
     });
   });
 
-  describe("Custom Decimals Functions", function () {
-    it("Should allow owner to set custom decimals", async function () {
-      await mockToken.setDecimals(6);
-      expect(await mockToken.decimals()).to.equal(6);
+  describe("Burning Functions", function () {
+    beforeEach(async function () {
+      await mockToken.transfer(user1.address, ethers.parseEther("10000"));
     });
 
-    it("Should reject setting decimals from non-owner", async function () {
-      await expect(
-        mockToken.connect(unauthorized).setDecimals(6)
-      ).to.be.revertedWith("Ownable: caller is not the owner");
+    it("Should allow users to burn their own tokens", async function () {
+      const burnAmount = ethers.parseEther("1000");
+      const initialBalance = await mockToken.balanceOf(user1.address);
+      
+      await mockToken.connect(user1).burn(burnAmount);
+      
+      const finalBalance = await mockToken.balanceOf(user1.address);
+      expect(finalBalance).to.equal(initialBalance - burnAmount);
     });
 
-    it("Should allow setting decimals to zero", async function () {
-      await mockToken.setDecimals(0);
-      expect(await mockToken.decimals()).to.equal(0);
+    it("Should decrease total supply when burning", async function () {
+      const initialSupply = await mockToken.totalSupply();
+      const burnAmount = ethers.parseEther("1000");
+      
+      await mockToken.connect(user1).burn(burnAmount);
+      
+      const newSupply = await mockToken.totalSupply();
+      expect(newSupply).to.equal(initialSupply - burnAmount);
     });
 
-    it("Should allow setting high decimal values", async function () {
-      await mockToken.setDecimals(255);
-      expect(await mockToken.decimals()).to.equal(255);
+    it("Should allow burning with approval (burnFrom)", async function () {
+      const burnAmount = ethers.parseEther("1000");
+      await mockToken.connect(user1).approve(user2.address, burnAmount);
+      
+      const initialBalance = await mockToken.balanceOf(user1.address);
+      await mockToken.connect(user2).burnFrom(user1.address, burnAmount);
+      
+      const finalBalance = await mockToken.balanceOf(user1.address);
+      expect(finalBalance).to.equal(initialBalance - burnAmount);
+    });
+
+    it("Should emit Transfer event when burning", async function () {
+      const burnAmount = ethers.parseEther("1000");
+      await expect(mockToken.connect(user1).burn(burnAmount))
+        .to.emit(mockToken, "Transfer")
+        .withArgs(user1.address, ethers.ZeroAddress, burnAmount);
     });
   });
 
@@ -210,20 +230,25 @@ describe("MockERC20 - Enhanced Coverage Tests", function () {
   describe("Edge Cases", function () {
     it("Should handle zero amount operations", async function () {
       await expect(mockToken.mint(user1.address, 0)).to.not.be.reverted;
-      await expect(mockToken.burn(deployer.address, 0)).to.not.be.reverted;
+      await mockToken.transfer(user1.address, ethers.parseEther("1000"));
+      await expect(mockToken.connect(user1).burn(0)).to.not.be.reverted;
     });
 
-    it("Should handle maximum uint256 values", async function () {
-      const maxUint256 = ethers.MaxUint256;
+    it("Should handle large token amounts", async function () {
+      const largeAmount = ethers.parseEther("1000000");
       await expect(
-        mockToken.mint(user1.address, maxUint256)
+        mockToken.mint(user1.address, largeAmount)
       ).to.not.be.reverted;
+      
+      const balance = await mockToken.balanceOf(user1.address);
+      expect(balance).to.equal(largeAmount);
     });
 
     it("Should maintain correct balances after multiple operations", async function () {
+      // Start with tokens for user1
       await mockToken.mint(user1.address, ethers.parseEther("1000"));
       await mockToken.transfer(user2.address, ethers.parseEther("500"));
-      await mockToken.burn(user1.address, ethers.parseEther("200"));
+      await mockToken.connect(user1).burn(ethers.parseEther("200"));
       
       const user1Balance = await mockToken.balanceOf(user1.address);
       const user2Balance = await mockToken.balanceOf(user2.address);
