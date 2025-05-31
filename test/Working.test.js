@@ -59,7 +59,7 @@ describe("Working Escrow Platform Tests", function () {
     });
 
     it("Should handle transfers", async function () {
-      const amount = ethers.parseUnits("100", 6);
+      const amount = ethers.parseEther("100");
       await mockToken.connect(buyer).transfer(seller.address, amount);
       expect(await mockToken.balanceOf(seller.address)).to.equal(amount);
     });

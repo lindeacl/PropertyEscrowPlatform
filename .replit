@@ -39,10 +39,6 @@ args = "CLI Demo"
 task = "workflow.run"
 args = "Frontend Demo"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Working Tests"
-
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -100,14 +96,6 @@ author = "agent"
 task = "shell.exec"
 args = "python3 -m http.server 5000"
 waitForPort = 5000
-
-[[workflows.workflow]]
-name = "Working Tests"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npx hardhat test test/Working.test.js"
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
