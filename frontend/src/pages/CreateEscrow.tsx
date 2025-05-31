@@ -9,10 +9,13 @@ import {
   Calendar,
   DollarSign,
   Users,
-  FileText
+  FileText,
+  ChevronLeft,
+  ChevronRight,
+  Wallet as WalletIcon
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { CreateEscrowParams } from '../types';
+import { Card, Button, Input, Grid } from '../components/ui';
 
 const CreateEscrow: React.FC = () => {
   const navigate = useNavigate();
@@ -20,15 +23,17 @@ const CreateEscrow: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  const [formData, setFormData] = useState<CreateEscrowParams>({
+  const [formData, setFormData] = useState({
+    propertyId: '',
+    propertyAddress: '',
+    depositAmount: '',
+    depositDeadline: 0,
     buyer: '',
     seller: '',
     agent: '',
     arbiter: '',
-    tokenAddress: '',
-    depositAmount: '',
-    depositDeadline: 0,
-    propertyId: ''
+    tokenAddress: '0x5FbDB2315678afecb367f032d93F642f64180aa3', // USDC contract
+    documents: [] as File[]
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
