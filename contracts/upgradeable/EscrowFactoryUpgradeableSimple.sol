@@ -52,12 +52,12 @@ contract EscrowFactoryUpgradeableSimple is
     function createEscrow(
         address buyer,
         address seller,
-        address agent,
-        address arbiter,
+        address /* agent */,
+        address /* arbiter */,
         address tokenAddress,
-        uint256 depositAmount,
-        uint256 depositDeadline,
-        string memory propertyId
+        uint256 /* depositAmount */,
+        uint256 /* depositDeadline */,
+        string memory /* propertyId */
     ) external returns (address) {
         require(whitelistedTokens[tokenAddress], "Token not whitelisted");
         
@@ -72,5 +72,8 @@ contract EscrowFactoryUpgradeableSimple is
         return escrows.length;
     }
     
-    function _authorizeUpgrade(address) internal override onlyOwner {}
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
+        // Only owner can authorize upgrades
+        require(newImplementation != address(0), "Invalid implementation address");
+    }
 }
