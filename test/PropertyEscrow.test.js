@@ -84,7 +84,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       await propertyEscrow.connect(buyer).depositFunds(escrowId);
 
       const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.status).to.equal(1); // FUNDED
+      expect(Number(escrow.state)).to.equal(1); // DEPOSITED
     });
 
     it("Should reject deposits from non-buyer", async function () {
@@ -134,7 +134,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       await propertyEscrow.connect(seller).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.status).to.equal(2); // COMPLETED
+      expect(escrow.state).to.equal(3); // RELEASED
     });
 
     it("Should transfer correct amounts including platform fee", async function () {
@@ -164,7 +164,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       await propertyEscrow.connect(buyer).cancelEscrow(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.status).to.equal(3); // CANCELLED
+      expect(escrow.state).to.equal(6); // CANCELLED
     });
 
     it("Should refund buyer when cancelling after funding", async function () {
