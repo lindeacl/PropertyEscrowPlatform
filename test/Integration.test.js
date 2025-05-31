@@ -210,7 +210,7 @@ describe("Integration Tests - Full Property Sale Flow", function () {
         }
       });
 
-      const expiredEscrowAddress = await factory.escrows(1);
+      const expiredEscrowAddress = await factory.getEscrowContract(1);
       const expiredEscrow = await ethers.getContractAt("PropertyEscrow", expiredEscrowAddress);
       
       const escrowData = await expiredEscrow.getEscrow(1);
