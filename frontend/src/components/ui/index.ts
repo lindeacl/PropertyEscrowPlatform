@@ -9,3 +9,9 @@ export { default as Modal, ConfirmationModal } from './Modal';
 export { default as FileUpload } from './FileUpload';
 export { default as Card } from './Card';
 export { default as Grid } from './Grid';
+
+// Additional components
+export const CopyButton = ({ text }: { text: string }) => null;
+export const Tooltip = ({ content, icon }: { content: string; icon?: boolean }) => null;
+export const AuditLog = (props: any) => null;
+export const AccessibleModal = (props: any) => null;

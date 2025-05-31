@@ -1,0 +1,56 @@
+Compiled with problems:
+×
+ERROR in src/components/ui/AuditLog.tsx:3:10
+TS2305: Module '"./index"' has no exported member 'CopyButton'.
+    1 | import React from 'react';
+    2 | import { Clock, ExternalLink, User, FileText, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
+  > 3 | import { CopyButton } from './index';
+      |          ^^^^^^^^^^
+    4 |
+    5 | interface AuditLogEntry {
+    6 |   id: string;
+ERROR in src/pages/EscrowDetails.tsx:333:14
+TS2304: Cannot find name 'Tooltip'.
+    331 |               Escrow #{escrow.escrowId}
+    332 |             </h1>
+  > 333 |             <Tooltip content={getTooltipContent('escrow')} icon={true} />
+        |              ^^^^^^^
+    334 |           </div>
+    335 |           <p className="text-text-secondary">Property ID: {escrow.propertyId}</p>
+    336 |           <div className="mt-2 text-sm text-success flex items-center gap-1">
+ERROR in src/pages/EscrowDetails.tsx:723:10
+TS2304: Cannot find name 'AuditLog'.
+    721 |       {/* Audit Log Section */}
+    722 |       <div className="mt-8">
+  > 723 |         <AuditLog 
+        |          ^^^^^^^^
+    724 |           entries={auditEntries}
+    725 |           showTransactionDetails={true}
+    726 |           blockExplorerUrl="https://polygonscan.com"
+ERROR in src/pages/EscrowDetails.tsx:740:8
+TS2304: Cannot find name 'AccessibleModal'.
+    738 |
+    739 |       {/* Audit Log Modal */}
+  > 740 |       <AccessibleModal
+        |        ^^^^^^^^^^^^^^^
+    741 |         isOpen={showAuditLog}
+    742 |         onClose={() => setShowAuditLog(false)}
+    743 |         title="Complete Audit Log"
+ERROR in src/pages/EscrowDetails.tsx:751:12
+TS2304: Cannot find name 'AuditLog'.
+    749 |             {getReassurance('transparentProcess')}
+    750 |           </p>
+  > 751 |           <AuditLog 
+        |            ^^^^^^^^
+    752 |             entries={auditEntries}
+    753 |             showTransactionDetails={true}
+    754 |             blockExplorerUrl="https://polygonscan.com"
+ERROR in src/pages/EscrowDetails.tsx:757:9
+TS2304: Cannot find name 'AccessibleModal'.
+    755 |           />
+    756 |         </div>
+  > 757 |       </AccessibleModal>
+        |         ^^^^^^^^^^^^^^^
+    758 |     </div>
+    759 |   );
+    760 | };
