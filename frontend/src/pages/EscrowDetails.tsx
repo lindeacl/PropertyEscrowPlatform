@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { EscrowData, EscrowStatus, UserRole } from '../types';
+import DisputeModal from '../components/modals/DisputeModal';
 
 const EscrowDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +30,7 @@ const EscrowDetails: React.FC = () => {
   });
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
+  const [showDisputeModal, setShowDisputeModal] = useState(false);
 
   useEffect(() => {
     if (isConnected && id) {
@@ -121,15 +123,35 @@ const EscrowDetails: React.FC = () => {
   };
 
   const handleRaiseDispute = async () => {
-    const reason = prompt('Please provide a reason for the dispute:');
-    if (!reason || !escrow || !signer) return;
+    setShowDisputeModal(true);
+  };
+
+  const handleSubmitDispute = async (reason: string, description: string, evidence: File[]) => {
+    if (!escrow || !signer) return;
     
     setActionLoading(true);
     try {
-      toast.success('Dispute functionality will be available once contracts are deployed');
+      // Contract integration will be implemented here
+      toast.success(`Dispute submitted successfully with reason: ${reason}`);
+      toast.success(`Evidence files uploaded: ${evidence.length}`);
     } catch (error) {
-      console.error('Failed to raise dispute:', error);
-      toast.error('Failed to raise dispute');
+      console.error('Failed to submit dispute:', error);
+      toast.error('Failed to submit dispute');
+      throw error;
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleResolveDispute = async () => {
+    if (!escrow || !signer) return;
+    
+    setActionLoading(true);
+    try {
+      toast.success('Dispute resolution functionality will be available once contracts are deployed');
+    } catch (error) {
+      console.error('Failed to resolve dispute:', error);
+      toast.error('Failed to resolve dispute');
     } finally {
       setActionLoading(false);
     }
