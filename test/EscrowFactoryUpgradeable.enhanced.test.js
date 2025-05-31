@@ -38,7 +38,7 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
     });
 
     it("Should start with zero escrow count", async function () {
-      expect(await escrowFactory.escrowCount()).to.equal(0);
+      expect(await escrowFactory.getEscrowCount()).to.equal(0);
     });
 
     it("Should reject re-initialization", async function () {
@@ -56,7 +56,7 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
       await complianceManager.createComplianceRecord(agent.address, true, 1, "Verified agent");
       await complianceManager.createComplianceRecord(arbiter.address, true, 1, "Verified arbiter");
       
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
     });
 
     it("Should reject escrow creation with non-compliant buyer", async function () {
@@ -184,7 +184,7 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
 
   describe("Enhanced Escrow Creation", function () {
     beforeEach(async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
     });
 
     it("Should reject creation with empty property ID", async function () {
@@ -271,12 +271,12 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
   describe("Access Control", function () {
     it("Should reject token whitelisting from non-owner", async function () {
       await expect(
-        escrowFactory.connect(unauthorized).whitelistToken(await mockToken.getAddress())
+        escrowFactory.connect(unauthorized).setTokenWhitelist(await mockToken.getAddress())
       ).to.be.revertedWith("Ownable: caller is not the owner");
     });
 
     it("Should reject token removal from non-owner", async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
       await expect(
         escrowFactory.connect(unauthorized).removeTokenFromWhitelist(await mockToken.getAddress())
       ).to.be.revertedWith("Ownable: caller is not the owner");
@@ -296,7 +296,7 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
     });
 
     it("Should prevent operations when paused", async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
       await escrowFactory.pause();
 
       await expect(
@@ -347,12 +347,12 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
   describe("View Functions", function () {
     it("Should return correct implementation version", async function () {
       // Test that the contract is properly initialized and functional
-      expect(await escrowFactory.escrowCount()).to.equal(0);
+      expect(await escrowFactory.getEscrowCount()).to.equal(0);
       expect(await escrowFactory.owner()).to.equal(deployer.address);
     });
 
     it("Should return correct escrow addresses", async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
       
       await escrowFactory.createEscrow(
         "PROP-001",
@@ -373,7 +373,7 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
 
   describe("Edge Cases", function () {
     it("Should handle multiple escrow creation correctly", async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
       
       for (let i = 0; i < 5; i++) {
         await escrowFactory.createEscrow(
@@ -389,11 +389,11 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
         );
       }
 
-      expect(await escrowFactory.escrowCount()).to.equal(5);
+      expect(await escrowFactory.getEscrowCount()).to.equal(5);
     });
 
     it("Should handle token whitelist changes correctly", async function () {
-      await escrowFactory.whitelistToken(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
       expect(await escrowFactory.isTokenWhitelisted(await mockToken.getAddress())).to.be.true;
       
       await escrowFactory.removeTokenFromWhitelist(await mockToken.getAddress());
