@@ -242,7 +242,10 @@ contract EscrowFactoryUpgradeable is
     /**
      * @dev Authorize upgrade (UUPS pattern)
      */
-    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
+        // Only owner can authorize upgrades - implementation address validation handled by UUPS
+        require(newImplementation != address(0), "Invalid implementation address");
+    }
 
     /**
      * @dev Get implementation version for upgrade tracking
