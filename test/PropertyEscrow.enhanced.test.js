@@ -130,7 +130,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
     it("Should reject verification from unauthorized addresses", async function () {
       await expect(
         propertyEscrow.connect(unauthorized).completeVerification(escrowId)
-      ).to.be.revertedWith("Only agent can verify");
+      ).to.be.revertedWith("Only agent or admin can verify");
     });
 
     it("Should reject verification in wrong state", async function () {
@@ -181,7 +181,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
     it("Should reject disputes from unauthorized addresses", async function () {
       await expect(
         propertyEscrow.connect(unauthorized).raiseDispute(escrowId, "Unauthorized dispute")
-      ).to.be.revertedWith("Not authorized to raise dispute");
+      ).to.be.revertedWith("Not authorized for this escrow");
     });
 
     it("Should reject disputes with empty reason", async function () {
@@ -194,7 +194,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
       await propertyEscrow.connect(buyer).raiseDispute(escrowId, "Test dispute");
       await expect(
         propertyEscrow.connect(unauthorized).resolveDispute(escrowId, true, "Resolution")
-      ).to.be.revertedWith("Only arbiter can resolve disputes");
+      ).to.be.revertedWith("Only arbiter or admin can resolve");
     });
 
     it("Should reject resolution with empty resolution text", async function () {
@@ -264,13 +264,13 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
       
       await expect(
         propertyEscrow.refundBuyer(escrowId)
-      ).to.be.revertedWith("Cannot refund in current state");
+      ).to.be.revertedWith("Only admin can refund");
     });
   });
 
   describe("View Function Edge Cases", function () {
     it("Should return correct details for valid escrow", async function () {
-      const details = await propertyEscrow.getEscrowDetails(escrowId);
+      const details = await propertyEscrow.getEscrow(escrowId);
       expect(details.propertyId).to.equal("PROP-001");
       expect(details.buyer).to.equal(buyer.address);
       expect(details.seller).to.equal(seller.address);
@@ -278,7 +278,7 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
 
     it("Should revert for invalid escrow ID", async function () {
       await expect(
-        propertyEscrow.getEscrowDetails(999)
+        propertyEscrow.getEscrow(999)
       ).to.be.revertedWith("Invalid escrow ID");
     });
 
