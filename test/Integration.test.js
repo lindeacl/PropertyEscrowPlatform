@@ -195,57 +195,65 @@ describe("Integration Tests - Full Property Sale Flow", function () {
 
   describe("Edge Cases", function () {
     it("Should handle expired escrow deadlines", async function () {
-      // Create escrow with future deadline but test expiration logic
-      const futureTime = Math.floor(Date.now() / 1000) + 86400;
+      // Test that contract properly rejects past deadlines
+      const pastTime = Math.floor(Date.now() / 1000) - 86400; // 24 hours ago
       
-      await factory.createEscrow({
+      try {
+        await escrow.createEscrow({
+          buyer: buyer.address,
+          seller: seller.address,
+          agent: agent.address,
+          arbiter: arbiter.address,
+          tokenAddress: await mockToken.getAddress(),
+          depositAmount: ethers.parseEther("100"),
+          agentFee: 250,
+          arbiterFee: 50,
+          platformFee: 250,
+          depositDeadline: pastTime,
+          verificationDeadline: pastTime + 86400,
+          property: {
+            propertyId: "Expired Property",
+            description: "Expired Test Property",
+            salePrice: ethers.parseEther("100"),
+            documentHash: "QmExpired123",
+            verified: false
+          }
+        });
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Invalid deposit deadline");
+      }
+    });
+
+    it("Should handle large transaction amounts", async function () {
+      const largeAmount = ethers.parseEther("500000"); // Use smaller amount within available balance
+      await mockToken.connect(owner).transfer(buyer.address, largeAmount);
+      
+      const tx = await escrow.createEscrow({
         buyer: buyer.address,
         seller: seller.address,
         agent: agent.address,
         arbiter: arbiter.address,
         tokenAddress: await mockToken.getAddress(),
-        depositAmount: ethers.parseEther("100"),
+        depositAmount: largeAmount,
         agentFee: 250,
         arbiterFee: 50,
         platformFee: 250,
-        depositDeadline: futureTime,
-        verificationDeadline: futureTime + 86400,
+        depositDeadline: Math.floor(Date.now() / 1000) + 86400,
+        verificationDeadline: Math.floor(Date.now() / 1000) + 172800,
         property: {
-          propertyId: "Expired Property",
-          description: "Expired Test Property",
-          salePrice: ethers.parseEther("100"),
-          documentHash: "QmExpired123",
+          propertyId: "High Value Property",
+          description: "Large Transaction Test",
+          salePrice: largeAmount,
+          documentHash: "QmLarge123",
           verified: false
         }
       });
+      await tx.wait();
 
-      const expiredEscrowAddress = await factory.getEscrowContract(1);
-      const expiredEscrow = await ethers.getContractAt("PropertyEscrow", expiredEscrowAddress);
+      const escrowData = await escrow.getEscrow(1);
       
-      const escrowData = await expiredEscrow.getEscrow(1);
-      expect(escrowData.deadline).to.be.lessThan(Math.floor(Date.now() / 1000));
-    });
-
-    it("Should handle large transaction amounts", async function () {
-      const largeAmount = ethers.parseEther("1000000");
-      await mockToken.transfer(buyer.address, largeAmount);
-      
-      await factory.createEscrow(
-        buyer.address,
-        seller.address,
-        agent.address,
-        arbiter.address,
-        await mockToken.getAddress(),
-        largeAmount,
-        currentTime + 86400,
-        "High Value Property"
-      );
-
-      const largeEscrowAddress = await factory.escrows(1);
-      const largeEscrow = await ethers.getContractAt("PropertyEscrow", largeEscrowAddress);
-      const escrowData = await largeEscrow.getEscrow(1);
-      
-      expect(escrowData.amount).to.equal(largeAmount);
+      expect(escrowData.depositAmount).to.equal(largeAmount);
     });
 
     it("Should validate correct fee calculations", async function () {
@@ -255,10 +263,11 @@ describe("Integration Tests - Full Property Sale Flow", function () {
       const platformWallet = await factory.platformWallet();
       const initialPlatformBalance = await mockToken.balanceOf(platformWallet);
       
-      // Complete escrow
-      await escrow.connect(buyer).approveRelease();
-      await escrow.connect(seller).approveRelease();
-      await escrow.connect(agent).approveRelease();
+      // Complete escrow with proper workflow sequencing
+      await escrow.connect(agent).completeVerification(0);
+      await escrow.connect(buyer).giveApproval(0);
+      await escrow.connect(seller).giveApproval(0);
+      await escrow.connect(agent).giveApproval(0);
       await escrow.connect(seller).releaseFunds(0);
       
       const finalPlatformBalance = await mockToken.balanceOf(platformWallet);
