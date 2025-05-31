@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise Property Escrow Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -320,6 +321,26 @@
 
     <script>
         let isWalletConnected = false;
+        
+        // Contract addresses from deployment
+        const CONTRACT_ADDRESSES = {
+            MOCK_USDC: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+            PROPERTY_ESCROW: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+            ESCROW_FACTORY: '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9'
+        };
+        
+        // Contract ABIs (simplified for demo)
+        const ESCROW_FACTORY_ABI = [
+            "function createEscrow((address,address,address,address,address,uint256,uint256,string,uint256)) external returns (address, uint256)",
+            "function isTokenWhitelisted(address) external view returns (bool)",
+            "function getEscrowContract(uint256) external view returns (address)"
+        ];
+        
+        const ERC20_ABI = [
+            "function balanceOf(address) external view returns (uint256)",
+            "function approve(address,uint256) external returns (bool)",
+            "function allowance(address,address) external view returns (uint256)"
+        ];
 
         function showPage(pageName) {
             // Hide all pages
@@ -369,13 +390,74 @@
             }
         }
 
-        function createEscrow() {
+        async function createEscrow() {
             if (!isWalletConnected) {
                 alert('Please connect your wallet first');
                 return;
             }
             
-            alert('Escrow creation will be available once the smart contracts are deployed to the blockchain.');
+            try {
+                // Get form data
+                const propertyId = document.querySelector('input[placeholder="e.g., PROP-2024-001"]').value;
+                const amount = document.querySelector('input[placeholder="0.0"]').value;
+                const buyer = document.querySelector('input[placeholder="0x..."]:nth-of-type(1)').value;
+                const seller = document.querySelector('input[placeholder="0x..."]:nth-of-type(2)').value;
+                const agent = document.querySelector('input[placeholder="0x..."]:nth-of-type(3)').value;
+                const arbiter = document.querySelector('input[placeholder="0x..."]:nth-of-type(4)').value;
+                const deadline = new Date(document.querySelector('input[type="datetime-local"]').value).getTime() / 1000;
+                
+                if (!propertyId || !amount || !buyer || !seller || !agent || !arbiter || !deadline) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                
+                // Create contract instances
+                const factory = new ethers.Contract(CONTRACT_ADDRESSES.ESCROW_FACTORY, ESCROW_FACTORY_ABI, signer);
+                const token = new ethers.Contract(CONTRACT_ADDRESSES.MOCK_USDC, ERC20_ABI, signer);
+                
+                // Check if token is whitelisted
+                const isWhitelisted = await factory.isTokenWhitelisted(CONTRACT_ADDRESSES.MOCK_USDC);
+                if (!isWhitelisted) {
+                    alert('USDC token is not whitelisted');
+                    return;
+                }
+                
+                // Convert amount to token units (USDC has 6 decimals)
+                const depositAmount = ethers.utils.parseUnits(amount, 6);
+                
+                // Create escrow parameters
+                const escrowParams = [
+                    buyer,
+                    seller,
+                    agent,
+                    arbiter,
+                    CONTRACT_ADDRESSES.MOCK_USDC,
+                    depositAmount,
+                    Math.floor(deadline),
+                    propertyId,
+                    250 // 2.5% platform fee
+                ];
+                
+                // Estimate gas and send transaction
+                const gasLimit = await factory.estimateGas.createEscrow(escrowParams);
+                const tx = await factory.createEscrow(escrowParams, { gasLimit: gasLimit.mul(120).div(100) });
+                
+                alert(`Escrow creation transaction sent! Hash: ${tx.hash}`);
+                
+                // Wait for confirmation
+                const receipt = await tx.wait();
+                alert(`Escrow created successfully! Block: ${receipt.blockNumber}`);
+                
+                // Redirect to dashboard
+                showPage('dashboard');
+                
+            } catch (error) {
+                console.error('Error creating escrow:', error);
+                alert(`Failed to create escrow: ${error.message}`);
+            }
         }
 
         // Check if wallet is already connected on page load
