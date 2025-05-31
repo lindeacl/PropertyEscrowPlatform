@@ -29,8 +29,8 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
   });
 
   describe("Initialization", function () {
-    it("Should initialize with correct compliance manager", async function () {
-      expect(await escrowFactory.complianceManager()).to.equal(await complianceManager.getAddress());
+    it("Should initialize with correct platform wallet", async function () {
+      expect(await escrowFactory.platformWallet()).to.equal(deployer.address);
     });
 
     it("Should set deployer as owner", async function () {
@@ -38,32 +38,25 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
     });
 
     it("Should start with zero escrow count", async function () {
-      expect(await escrowFactory.getEscrowCount()).to.equal(0);
+      expect(await escrowFactory.getEscrowCount()).to.equal(0n);
     });
 
     it("Should reject re-initialization", async function () {
       await expect(
-        escrowFactory.initialize(await complianceManager.getAddress())
+        escrowFactory.initialize(deployer.address, 250)
       ).to.be.revertedWith("Initializable: contract is already initialized");
     });
   });
 
-  describe("Compliance Integration", function () {
+  describe("Token Whitelisting", function () {
     beforeEach(async function () {
-      // Add compliance records for participants
-      await complianceManager.createComplianceRecord(buyer.address, true, 1, "Low risk buyer");
-      await complianceManager.createComplianceRecord(seller.address, true, 1, "Low risk seller");
-      await complianceManager.createComplianceRecord(agent.address, true, 1, "Verified agent");
-      await complianceManager.createComplianceRecord(arbiter.address, true, 1, "Verified arbiter");
-      
-      await escrowFactory.setTokenWhitelist(await mockToken.getAddress());
+      await escrowFactory.setTokenWhitelist(await mockToken.getAddress(), true);
     });
 
-    it("Should reject escrow creation with non-compliant buyer", async function () {
+    it("Should create escrow with whitelisted token", async function () {
       await expect(
-        escrowFactory.createEscrowWithCompliance(
-          "PROP-001",
-          unauthorized.address, // No compliance record
+        escrowFactory.createEscrow(
+          buyer.address,
           seller.address,
           agent.address,
           arbiter.address,
