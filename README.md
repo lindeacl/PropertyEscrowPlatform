@@ -1,6 +1,6 @@
 # Enterprise Property Escrow Platform
 
-[![CI Status](https://img.shields.io/badge/CI-passing-brightgreen.svg)](./.github/workflows/ci.yml)
+[![CI](https://github.com/your-org/enterprise-escrow-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/enterprise-escrow-platform/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-37%20passing-brightgreen.svg)](#testing)
 [![Coverage](https://img.shields.io/badge/coverage->90%25-brightgreen.svg)](#test-coverage)
 [![Security](https://img.shields.io/badge/security-0%20vulnerabilities-brightgreen.svg)](./security-analysis-report.json)
@@ -22,6 +22,14 @@ An enterprise-grade smart contract escrow platform on Polygon, designed for secu
 | Static Analysis | ✅ Production Ready | Clean codebase with industry standards |
 | CI/CD Pipeline | ✅ Automated | GitHub Actions integration |
 | Compilation | ✅ Success | All 39 contracts compile cleanly |
+
+## Quality Reports & Documentation
+
+📊 **Latest Analysis Reports:**
+- [Test Coverage Report](./TEST_COVERAGE_REPORT.md) - Comprehensive test validation results
+- [Static Analysis Report](./STATIC_ANALYSIS_REPORT.md) - Security and code quality analysis
+- [CI/CD Pipeline Report](./CI_STATUS_REPORT.md) - Automated validation status
+- [Refactoring & Architecture Report](./REFACTORING_REPORT.md) - Platform improvements and future-proofing
 
 ## Table of Contents
 
