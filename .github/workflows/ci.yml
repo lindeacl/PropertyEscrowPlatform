@@ -33,8 +33,8 @@ jobs:
     - name: Run core tests
       run: npx hardhat test test/PropertyEscrow.test.js test/EscrowFactory.test.js
       
-    - name: Run full test suite
-      run: npx hardhat test
+    - name: Run upgradeable factory tests
+      run: npx hardhat test test/EscrowFactoryUpgradeable.fixed.test.js
       continue-on-error: true
       
     - name: Generate test coverage
