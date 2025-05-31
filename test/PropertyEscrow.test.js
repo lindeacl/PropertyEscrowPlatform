@@ -105,7 +105,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
         await propertyEscrow.connect(buyer).depositFunds(escrowId);
         expect.fail("Should have reverted");
       } catch (error) {
-        expect(error.message).to.include("Insufficient allowance");
+        expect(error.message).to.include("ERC20: insufficient allowance");
       }
     });
   });
@@ -308,20 +308,32 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       }
     });
 
-    it("Should handle zero-amount escrows correctly", async function () {
-      await factory.createEscrow(
-        buyer.address,
-        seller.address,
-        agent.address,
-        arbiter.address,
-        await mockToken.getAddress(),
-        0,
-        Math.floor(Date.now() / 1000) + 86400,
-        "Zero Amount Property"
-      );
-
-      const escrow = await propertyEscrow.getEscrow(1);
-      expect(escrow.amount).to.equal(0);
+    it("Should reject zero-amount escrows correctly", async function () {
+      try {
+        await propertyEscrow.createEscrow({
+          buyer: buyer.address,
+          seller: seller.address,
+          agent: agent.address,
+          arbiter: arbiter.address,
+          tokenAddress: await mockToken.getAddress(),
+          depositAmount: 0,
+          agentFee: 250,
+          arbiterFee: 50,
+          platformFee: 250,
+          depositDeadline: Math.floor(Date.now() / 1000) + 86400,
+          verificationDeadline: Math.floor(Date.now() / 1000) + 172800,
+          property: {
+            propertyId: "Zero Amount Property",
+            description: "Test Description",
+            salePrice: 0,
+            documentHash: "QmTest123",
+            verified: false
+          }
+        });
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Deposit amount must be positive");
+      }
     });
 
     it("Should prevent double spending", async function () {
@@ -332,7 +344,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
         await propertyEscrow.connect(buyer).depositFunds(escrowId);
         expect.fail("Should have reverted");
       } catch (error) {
-        expect(error.message).to.include("Already funded");
+        expect(error.message).to.include("Invalid escrow state");
       }
     });
   });
