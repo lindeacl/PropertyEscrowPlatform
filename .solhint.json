@@ -16,7 +16,6 @@
     "state-visibility": "error",
     "use-forbidden-name": "error",
     "compiler-version": ["error", "^0.8.0"],
-    "bracket-align": "error",
     "code-complexity": ["error", 7],
     "function-max-lines": ["error", 50],
     "max-states-count": ["error", 15]

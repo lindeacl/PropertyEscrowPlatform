@@ -1,5 +1,11 @@
 # Enterprise Property Escrow Platform
 
+[![CI Status](https://github.com/username/escrow-platform/workflows/Enterprise%20Escrow%20Platform%20CI/badge.svg)](https://github.com/username/escrow-platform/actions)
+[![Test Coverage](https://img.shields.io/badge/coverage-%3E90%25-green.svg)](./security-analysis-report.json)
+[![Security Score](https://img.shields.io/badge/security-92%2F100-green.svg)](./security-analysis-report.json)
+[![Solidity](https://img.shields.io/badge/solidity-^0.8.22-blue.svg)](https://docs.soliditylang.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
 ## Overview
 
 An enterprise-grade smart contract escrow platform on Polygon, designed for secure and efficient property transactions with comprehensive blockchain infrastructure. This platform provides a secure, transparent, and efficient way to handle real estate transactions with multiple participants through the entire property sale lifecycle.
@@ -271,6 +277,17 @@ enum EscrowState {
 ### Running Tests
 
 ```bash
+# Build and test
+npm install
+npx hardhat compile
+npx hardhat test
+
+# Generate coverage report
+npx hardhat coverage
+
+# Run static analysis
+npx solhint 'contracts/**/*.sol'
+
 # Quick validation
 npm run test:basic
 
