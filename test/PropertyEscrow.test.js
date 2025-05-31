@@ -118,6 +118,8 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     });
 
     it("Should allow agent to approve release", async function () {
+      // Complete verification first
+      await propertyEscrow.connect(agent).completeVerification(escrowId);
       await propertyEscrow.connect(agent).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
@@ -125,8 +127,11 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     });
 
     it("Should complete release when both parties approve", async function () {
+      // Complete verification first
+      await propertyEscrow.connect(agent).completeVerification(escrowId);
       await propertyEscrow.connect(agent).giveApproval(escrowId);
       await propertyEscrow.connect(buyer).giveApproval(escrowId);
+      await propertyEscrow.connect(seller).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
       expect(escrow.status).to.equal(2); // COMPLETED
@@ -136,8 +141,12 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       const initialSellerBalance = await mockToken.balanceOf(seller.address);
       const initialPlatformBalance = await mockToken.balanceOf(owner.address);
       
+      // Complete full workflow
+      await propertyEscrow.connect(agent).completeVerification(escrowId);
       await propertyEscrow.connect(agent).giveApproval(escrowId);
       await propertyEscrow.connect(buyer).giveApproval(escrowId);
+      await propertyEscrow.connect(seller).giveApproval(escrowId);
+      await propertyEscrow.connect(seller).releaseFunds(escrowId);
       
       const finalSellerBalance = await mockToken.balanceOf(seller.address);
       const finalPlatformBalance = await mockToken.balanceOf(owner.address);

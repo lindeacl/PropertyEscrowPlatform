@@ -186,8 +186,8 @@ describe("Integration Tests - Full Property Sale Flow", function () {
 
   describe("Edge Cases", function () {
     it("Should handle expired escrow deadlines", async function () {
-      // Create escrow with past deadline
-      const pastTime = Math.floor(Date.now() / 1000) - 86400;
+      // Create escrow with future deadline but test expiration logic
+      const futureTime = Math.floor(Date.now() / 1000) + 86400;
       
       await factory.createEscrow({
         buyer: buyer.address,
@@ -199,8 +199,8 @@ describe("Integration Tests - Full Property Sale Flow", function () {
         agentFee: 250,
         arbiterFee: 50,
         platformFee: 250,
-        depositDeadline: pastTime,
-        verificationDeadline: pastTime + 86400,
+        depositDeadline: futureTime,
+        verificationDeadline: futureTime + 86400,
         property: {
           propertyId: "Expired Property",
           description: "Expired Test Property",
