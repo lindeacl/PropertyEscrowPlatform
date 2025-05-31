@@ -33,11 +33,11 @@ args = "Local Blockchain"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Web Server"
+args = "CLI Demo"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "CLI Demo"
+args = "Frontend Demo"
 
 [[workflows.workflow]]
 name = "Hardhat Development Server"
@@ -81,21 +81,21 @@ args = "npx hardhat node"
 waitForPort = 8545
 
 [[workflows.workflow]]
-name = "Web Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python3 -m http.server 5000"
-waitForPort = 5000
-
-[[workflows.workflow]]
 name = "CLI Demo"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "node cli-demo.js"
+
+[[workflows.workflow]]
+name = "Frontend Demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 -m http.server 5000"
+waitForPort = 5000
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]
