@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ethers } from 'ethers';
+import { handleBlockchainError } from '../utils/errorHandling';
+import { getWalletProvider, connectToLocalNetwork } from '../utils/provider';
 
 interface WalletState {
   isConnected: boolean;
@@ -42,41 +44,44 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const connectWallet = async () => {
     if (typeof window.ethereum === 'undefined') {
-      throw new Error('MetaMask is not installed');
+      throw new Error('MetaMask is not installed. Please install MetaMask to connect your wallet.');
     }
 
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      // Request account access from MetaMask first
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
       
-      // Request account access
-      const accounts = await provider.send('eth_requestAccounts', []);
-      if (accounts.length === 0) {
-        throw new Error('No accounts available');
-      }
-      
+      const provider = getWalletProvider();
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
-      const network = await provider.getNetwork();
+      
+      // Try to get network info, but don't fail if it's not available
+      let chainId = 1; // Default to mainnet
+      try {
+        const network = await provider.getNetwork();
+        chainId = Number(network.chainId);
+      } catch (networkError) {
+        console.warn('Could not get network info, using default');
+      }
       
       setWalletState({
         isConnected: true,
         address,
         provider,
         signer,
-        chainId: Number(network.chainId),
+        chainId,
         balance: '0'
       });
 
-      await updateBalance(address, provider);
+      // Try to update balance, but don't fail connection if it doesn't work
+      try {
+        await updateBalance(address, provider);
+      } catch (balanceError) {
+        console.warn('Could not fetch balance:', balanceError);
+      }
     } catch (error: any) {
       console.error('Failed to connect wallet:', error);
-      if (error.code === 4001) {
-        throw new Error('User rejected the connection request');
-      } else if (error.code === -32002) {
-        throw new Error('Connection request already pending');
-      } else {
-        throw new Error('Failed to connect wallet. Please ensure MetaMask is installed and try again.');
-      }
+      throw new Error(handleBlockchainError(error));
     }
   };
 
