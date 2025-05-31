@@ -3,3 +3,7 @@ export { default as Card } from './Card';
 export { default as Grid } from './Grid';
 export { default as Input } from './Input';
 export { default as StatusChip } from './StatusChip';
+export { default as FileUpload } from './FileUpload';
+export { default as Toast } from './Toast';
+export { default as Table } from './Table';
+export { default as CopyButton } from './CopyButton';
