@@ -68,11 +68,11 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     });
 
     it("Should have correct role assignments", async function () {
-      const ADMIN_ROLE = await propertyEscrow.ADMIN_ROLE();
+      const DEFAULT_ADMIN_ROLE = await propertyEscrow.DEFAULT_ADMIN_ROLE();
       const AGENT_ROLE = await propertyEscrow.AGENT_ROLE();
       const ARBITER_ROLE = await propertyEscrow.ARBITER_ROLE();
 
-      expect(await propertyEscrow.hasRole(ADMIN_ROLE, owner.address)).to.be.true;
+      expect(await propertyEscrow.hasRole(DEFAULT_ADMIN_ROLE, await factory.getAddress())).to.be.true;
       expect(await propertyEscrow.hasRole(AGENT_ROLE, agent.address)).to.be.true;
       expect(await propertyEscrow.hasRole(ARBITER_ROLE, arbiter.address)).to.be.true;
     });
@@ -118,12 +118,36 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     });
 
     it("Should allow agent to approve release", async function () {
-      // Complete verification first
-      await propertyEscrow.connect(agent).completeVerification(escrowId);
-      await propertyEscrow.connect(agent).giveApproval(escrowId);
+      // Create fresh escrow in same PropertyEscrow contract
+      const newEscrowId = await propertyEscrow.createEscrow({
+        buyer: buyer.address,
+        seller: seller.address,
+        agent: agent.address,
+        arbiter: arbiter.address,
+        tokenAddress: await mockToken.getAddress(),
+        depositAmount: ethers.parseEther("1000"),
+        agentFee: 250,
+        arbiterFee: 50,
+        platformFee: 250,
+        depositDeadline: Math.floor(Date.now() / 1000) + 86400,
+        verificationDeadline: Math.floor(Date.now() / 1000) + 172800,
+        property: {
+          propertyId: "Test Property Approval",
+          description: "Test Description",
+          salePrice: ethers.parseEther("1000"),
+          documentHash: "QmTest123",
+          verified: false
+        }
+      });
       
-      const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.agentApproved).to.be.true;
+      // Follow proper workflow: deposit → verify → approve
+      await mockToken.connect(buyer).approve(await propertyEscrow.getAddress(), ethers.parseEther("1000"));
+      await propertyEscrow.connect(buyer).depositFunds(newEscrowId);
+      await propertyEscrow.connect(agent).completeVerification(newEscrowId);
+      await propertyEscrow.connect(agent).giveApproval(newEscrowId);
+      
+      const escrow = await propertyEscrow.getEscrow(newEscrowId);
+      expect(escrow.agentApproval).to.be.true;
     });
 
     it("Should complete release when both parties approve", async function () {
