@@ -636,7 +636,11 @@ const EscrowDetails: React.FC = () => {
               </button>
               
               {userRole.isArbiter && escrow.status === EscrowStatus.DISPUTED && (
-                <button className="w-full btn-primary">
+                <button 
+                  onClick={handleResolveDispute}
+                  disabled={actionLoading}
+                  className="w-full btn-primary"
+                >
                   <CheckCircle className="mr-2 h-4 w-4" />
                   Resolve Dispute
                 </button>
@@ -645,6 +649,14 @@ const EscrowDetails: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Dispute Modal */}
+      <DisputeModal
+        isOpen={showDisputeModal}
+        onClose={() => setShowDisputeModal(false)}
+        onSubmit={handleSubmitDispute}
+        escrowId={escrow?.escrowId || 0}
+      />
     </div>
   );
 };
