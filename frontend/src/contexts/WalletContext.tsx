@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { handleBlockchainError } from '../utils/errorHandling';
-import { getWalletProvider, connectToLocalNetwork } from '../utils/provider';
+import { getWalletProvider } from '../utils/provider';
 
 interface WalletState {
   isConnected: boolean;
