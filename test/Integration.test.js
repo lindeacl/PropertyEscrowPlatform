@@ -189,16 +189,26 @@ describe("Integration Tests - Full Property Sale Flow", function () {
       // Create escrow with past deadline
       const pastTime = Math.floor(Date.now() / 1000) - 86400;
       
-      await factory.createEscrow(
-        buyer.address,
-        seller.address,
-        agent.address,
-        arbiter.address,
-        await mockToken.getAddress(),
-        ethers.parseEther("100"),
-        pastTime,
-        "Expired Property"
-      );
+      await factory.createEscrow({
+        buyer: buyer.address,
+        seller: seller.address,
+        agent: agent.address,
+        arbiter: arbiter.address,
+        tokenAddress: await mockToken.getAddress(),
+        depositAmount: ethers.parseEther("100"),
+        agentFee: 250,
+        arbiterFee: 50,
+        platformFee: 250,
+        depositDeadline: pastTime,
+        verificationDeadline: pastTime + 86400,
+        property: {
+          propertyId: "Expired Property",
+          description: "Expired Test Property",
+          salePrice: ethers.parseEther("100"),
+          documentHash: "QmExpired123",
+          verified: false
+        }
+      });
 
       const expiredEscrowAddress = await factory.escrows(1);
       const expiredEscrow = await ethers.getContractAt("PropertyEscrow", expiredEscrowAddress);

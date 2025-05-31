@@ -66,16 +66,26 @@ describe("EscrowFactory", function () {
       const currentTime = Math.floor(Date.now() / 1000);
       
       try {
-        await factory.createEscrow(
-          buyer.address,
-          seller.address,
-          agent.address,
-          arbiter.address,
-          await unauthorizedToken.getAddress(),
-          ethers.parseEther("1000"),
-          currentTime + 86400,
-          "Test Property"
-        );
+        await factory.createEscrow({
+          buyer: buyer.address,
+          seller: seller.address,
+          agent: agent.address,
+          arbiter: arbiter.address,
+          tokenAddress: await unauthorizedToken.getAddress(),
+          depositAmount: ethers.parseEther("1000"),
+          agentFee: 250,
+          arbiterFee: 50,
+          platformFee: 250,
+          depositDeadline: currentTime + 86400,
+          verificationDeadline: currentTime + 172800,
+          property: {
+            propertyId: "Test Property",
+            description: "Test Description",
+            salePrice: ethers.parseEther("1000"),
+            documentHash: "QmTest123",
+            verified: false
+          }
+        });
         expect.fail("Should have reverted");
       } catch (error) {
         expect(error.message).to.include("Token not whitelisted");

@@ -27,18 +27,28 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
     // Whitelist token and create escrow
     await factory.whitelistToken(await mockToken.getAddress(), true);
     
-    await factory.createEscrow(
-      buyer.address,
-      seller.address,
-      agent.address,
-      arbiter.address,
-      await mockToken.getAddress(),
-      ethers.parseEther("1000"),
-      Math.floor(Date.now() / 1000) + 86400,
-      "Test Property"
-    );
+    await factory.createEscrow({
+      buyer: buyer.address,
+      seller: seller.address,
+      agent: agent.address,
+      arbiter: arbiter.address,
+      tokenAddress: await mockToken.getAddress(),
+      depositAmount: ethers.parseEther("1000"),
+      agentFee: 250,
+      arbiterFee: 50,
+      platformFee: 250,
+      depositDeadline: Math.floor(Date.now() / 1000) + 86400,
+      verificationDeadline: Math.floor(Date.now() / 1000) + 172800,
+      property: {
+        propertyId: "Test Property",
+        description: "Test Description",
+        salePrice: ethers.parseEther("1000"),
+        documentHash: "QmTest123",
+        verified: false
+      }
+    });
 
-    const escrowAddress = await factory.escrows(escrowId);
+    const escrowAddress = await factory.getEscrowContract(escrowId);
     propertyEscrow = await ethers.getContractAt("PropertyEscrow", escrowAddress);
 
     // Transfer tokens to buyer
