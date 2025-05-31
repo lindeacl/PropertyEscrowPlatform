@@ -11,7 +11,8 @@ import {
   FileText,
   ExternalLink,
   Upload,
-  MessageSquare
+  MessageSquare,
+  Shield
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { EscrowData, EscrowStatus, UserRole } from '../types';
@@ -66,6 +67,58 @@ const EscrowDetails: React.FC = () => {
       };
       
       setEscrow(sampleEscrow);
+      
+      // Sample audit log data for demonstration
+      const sampleAuditEntries = [
+        {
+          id: '1',
+          timestamp: new Date(Date.now() - 86400000), // 1 day ago
+          action: 'Created',
+          actor: sampleEscrow.seller,
+          actorRole: 'seller' as const,
+          description: 'Escrow contract created for property PROP-2025-001',
+          transactionHash: '0x1234567890abcdef1234567890abcdef12345678',
+          blockNumber: 45123456,
+          gasUsed: '142,351',
+          details: {
+            propertyId: 'PROP-2025-001',
+            depositAmount: '2.5 ETH',
+            deadline: '7 days'
+          }
+        },
+        {
+          id: '2',
+          timestamp: new Date(Date.now() - 82800000), // 23 hours ago
+          action: 'Verified',
+          actor: sampleEscrow.agent,
+          actorRole: 'agent' as const,
+          description: 'Property documentation verified and escrow approved',
+          transactionHash: '0xabcdef1234567890abcdef1234567890abcdef12',
+          blockNumber: 45123478,
+          gasUsed: '98,234',
+          details: {
+            verificationStatus: 'Approved',
+            documentsReviewed: '5 files'
+          }
+        },
+        {
+          id: '3',
+          timestamp: new Date(Date.now() - 72000000), // 20 hours ago
+          action: 'Deposited',
+          actor: sampleEscrow.buyer,
+          actorRole: 'buyer' as const,
+          description: 'Buyer deposited 2.5 ETH into escrow contract',
+          transactionHash: '0x567890abcdef1234567890abcdef1234567890ab',
+          blockNumber: 45123512,
+          gasUsed: '156,789',
+          details: {
+            amount: '2.5 ETH',
+            confirmations: '24'
+          }
+        }
+      ];
+      
+      setAuditEntries(sampleAuditEntries);
       
       if (address) {
         // Determine user role based on their address
@@ -266,15 +319,26 @@ const EscrowDetails: React.FC = () => {
       <div className="flex items-center mb-8">
         <button
           onClick={() => navigate('/')}
-          className="mr-4 p-2 text-text-secondary hover:text-text-primary"
+          className="mr-4 p-2 text-text-secondary hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg transition-colors"
+          aria-label="Back to Dashboard"
+          tabIndex={0}
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-text-primary">Escrow #{escrow.escrowId}</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-text-primary">
+              Escrow #{escrow.escrowId}
+            </h1>
+            <Tooltip content={getTooltipContent('escrow')} icon={true} />
+          </div>
           <p className="text-text-secondary">Property ID: {escrow.propertyId}</p>
+          <div className="mt-2 text-sm text-success flex items-center gap-1">
+            <Shield className="h-4 w-4" />
+            {getReassurance('fundsSecure')}
+          </div>
         </div>
-        <div className={`px-4 py-2 rounded-full ${statusInfo.bg} ${statusInfo.color} font-semibold`}>
+        <div className={`px-4 py-2 rounded-full ${statusInfo.bg} ${statusInfo.color} font-semibold`} role="status" aria-live="polite">
           {statusInfo.text}
         </div>
       </div>
@@ -654,6 +718,16 @@ const EscrowDetails: React.FC = () => {
         </div>
       </div>
 
+      {/* Audit Log Section */}
+      <div className="mt-8">
+        <AuditLog 
+          entries={auditEntries}
+          showTransactionDetails={true}
+          blockExplorerUrl="https://polygonscan.com"
+          className="mb-6"
+        />
+      </div>
+
       {/* Dispute Modal */}
       <DisputeModal
         isOpen={showDisputeModal}
@@ -661,6 +735,26 @@ const EscrowDetails: React.FC = () => {
         onSubmit={handleSubmitDispute}
         escrowId={escrow?.escrowId || 0}
       />
+
+      {/* Audit Log Modal */}
+      <AccessibleModal
+        isOpen={showAuditLog}
+        onClose={() => setShowAuditLog(false)}
+        title="Complete Audit Log"
+        size="xl"
+        ariaDescribedBy="audit-log-description"
+      >
+        <div id="audit-log-description" className="p-6">
+          <p className="text-text-secondary mb-4">
+            {getReassurance('transparentProcess')}
+          </p>
+          <AuditLog 
+            entries={auditEntries}
+            showTransactionDetails={true}
+            blockExplorerUrl="https://polygonscan.com"
+          />
+        </div>
+      </AccessibleModal>
     </div>
   );
 };
