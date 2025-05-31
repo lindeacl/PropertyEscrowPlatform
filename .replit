@@ -37,7 +37,7 @@ args = "CLI Demo"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "React Development Server"
+args = "Frontend Development Server"
 
 [[workflows.workflow]]
 name = "Hardhat Development Server"
@@ -89,12 +89,12 @@ task = "shell.exec"
 args = "node cli-demo.js"
 
 [[workflows.workflow]]
-name = "React Development Server"
+name = "Frontend Development Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd frontend && node server.js"
+args = "cd frontend && npm start"
 waitForPort = 5000
 
 [deployment]
