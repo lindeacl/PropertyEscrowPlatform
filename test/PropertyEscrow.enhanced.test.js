@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+require("@nomicfoundation/hardhat-chai-matchers");
 
 describe("PropertyEscrow - Enhanced Coverage Tests", function () {
   let propertyEscrow, mockToken, escrowFactory;
@@ -16,26 +17,44 @@ describe("PropertyEscrow - Enhanced Coverage Tests", function () {
 
     // Deploy EscrowFactory
     const EscrowFactory = await ethers.getContractFactory("EscrowFactory");
-    escrowFactory = await EscrowFactory.deploy();
+    escrowFactory = await EscrowFactory.deploy(
+      deployer.address, // platformWallet
+      250, // platformFee (2.5%)
+      agent.address, // defaultAgent
+      arbiter.address // defaultArbiter
+    );
     await escrowFactory.waitForDeployment();
 
     // Whitelist token
-    await escrowFactory.whitelistToken(await mockToken.getAddress());
+    await escrowFactory.whitelistToken(await mockToken.getAddress(), true);
 
     // Create escrow
-    await escrowFactory.createEscrow(
-      "PROP-001",
-      buyer.address,
-      seller.address,
-      agent.address,
-      arbiter.address,
-      await mockToken.getAddress(),
-      ethers.parseEther("1000"),
-      Math.floor(Date.now() / 1000) + 86400,
-      "Test Property"
-    );
+    const currentTime = Math.floor(Date.now() / 1000);
+    const params = {
+      buyer: buyer.address,
+      seller: seller.address,
+      agent: agent.address,
+      arbiter: arbiter.address,
+      tokenAddress: await mockToken.getAddress(),
+      depositAmount: ethers.parseEther("1000"),
+      agentFee: 100,
+      arbiterFee: 50,
+      platformFee: 250,
+      depositDeadline: currentTime + 86400,
+      verificationDeadline: currentTime + 172800,
+      property: {
+        propertyId: "PROP-001",
+        description: "Test Property",
+        salePrice: ethers.parseEther("1000"),
+        documentHash: "QmTest123",
+        verified: false
+      }
+    };
+    
+    const tx = await escrowFactory.createEscrow(params);
+    await tx.wait();
 
-    const escrowAddress = await escrowFactory.escrows(0);
+    const escrowAddress = await escrowFactory.getEscrowContract(0);
     propertyEscrow = await ethers.getContractAt("PropertyEscrow", escrowAddress);
 
     // Transfer tokens to buyer
