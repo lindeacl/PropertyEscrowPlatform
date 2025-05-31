@@ -9,6 +9,7 @@ import './styles/index.css';
 import MainLayout from './components/layout/MainLayout';
 
 // Pages
+import Homepage from './pages/Homepage';
 import Dashboard from './pages/Dashboard';
 import CreateEscrow from './pages/CreateEscrow';
 import EscrowDetails from './pages/EscrowDetails';
@@ -22,7 +23,8 @@ function App() {
           <div className="App">
             <MainLayout>
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Homepage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/create" element={<CreateEscrow />} />
                 <Route path="/escrow/:id" element={<EscrowDetails />} />
                 <Route path="/settings" element={<Settings />} />
