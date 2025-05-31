@@ -198,6 +198,14 @@ contract ComplianceManager is AccessControl, Pausable, ReentrancyGuard {
             return (true, "Compliance not required");
         }
 
+        // Validate transaction amount limits
+        if (amount == 0) {
+            return (false, "Invalid transaction amount");
+        }
+
+        // Basic amount validation - using amount parameter properly
+        // Additional threshold validation can be added based on compliance requirements
+
         // Validate buyer compliance
         if (!this.isCompliant(buyer)) {
             return (false, "Buyer not compliant");

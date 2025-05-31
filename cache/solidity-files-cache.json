@@ -859,8 +859,8 @@
       ]
     },
     "/home/runner/workspace/contracts/compliance/ComplianceManager.sol": {
-      "lastModificationDate": 1748464607071,
-      "contentHash": "d525dfa89d6cb280fbd272cc270b948a",
+      "lastModificationDate": 1748682463560,
+      "contentHash": "fe370c54a2b8276e450631902bf49472",
       "sourceName": "contracts/compliance/ComplianceManager.sol",
       "solcConfig": {
         "version": "0.8.22",
