@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import './styles/index.css';
 
 // Pages
-import StaticHomepage from './pages/StaticHomepage';
+import PureStaticHomepage from './pages/PureStaticHomepage';
 import Dashboard from './pages/Dashboard';
 import CreateEscrow from './pages/CreateEscrow';
 import EscrowDetails from './pages/EscrowDetails';
@@ -17,7 +17,7 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<StaticHomepage />} />
+            <Route path="/" element={<PureStaticHomepage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create" element={<CreateEscrow />} />
             <Route path="/escrow/:id" element={<EscrowDetails />} />
