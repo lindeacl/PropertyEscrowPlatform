@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Wifi, WifiOff } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 interface DemoModeProps {
   children: React.ReactNode;

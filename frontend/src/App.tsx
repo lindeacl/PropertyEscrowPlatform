@@ -7,7 +7,6 @@ import './styles/index.css';
 
 // Layout
 import MainLayout from './components/layout/MainLayout';
-import DemoMode from './components/DemoMode';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -21,16 +20,14 @@ function App() {
       <WalletProvider>
         <Router>
           <div className="App">
-            <DemoMode>
-              <MainLayout>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/create" element={<CreateEscrow />} />
-                  <Route path="/escrow/:id" element={<EscrowDetails />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Routes>
-              </MainLayout>
-            </DemoMode>
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/create" element={<CreateEscrow />} />
+                <Route path="/escrow/:id" element={<EscrowDetails />} />
+                <Route path="/settings" element={<Settings />} />
+              </Routes>
+            </MainLayout>
           <Toaster 
             position="top-right"
             toastOptions={{

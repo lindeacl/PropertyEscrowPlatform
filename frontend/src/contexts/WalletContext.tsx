@@ -18,13 +18,6 @@ interface WalletContextType extends WalletState {
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
-const SUPPORTED_CHAINS = {
-  1: 'Ethereum Mainnet',
-  137: 'Polygon Mainnet',
-  31337: 'Localhost',
-  11155111: 'Sepolia Testnet'
-};
-
 export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [walletState, setWalletState] = useState<WalletState>({
     isConnected: false,
@@ -77,7 +70,6 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       await updateBalance(address, provider);
     } catch (error: any) {
       console.error('Failed to connect wallet:', error);
-      // Don't throw error to prevent app crashes - just log and let UI handle it
       if (error.code === 4001) {
         throw new Error('User rejected the connection request');
       } else if (error.code === -32002) {
@@ -111,7 +103,6 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       });
     } catch (error: any) {
       if (error.code === 4902) {
-        // Chain not added to MetaMask
         throw new Error(`Chain ${targetChainId} not added to wallet`);
       }
       throw error;
@@ -122,28 +113,17 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const handleAccountsChanged = (accounts: string[]) => {
       if (accounts.length === 0) {
         disconnectWallet();
-      } else if (accounts[0] !== walletState.address) {
-        // Only reconnect if we were already connected
-        if (walletState.isConnected) {
-          connectWallet().catch(console.error);
-        }
       }
     };
 
     const handleChainChanged = (chainId: string) => {
       const newChainId = parseInt(chainId, 16);
       setWalletState(prev => ({ ...prev, chainId: newChainId }));
-      
-      if (walletState.address && walletState.provider) {
-        updateBalance(walletState.address, walletState.provider);
-      }
     };
 
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
-
-      // Don't automatically connect - let users manually connect when they're ready
     }
 
     return () => {
@@ -152,7 +132,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         window.ethereum.removeListener('chainChanged', handleChainChanged);
       }
     };
-  }, [walletState.isConnected, walletState.address]);
+  }, []);
 
   return (
     <WalletContext.Provider
