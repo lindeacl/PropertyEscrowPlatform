@@ -1,0 +1,219 @@
+1. Brand & Visual Identity
+Tone: Trustworthy, modern, clear, and accessible. No “Web3 confusion”—all users should feel safe, informed, and in control.
+
+Inspiration: Stripe, Blend, DocuSign, OpenSea Pro, but “friendlier” for property transactions.
+
+2. Color Palette
+Use	Color	HEX	Sample
+Primary (Action)	Royal Blue	#2962FF	
+Background	Soft Grey	#F4F6FB	
+Surface/Card	White	#FFFFFF	
+Accent	Sun Gold	#FFCA28	
+Error/Alert	Confident Red	#E53935	
+Success	Emerald Green	#43A047	
+Border/Disabled	Light Slate	#E0E5ED	
+Text Primary	Almost Black	#1A2233	
+Text Secondary	Charcoal Grey	#707A94	
+
+Dark Mode: Invert background and surface colors, keep blue/gold/emerald as accents.
+
+3. Typography
+Headings:
+
+Inter, Segoe UI, or Roboto – Bold, clear, tight letter-spacing
+
+H1: 2rem+, H2: 1.5rem, H3: 1.25rem, uppercase for page/section titles
+
+Body:
+
+Regular weight, 1rem (16px) base, 1.5 line height for readability
+
+Use secondary color for supporting or metadata
+
+Numbers & Hashes:
+
+Use monospaced font for blockchain hashes/addresses/amounts (e.g., Fira Mono)
+
+4. UI Components & Layout
+A. Layout
+Navigation:
+
+Persistent left sidebar for desktop (with collapse option); bottom nav for mobile
+
+Top bar with profile, network status, notifications
+
+Grid System:
+
+12-column responsive grid for desktop, 4/6-column for mobile/tablet
+
+Cards:
+
+Soft shadow (0 2px 16px rgba(41,98,255,0.07))
+
+16px border-radius minimum; white or light background
+
+B. Buttons & Inputs
+Variant	Example	Usage
+Primary	Royal Blue bg, white text, bold	Main actions (deposit, create, release funds)
+Secondary	Outline, blue text	Cancel, less important
+Danger	Red bg, white text	Dispute, destructive actions
+Disabled	Light grey bg, grey text	Unavailable actions
+
+Inputs:
+
+Full width, 12px-16px radius, large touch targets
+
+Clear label, helper/error text beneath
+
+C. Feedback, Alerts, Status
+Success: Emerald Green
+
+Warning: Sun Gold
+
+Error: Confident Red
+
+Info: Blue (lighter variant)
+
+Toasts: Top-right; use icons (check, info, alert, x)
+
+Form validation: Show inline below input, never as popups
+
+D. Tables & Data Display
+Use alternating row backgrounds for readability
+
+Sort/filter/search available on all main tables
+
+Wallet addresses: Shorten with ellipsis (0x1234...ABCD)
+
+Status chips: Use color-coded pills (e.g. blue for “Pending”, green for “Completed”, red for “Disputed”)
+
+E. Icons & Imagery
+Icon set: Lucide, Feather, or Heroicons (line style, 24px, no fills)
+
+Illustrations: Minimal, abstract, property/finance-themed (not stock photos)
+
+Empty states: Friendly illustration + short call-to-action
+
+5. User Flow & Page Guide
+A. Dashboard
+Overview cards:
+
+Total escrows, active, completed, disputed, pending actions
+
+Recent activity feed (last 10 actions with icons)
+
+“Start new escrow” prominent CTA
+
+B. Escrow Lifecycle Page
+Multi-step progress indicator (Created → Funded → Verification → Released/Disputed)
+
+All details: property, parties, funds, status, transaction history (with block explorer links)
+
+Contextual actions: deposit, upload docs, raise dispute, approve/release, request refund
+
+Download contract PDF/certificate
+
+C. Escrow Creation
+Form-driven flow (property details, counterparty, amount, payment method, upload docs)
+
+Real-time validation, file upload with drag & drop
+
+D. Deposit Funds
+Prominent “Connect Wallet” button (MetaMask, WalletConnect)
+
+Show ERC20 balance, network (Polygon), confirmation dialogs before blockchain actions
+
+E. Disputes/Resolution
+Raise dispute: Confirmation step, input reason/details, status timeline
+
+Admin/agent view: Approve/reject, view all supporting documents, override actions
+
+F. Notifications
+Non-intrusive, easy to dismiss toasts
+
+Show on major actions (escrow funded, funds released, dispute raised/resolved)
+
+G. Settings/Profile
+User profile, KYC status, change password, notification preferences
+
+Wallet addresses, network selection
+
+6. Accessibility & Responsiveness
+Color contrast AA minimum
+
+All controls keyboard-navigable, visible focus ring
+
+Mobile-first design—test all forms, navigation, and dialogs at small breakpoints
+
+Tooltips for advanced blockchain terms or actions
+
+7. Microcopy & Voice
+Friendly but professional:
+
+“Your funds are securely escrowed.”
+
+“Raise a dispute—don’t worry, we’ll help resolve it.”
+
+“Waiting for the seller to upload documents.”
+
+Avoid jargon—explain blockchain terms when first used
+
+8. Extra Touches
+Loading:
+
+Use animated skeletons or spinners, never block whole page unless unavoidable
+
+Audit log page:
+
+Timeline of every escrow-related action, with clickable transaction hashes
+
+Dark mode toggle:
+
+Persist choice in local storage
+
+9. Dev Implementation Guidelines
+Use React (or preferred modern framework)
+
+Use Tailwind CSS or CSS-in-JS for theme consistency
+
+Use state management (Redux, Zustand, or Context)
+
+Integrate WalletConnect, MetaMask modules for web3 actions
+
+Use TypeScript for all new UI components
+
+10. Sample Component Snippets (Tailwind + React)
+Primary Button:
+
+jsx
+Copy
+Edit
+<button className="bg-[#2962FF] text-white font-bold px-6 py-3 rounded-xl shadow hover:scale-105 transition">
+  Deposit Funds
+</button>
+Status Chip:
+
+jsx
+Copy
+Edit
+<span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#F4F6FB] text-[#2962FF]">
+  Pending
+</span>
+Card:
+
+jsx
+Copy
+Edit
+<div className="bg-white rounded-2xl shadow p-6">
+  {/* Escrow Details Here */}
+</div>
+Final Words for the Dev Agent
+Every user touchpoint should say: “Your money is safe. Your experience is seamless. This is enterprise-grade escrow.” Don’t over-design—be clear, bold, and frictionless.
+
+Ready for your next design sprint? Just ask for sample wireframes, figma templates, or more component code as needed!
+
+
+
+
+
+
