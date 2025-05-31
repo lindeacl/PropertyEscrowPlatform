@@ -10,8 +10,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -49,8 +57,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -86,8 +102,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -125,8 +149,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -162,8 +194,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -199,8 +239,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -238,8 +286,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -277,8 +333,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -319,8 +383,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -356,8 +428,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -397,8 +477,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -434,8 +522,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -474,8 +570,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -513,8 +617,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -550,8 +662,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -587,8 +707,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -624,8 +752,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -661,8 +797,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -698,8 +842,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -737,8 +889,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -778,8 +938,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -810,52 +978,6 @@
         "ComplianceManager"
       ]
     },
-    "/home/runner/workspace/contracts/upgradeable/EscrowFactoryUpgradeable.sol": {
-      "lastModificationDate": 1748683132930,
-      "contentHash": "e80459091c28c47b641bcefa9c1a63ff",
-      "sourceName": "contracts/upgradeable/EscrowFactoryUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
-        "../libraries/EscrowStructs.sol",
-        "../compliance/IComplianceManager.sol",
-        "../core/PropertyEscrow.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "EscrowFactoryUpgradeable"
-      ]
-    },
     "/home/runner/workspace/contracts/compliance/IComplianceManager.sol": {
       "lastModificationDate": 1748463816482,
       "contentHash": "4b950bd264502cd5b43db6b32f5ff4a3",
@@ -865,8 +987,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -902,8 +1032,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -942,8 +1080,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -981,8 +1127,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1021,8 +1175,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1060,8 +1222,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1101,8 +1271,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1140,8 +1318,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1177,8 +1363,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1214,8 +1408,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1258,8 +1460,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1295,8 +1505,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1332,8 +1550,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1369,8 +1595,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1409,8 +1643,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1453,8 +1695,16 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
           },
+          "viaIR": false,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1487,6 +1737,57 @@
       ],
       "artifacts": [
         "PropertyEscrow"
+      ]
+    },
+    "/home/runner/workspace/contracts/upgradeable/EscrowFactoryUpgradeableSimple.sol": {
+      "lastModificationDate": 1748698824767,
+      "contentHash": "0c6d921a55bfe6fb1569a72bf7b42953",
+      "sourceName": "contracts/upgradeable/EscrowFactoryUpgradeableSimple.sol",
+      "solcConfig": {
+        "version": "0.8.22",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1,
+            "details": {
+              "yul": true,
+              "yulDetails": {
+                "stackAllocation": true,
+                "optimizerSteps": "dhfoDgvulfnTUtnIf"
+              }
+            }
+          },
+          "viaIR": false,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
+        "../libraries/EscrowStructs.sol",
+        "../core/PropertyEscrow.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
+        "EscrowFactoryUpgradeableSimple"
       ]
     }
   }

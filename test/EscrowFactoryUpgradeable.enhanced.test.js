@@ -18,11 +18,11 @@ describe("EscrowFactoryUpgradeable - Enhanced Coverage Tests", function () {
     complianceManager = await ComplianceManager.deploy(deployer.address);
     await complianceManager.waitForDeployment();
 
-    // Deploy EscrowFactoryUpgradeable
-    const EscrowFactoryUpgradeable = await ethers.getContractFactory("EscrowFactoryUpgradeable");
+    // Deploy EscrowFactoryUpgradeableSimple
+    const EscrowFactoryUpgradeable = await ethers.getContractFactory("EscrowFactoryUpgradeableSimple");
     escrowFactory = await upgrades.deployProxy(
       EscrowFactoryUpgradeable,
-      [await complianceManager.getAddress()],
+      [deployer.address, 250],
       { initializer: "initialize" }
     );
     await escrowFactory.waitForDeployment();

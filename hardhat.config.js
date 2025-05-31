@@ -19,8 +19,15 @@ module.exports = {
       optimizer: {
         enabled: true,
         runs: 1,
+        details: {
+          yul: true,
+          yulDetails: {
+            stackAllocation: true,
+            optimizerSteps: "dhfoDgvulfnTUtnIf"
+          }
+        }
       },
-      viaIR: true,
+      viaIR: false,
     },
   },
   
