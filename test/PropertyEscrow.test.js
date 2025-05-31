@@ -62,9 +62,9 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       expect(escrow.seller).to.equal(seller.address);
       expect(escrow.agent).to.equal(agent.address);
       expect(escrow.arbiter).to.equal(arbiter.address);
-      expect(escrow.tokenContract).to.equal(await mockToken.getAddress());
-      expect(escrow.amount).to.equal(ethers.parseEther("1000"));
-      expect(escrow.status).to.equal(0); // PENDING
+      expect(escrow.tokenAddress).to.equal(await mockToken.getAddress());
+      expect(escrow.depositAmount).to.equal(ethers.parseEther("1000"));
+      expect(Number(escrow.state)).to.equal(0); // CREATED
     });
 
     it("Should have correct role assignments", async function () {
@@ -134,7 +134,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       await propertyEscrow.connect(seller).giveApproval(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.state).to.equal(3); // RELEASED
+      expect(Number(escrow.state)).to.equal(3); // RELEASED
     });
 
     it("Should transfer correct amounts including platform fee", async function () {
@@ -164,7 +164,7 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       await propertyEscrow.connect(buyer).cancelEscrow(escrowId);
       
       const escrow = await propertyEscrow.getEscrow(escrowId);
-      expect(escrow.state).to.equal(6); // CANCELLED
+      expect(Number(escrow.state)).to.equal(6); // CANCELLED
     });
 
     it("Should refund buyer when cancelling after funding", async function () {
