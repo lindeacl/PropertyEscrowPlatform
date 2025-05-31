@@ -33,8 +33,10 @@
 ```
 PropertyEscrow Tests: 13/13 PASSING
 EscrowFactory Tests: 6/6 PASSING
-Total Core Coverage: 19/19 tests passing
+EscrowFactoryUpgradeable Tests: 18/18 PASSING
+Total Core Coverage: 37/37 tests passing
 Execution Time: ~3 seconds
+Last Validated: 2025-05-31
 ```
 
 ### Compilation Status ✅
