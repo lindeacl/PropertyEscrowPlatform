@@ -1,56 +1,58 @@
-import React from 'react';
-import { useWallet } from '../contexts/WalletContext';
+import React, { useEffect, useState } from 'react';
+import { initializeBlockchainConnection } from '../utils/blockchainConnection';
 
-const ConnectionStatus: React.FC = () => {
-  const { isConnected, address, chainId } = useWallet();
+interface ConnectionStatusProps {
+  children: React.ReactNode;
+}
 
-  if (!isConnected) {
+export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ children }) => {
+  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const setupConnection = async () => {
+      try {
+        const connection = await initializeBlockchainConnection();
+        setIsConnected(connection.isConnected);
+        setError(null);
+      } catch (err) {
+        console.warn('Blockchain connection unavailable:', err);
+        setError('Blockchain connection unavailable - running in offline mode');
+        setIsConnected(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    setupConnection();
+  }, []);
+
+  if (isLoading) {
     return (
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-        <div className="flex items-center">
-          <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
-          <div>
-            <h3 className="text-yellow-800 font-medium">Wallet Not Connected</h3>
-            <p className="text-yellow-700 text-sm">
-              Connect your MetaMask wallet to interact with the platform. 
-              Make sure to add the local network (Chain ID: 31337, RPC: http://127.0.0.1:8545).
-            </p>
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Initializing application...</p>
         </div>
       </div>
     );
   }
 
-  const isLocalNetwork = chainId === 31337;
-
   return (
-    <div className={`border rounded-lg p-4 mb-6 ${
-      isLocalNetwork 
-        ? 'bg-green-50 border-green-200' 
-        : 'bg-orange-50 border-orange-200'
-    }`}>
-      <div className="flex items-center">
-        <div className={`w-3 h-3 rounded-full mr-3 ${
-          isLocalNetwork ? 'bg-green-400' : 'bg-orange-400'
-        }`}></div>
-        <div>
-          <h3 className={`font-medium ${
-            isLocalNetwork ? 'text-green-800' : 'text-orange-800'
-          }`}>
-            {isLocalNetwork ? 'Connected to Local Network' : 'Wrong Network'}
-          </h3>
-          <p className={`text-sm ${
-            isLocalNetwork ? 'text-green-700' : 'text-orange-700'
-          }`}>
-            {isLocalNetwork 
-              ? `Wallet: ${address?.slice(0, 6)}...${address?.slice(-4)}`
-              : 'Please switch to the local Hardhat network (Chain ID: 31337)'
-            }
-          </p>
+    <div>
+      {!isConnected && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+          <div className="flex">
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">
+                {error || 'Blockchain connection not available. Some features may be limited.'}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
+      {children}
     </div>
   );
 };
-
-export default ConnectionStatus;

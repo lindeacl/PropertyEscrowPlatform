@@ -52,6 +52,10 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       
       const provider = getWalletProvider();
+      if (!provider) {
+        throw new Error('No wallet provider available');
+      }
+      
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
       

@@ -107,7 +107,19 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,9 +163,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { WalletProvider } from './contexts/WalletContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ConnectionStatus } from './components/ConnectionStatus';
 import { Toaster } from 'react-hot-toast';
 import './styles/index.css';
 &nbsp;
@@ -166,32 +187,38 @@ import Settings from './pages/Settings';
 &nbsp;
 function <span class="fstat-no" title="function not covered" >App(</span>) {
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;ThemeProvider&gt;
-      &lt;Router&gt;
-        &lt;div className="App"&gt;
-          &lt;Routes&gt;
-            &lt;Route path="/" element={&lt;PureStaticHomepage /&gt;} /&gt;
-            &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;} /&gt;
-            &lt;Route path="/create" element={&lt;CreateEscrow /&gt;} /&gt;
-            &lt;Route path="/escrow/:id" element={&lt;EscrowDetails /&gt;} /&gt;
-            &lt;Route path="/settings" element={&lt;Settings /&gt;} /&gt;
-          &lt;/Routes&gt;
-          &lt;Toaster 
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: 'var(--color-bg-primary)',
-                color: 'var(--color-text-primary)',
-                border: '1px solid var(--color-border)',
-                borderRadius: '8px',
-                boxShadow: '0 2px 16px rgba(41, 98, 255, 0.07)',
-              },
-            }}
-          /&gt;
-        &lt;/div&gt;
-      &lt;/Router&gt;
-    &lt;/ThemeProvider&gt;
+    &lt;ErrorBoundary&gt;
+      &lt;ConnectionStatus&gt;
+        &lt;ThemeProvider&gt;
+          &lt;WalletProvider&gt;
+            &lt;Router&gt;
+              &lt;div className="App"&gt;
+                &lt;Routes&gt;
+                  &lt;Route path="/" element={&lt;PureStaticHomepage /&gt;} /&gt;
+                  &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;} /&gt;
+                  &lt;Route path="/create" element={&lt;CreateEscrow /&gt;} /&gt;
+                  &lt;Route path="/escrow/:id" element={&lt;EscrowDetails /&gt;} /&gt;
+                  &lt;Route path="/settings" element={&lt;Settings /&gt;} /&gt;
+                &lt;/Routes&gt;
+                &lt;Toaster 
+                  position="top-right"
+                  toastOptions={{
+                    duration: 4000,
+                    style: {
+                      background: 'var(--color-bg-primary)',
+                      color: 'var(--color-text-primary)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: '8px',
+                      boxShadow: '0 2px 16px rgba(41, 98, 255, 0.07)',
+                    },
+                  }}
+                /&gt;
+              &lt;/div&gt;
+            &lt;/Router&gt;
+          &lt;/WalletProvider&gt;
+        &lt;/ThemeProvider&gt;
+      &lt;/ConnectionStatus&gt;
+    &lt;/ErrorBoundary&gt;
   );
 }
 &nbsp;
@@ -202,7 +229,7 @@ export default App;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-06T17:16:18.693Z
+                at 2025-06-06T17:22:23.527Z
             </div>
         <script src="../prettify.js"></script>
         <script>

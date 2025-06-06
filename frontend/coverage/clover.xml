@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1749230178825" clover="3.2.0">
-  <project timestamp="1749230178825" name="All files">
-    <metrics statements="1176" coveredstatements="42" conditionals="1027" coveredconditionals="34" methods="301" coveredmethods="13" elements="2504" coveredelements="89" complexity="0" loc="1176" ncloc="1176" packages="10" files="53" classes="53"/>
+<coverage generated="1749230543728" clover="3.2.0">
+  <project timestamp="1749230543728" name="All files">
+    <metrics statements="1225" coveredstatements="42" conditionals="1029" coveredconditionals="34" methods="310" coveredmethods="13" elements="2564" coveredelements="89" complexity="0" loc="1225" ncloc="1225" packages="10" files="55" classes="55"/>
     <package name="src">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="App.minimal.tsx" path="/home/runner/workspace/frontend/src/App.minimal.tsx">
@@ -10,7 +10,7 @@
       </file>
       <file name="App.tsx" path="/home/runner/workspace/frontend/src/App.tsx">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
       </file>
       <file name="index.tsx" path="/home/runner/workspace/frontend/src/index.tsx">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -19,15 +19,27 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="53" coveredstatements="0" conditionals="50" coveredconditionals="0" methods="16" coveredmethods="0"/>
+      <metrics statements="72" coveredstatements="0" conditionals="44" coveredconditionals="0" methods="22" coveredmethods="0"/>
       <file name="ConnectionStatus.tsx" path="/home/runner/workspace/frontend/src/components/ConnectionStatus.tsx">
-        <metrics statements="6" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="18" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
       </file>
       <file name="DemoMode.tsx" path="/home/runner/workspace/frontend/src/components/DemoMode.tsx">
         <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -35,6 +47,16 @@
         <line num="9" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
+      </file>
+      <file name="ErrorBoundary.tsx" path="/home/runner/workspace/frontend/src/components/ErrorBoundary.tsx">
+        <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
       </file>
       <file name="Layout.tsx" path="/home/runner/workspace/frontend/src/components/Layout.tsx">
         <metrics statements="20" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="10" coveredmethods="0"/>
@@ -1202,7 +1224,7 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="142" coveredstatements="0" conditionals="76" coveredconditionals="0" methods="28" coveredmethods="0"/>
+      <metrics statements="172" coveredstatements="0" conditionals="84" coveredconditionals="0" methods="31" coveredmethods="0"/>
       <file name="accessibility.ts" path="/home/runner/workspace/frontend/src/utils/accessibility.ts">
         <metrics statements="54" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="6" count="0" type="stmt"/>
@@ -1259,6 +1281,29 @@
         <line num="123" count="0" type="stmt"/>
         <line num="131" count="0" type="stmt"/>
         <line num="140" count="0" type="stmt"/>
+      </file>
+      <file name="blockchainConnection.ts" path="/home/runner/workspace/frontend/src/utils/blockchainConnection.ts">
+        <metrics statements="20" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
       </file>
       <file name="contracts.ts" path="/home/runner/workspace/frontend/src/utils/contracts.ts">
         <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -1347,24 +1392,34 @@
         <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
       <file name="provider.ts" path="/home/runner/workspace/frontend/src/utils/provider.ts">
-        <metrics statements="17" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <metrics statements="27" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="31" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
       </file>
     </package>
   </project>
