@@ -51,6 +51,10 @@ args = "Smart Contract Tests"
 task = "workflow.run"
 args = "Deploy Contracts"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Static Frontend Server"
+
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -106,7 +110,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd frontend && npm start"
+args = "cd frontend && PORT=5000 npm start"
 waitForPort = 5000
 
 [[workflows.workflow]]
@@ -132,6 +136,15 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx hardhat run scripts/deploy.js --network localhost"
+
+[[workflows.workflow]]
+name = "Static Frontend Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npx serve -s build -l 5000"
+waitForPort = 5000
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/contexts/ThemeContext.tsx</title>
+    <title>Code coverage report for src/utils/networkConnection.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/contexts</a> ThemeContext.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/utils</a> networkConnection.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -39,7 +39,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -119,22 +119,10 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -144,6 +132,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,18 +149,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,70 +175,62 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { createContext, useContext, useState, useEffect } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ethers } from 'ethers';
+import { getProvider } from './provider';
 &nbsp;
-type Theme = 'light' | 'dark';
-&nbsp;
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () =&gt; void;
-  setTheme: (theme: Theme) =&gt; void;
-}
-&nbsp;
-const ThemeContext = <span class="cstat-no" title="statement not covered" >createContext&lt;ThemeContextType | undefined&gt;(undefined);</span>
-&nbsp;
-export const useTheme = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-  const context = <span class="cstat-no" title="statement not covered" >useContext(ThemeContext);</span>
-<span class="cstat-no" title="statement not covered" >  if (context === undefined) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error('useTheme must be used within a ThemeProvider');</span>
+export const testBlockchainConnection = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (): Promise&lt;boolean&gt; =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const provider = <span class="cstat-no" title="statement not covered" >getProvider();</span>
+    const blockNumber = <span class="cstat-no" title="statement not covered" >await provider.getBlockNumber();</span>
+    const network = <span class="cstat-no" title="statement not covered" >await provider.getNetwork();</span>
+    
+<span class="cstat-no" title="statement not covered" >    console.log('Blockchain connection successful:', {</span>
+      blockNumber,
+      chainId: network.chainId,
+      name: network.name
+    });
+    
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    console.error('Blockchain connection failed:', error);</span>
+<span class="cstat-no" title="statement not covered" >    return false;</span>
   }
-<span class="cstat-no" title="statement not covered" >  return context;</span>
 };
 &nbsp;
-interface ThemeProviderProps {
-  children: React.ReactNode;
-}
-&nbsp;
-export const ThemeProvider: React.FC&lt;ThemeProviderProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> children }) =&gt; {</span>
-  const [theme, setThemeState] = <span class="cstat-no" title="statement not covered" >useState&lt;Theme&gt;(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (typeof window !== 'undefined') {</span>
-      const stored = <span class="cstat-no" title="statement not covered" >localStorage.getItem('theme') as Theme;</span>
-<span class="cstat-no" title="statement not covered" >      if (stored) <span class="cstat-no" title="statement not covered" >return stored;</span></span>
-      
-<span class="cstat-no" title="statement not covered" >      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</span>
-    }
-<span class="cstat-no" title="statement not covered" >    return 'light';</span>
-  });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    const root = <span class="cstat-no" title="statement not covered" >window.document.documentElement;</span>
+export const getNetworkInfo = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const provider = <span class="cstat-no" title="statement not covered" >getProvider();</span>
+    const network = <span class="cstat-no" title="statement not covered" >await provider.getNetwork();</span>
+    const blockNumber = <span class="cstat-no" title="statement not covered" >await provider.getBlockNumber();</span>
     
-<span class="cstat-no" title="statement not covered" >    if (theme === 'dark') {</span>
-<span class="cstat-no" title="statement not covered" >      root.classList.add('dark');</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      root.classList.remove('dark');</span>
-    }
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      connected: true,
+      chainId: Number(network.chainId),
+      name: network.name || 'localhost',
+      blockNumber
+    };
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      connected: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    localStorage.setItem('theme', theme);</span>
-  }, [theme]);
-&nbsp;
-  const toggleTheme = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setThemeState(<span class="fstat-no" title="function not covered" >pr</span>evTheme =&gt; <span class="cstat-no" title="statement not covered" >prevTheme === 'light' ? 'dark' : 'light')</span>;</span>
-  };
-&nbsp;
-  const setTheme = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(n</span>ewTheme: Theme) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setThemeState(newTheme);</span>
-  };
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}&gt;
-      {children}
-    &lt;/ThemeContext.Provider&gt;
-  );
+export const formatConnectionError = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>rror: any): string =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (error?.code === 'NETWORK_ERROR') {</span>
+<span class="cstat-no" title="statement not covered" >    return 'Cannot connect to local blockchain. Ensure Hardhat node is running on port 8545';</span>
+  }
+  
+<span class="cstat-no" title="statement not covered" >  if (error?.message?.includes('ECONNREFUSED')) {</span>
+<span class="cstat-no" title="statement not covered" >    return 'Connection refused. Please start the local blockchain network';</span>
+  }
+  
+<span class="cstat-no" title="statement not covered" >  if (error?.message?.includes('timeout')) {</span>
+<span class="cstat-no" title="statement not covered" >    return 'Connection timeout. Please check network connectivity';</span>
+  }
+  
+<span class="cstat-no" title="statement not covered" >  return error?.message || 'Unknown connection error';</span>
 };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

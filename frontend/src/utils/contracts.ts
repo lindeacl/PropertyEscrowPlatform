@@ -7,15 +7,15 @@ export const CONTRACT_ADDRESSES = {
   MOCK_TOKEN: process.env.REACT_APP_MOCK_TOKEN_ADDRESS || '0x5FbDB2315678afecb367f032d93F642f64180aa3',
 };
 
-// Contract ABIs - Updated to match actual deployed contracts
+// Contract ABIs - Fixed to match actual deployed contracts
 export const ESCROW_FACTORY_ABI = [
-  "function createEscrow(tuple(address buyer, address seller, address agent, address arbiter, address tokenAddress, uint256 depositAmount, uint256 agentFee, uint256 platformFee, tuple(string propertyId, string title, string description, string location, uint256 price, bool verified) property, uint256 depositDeadline, uint256 verificationDeadline)) external returns (address escrowContract, uint256 escrowId)",
+  "function createEscrow(tuple(address buyer, address seller, address agent, address arbiter, address tokenAddress, uint256 depositAmount, uint256 agentFee, uint256 platformFee, tuple(string propertyId, string description, uint256 salePrice, string documentHash, bool verified) property, uint256 depositDeadline, uint256 verificationDeadline)) external returns (address escrowContract, uint256 escrowId)",
   "function getEscrowContract(uint256 escrowId) external view returns (address)",
   "function getTotalEscrows() external view returns (uint256)",
   "function whitelistedTokens(address token) external view returns (bool)",
   "function whitelistToken(address token, bool whitelisted) external",
   "function platformWallet() external view returns (address)",
-  "event EscrowCreated(uint256 indexed escrowId, address indexed buyer, address indexed seller, address escrowContract)",
+  "event EscrowContractDeployed(address indexed escrowContract, address indexed creator, uint256 escrowId)",
   "event TokenWhitelisted(address indexed token, bool whitelisted)"
 ];
 

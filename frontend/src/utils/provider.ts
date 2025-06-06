@@ -6,6 +6,10 @@ export const getProvider = () => {
     name: 'localhost',
     chainId: 31337
   });
+  
+  // Configure provider with retry and timeout
+  localProvider.pollingInterval = 1000;
+  
   return localProvider;
 };
 
