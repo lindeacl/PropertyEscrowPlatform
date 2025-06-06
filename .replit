@@ -43,6 +43,14 @@ args = "Frontend Development Server"
 task = "workflow.run"
 args = "UI Test Suite"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Smart Contract Tests"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Deploy Contracts"
+
 [[workflows.workflow]]
 name = "Hardhat Development Server"
 author = "agent"
@@ -108,6 +116,22 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run test:coverage"
+
+[[workflows.workflow]]
+name = "Smart Contract Tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx hardhat test"
+
+[[workflows.workflow]]
+name = "Deploy Contracts"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx hardhat run scripts/deploy.js --network localhost"
 
 [deployment]
 run = ["sh", "-c", "npm install && npm run test && npm run deploy:localhost"]

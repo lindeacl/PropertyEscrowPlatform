@@ -60,6 +60,8 @@ class EscrowCLI {
       this.contracts.factory = await EscrowFactory.deploy(
         this.accounts.deployer.address, // platformWallet
         250, // platformFee (2.5% in basis points)
+        this.accounts.agent.address, // defaultAgent
+        this.accounts.arbiter.address, // defaultArbiter
         { gasLimit: 8000000 }
       );
       await this.contracts.factory.waitForDeployment();
