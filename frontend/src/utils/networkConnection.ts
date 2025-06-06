@@ -3,7 +3,7 @@ import { getProvider } from './provider';
 
 export const testBlockchainConnection = async (): Promise<boolean> => {
   try {
-    const provider = getProvider();
+    const provider = await getProvider();
     if (!provider) {
       console.error('No provider available');
       return false;
@@ -27,7 +27,7 @@ export const testBlockchainConnection = async (): Promise<boolean> => {
 
 export const getNetworkInfo = async () => {
   try {
-    const provider = getProvider();
+    const provider = await getProvider();
     if (!provider) {
       return {
         connected: false,

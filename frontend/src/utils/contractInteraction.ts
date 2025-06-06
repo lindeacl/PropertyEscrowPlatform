@@ -21,7 +21,7 @@ export class ContractInteractionService {
   private config: ContractConfig;
 
   constructor(config: ContractConfig = {}) {
-    this.provider = getProvider();
+    this.provider = null;
     this.signer = null;
     this.config = {
       escrowFactoryAddress: config.escrowFactoryAddress || DEFAULT_ADDRESSES.escrowFactory,

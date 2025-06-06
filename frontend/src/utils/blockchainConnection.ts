@@ -15,7 +15,7 @@ export const initializeBlockchainConnection = async (): Promise<BlockchainConnec
   }
 
   try {
-    const provider = getProvider();
+    const provider = await getProvider();
     
     if (!provider) {
       throw new Error('No provider available');

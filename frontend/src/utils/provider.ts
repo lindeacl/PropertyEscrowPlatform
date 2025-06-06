@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 let cachedProvider: ethers.Provider | null = null;
 let connectionMode: 'metamask' | 'local' | 'offline' = 'offline';
 
-export const getProvider = () => {
+export const getProvider = async () => {
   if (cachedProvider && connectionMode !== 'offline') {
     return cachedProvider;
   }
@@ -11,8 +11,11 @@ export const getProvider = () => {
   // First try local network since it's most reliable for development
   try {
     const localProvider = new ethers.JsonRpcProvider('http://127.0.0.1:8545');
+    // Test the connection before caching
+    await localProvider.getBlockNumber();
     cachedProvider = localProvider;
     connectionMode = 'local';
+    console.log('Connected to local blockchain');
     return cachedProvider;
   } catch (error) {
     console.warn('Local network unavailable:', error);
@@ -21,8 +24,12 @@ export const getProvider = () => {
   // Try MetaMask if available
   if (typeof window !== 'undefined' && window.ethereum) {
     try {
-      cachedProvider = new ethers.BrowserProvider(window.ethereum);
+      const metamaskProvider = new ethers.BrowserProvider(window.ethereum);
+      // Test the connection
+      await metamaskProvider.getNetwork();
+      cachedProvider = metamaskProvider;
       connectionMode = 'metamask';
+      console.log('Connected to MetaMask');
       return cachedProvider;
     } catch (error) {
       console.warn('MetaMask connection failed:', error);
@@ -31,6 +38,7 @@ export const getProvider = () => {
 
   // Return null instead of broken provider to prevent JSON-RPC errors
   connectionMode = 'offline';
+  console.warn('No blockchain connection available');
   return null;
 };
 
