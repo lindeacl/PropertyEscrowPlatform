@@ -20,7 +20,20 @@ declare global {
       toHaveAccessibleName(name?: string | RegExp): R;
       toHaveAccessibleDescription(description?: string | RegExp): R;
       toHaveErrorMessage(message?: string | RegExp): R;
+      toHaveNoViolations(): R;
     }
+
+    interface MockedFunction<T extends (...args: any[]) => any> {
+      (...args: Parameters<T>): ReturnType<T>;
+      mockClear(): void;
+      mockImplementation(fn: T): MockedFunction<T>;
+      mockReturnValue(value: ReturnType<T>): MockedFunction<T>;
+      mockRestore(): void;
+    }
+
+    function fn<T extends (...args: any[]) => any>(implementation?: T): MockedFunction<T>;
+    function spyOn<T, K extends keyof T>(object: T, method: K): MockedFunction<T[K] extends (...args: any[]) => any ? T[K] : never>;
+    function clearAllMocks(): void;
   }
 
   var beforeAll: (fn: () => void | Promise<void>) => void;
