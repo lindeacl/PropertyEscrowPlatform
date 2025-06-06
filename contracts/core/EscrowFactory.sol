@@ -187,14 +187,6 @@ contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
         return escrowCounter;
     }
 }
-     * @dev Gets the default agent address
-     * @return The default agent address
-     */
-    function getDefaultAgent() external view override returns (address) {
-        return defaultAgent;
-    }
-
-    /**
      * @dev Gets the default arbiter address
      * @return The default arbiter address
      */

@@ -1,0 +1,162 @@
+1. UI Automated Testing
+A. Add React Testing Library (RTL) for UI Component and Flow Testing
+Install Testing Libraries:
+
+bash
+Copy
+Edit
+cd frontend
+npm install --save-dev @testing-library/react @testing-library/jest-dom @testing-library/user-event
+Create a __tests__ directory inside src/ or co-locate test files with components (e.g., Dashboard.test.tsx).
+
+Write tests for the following critical flows:
+
+Escrow Creation (fill out and submit the form, expect confirmation)
+
+Escrow Deposit (simulate wallet interaction, check for status update)
+
+Dispute Flow (initiate and resolve dispute, check UI and state)
+
+Wallet Connection (mock MetaMask, expect account to show)
+
+Example test skeleton:
+
+tsx
+Copy
+Edit
+import { render, screen, fireEvent } from '@testing-library/react';
+import CreateEscrow from '../pages/CreateEscrow';
+
+test('renders escrow creation form and submits', () => {
+  render(<CreateEscrow />);
+  fireEvent.change(screen.getByLabelText(/Property Name/i), { target: { value: 'Test Property' }});
+  fireEvent.click(screen.getByRole('button', { name: /Create/i }));
+  expect(screen.getByText(/Escrow Created!/i)).toBeInTheDocument();
+});
+Add tests for error handling and edge cases (invalid form, wallet not connected, etc.)
+
+(Optional) Add Cypress for E2E flows:
+
+Install: npm install --save-dev cypress
+
+Scaffold flows: create, deposit, dispute, refund, connect wallet.
+
+2. Accessibility Improvements
+Audit UI for ARIA roles and labels:
+
+For every modal, input, button, and interactive element, add descriptive aria-label, aria-labelledby, or aria-describedby as appropriate.
+
+Example:
+
+jsx
+Copy
+Edit
+<button aria-label="Deposit Funds" ...>Deposit</button>
+<input aria-label="Property Name" ... />
+Ensure all dialogs/modals have role="dialog" and are keyboard navigable.
+
+Test keyboard navigation:
+
+Tab through every page, ensure all focus states are visible and actionable.
+
+Confirm you can operate forms, dialogs, and menu items with only the keyboard.
+
+Run automated a11y check with axe or Lighthouse:
+
+npm install --save-dev axe-core jest-axe
+
+Add tests or run audits to catch missing labels or color contrast issues.
+
+3. Documentation (README, QuickStart, Troubleshooting)
+Update README.md with:
+
+Quick Start: Clear instructions for cloning, installing, running contracts, and the frontend.
+
+How to connect MetaMask and set up local testnet.
+
+Troubleshooting:
+
+MetaMask errors
+
+Port conflicts
+
+Node version issues
+
+Missing .env/config steps
+
+Add a section for “How to test”:
+
+Include commands for running UI (npm test) and contract tests.
+
+Document known issues and solutions.
+
+4. Coverage Enforcement (Smart Contracts & UI)
+A. Enforce Smart Contract Test Coverage
+Ensure solidity-coverage is installed and configured in hardhat.config.js.
+
+bash
+Copy
+Edit
+npm install --save-dev solidity-coverage
+Run coverage:
+
+bash
+Copy
+Edit
+npx hardhat coverage
+Add a check in your CI workflow:
+
+Fail the build if coverage <90%.
+
+Example in .github/workflows/ci.yml:
+
+yaml
+Copy
+Edit
+- name: Run contract coverage
+  run: npx hardhat coverage
+- name: Enforce 90% coverage
+  run: grep -q 'Statements.*90%' coverage/lcov-report/index.html
+B. UI Coverage (Optional/Recommended)
+RTL integrates with Jest—coverage is easy to add:
+
+bash
+Copy
+Edit
+npm test -- --coverage
+Add badge to README for UI coverage.
+
+5. Internationalization (i18n) Preparation
+Install i18n library:
+
+bash
+Copy
+Edit
+npm install react-i18next i18next
+Wrap your app with an i18n provider (see react-i18next docs).
+
+Replace hardcoded strings in the UI with translation keys:
+
+Use the t('key') function everywhere a string is rendered.
+
+Example:
+
+jsx
+Copy
+Edit
+import { useTranslation } from 'react-i18next';
+const { t } = useTranslation();
+<h1>{t('dashboard.title')}</h1>
+Create at least one alternative language file (e.g., en.json, es.json).
+
+Summary Table
+Step	What to Do	Key Command/Action
+1	Add UI automated tests	npm install --save-dev @testing-library/react jest-axe cypress
+2	Improve accessibility	Add ARIA labels, test keyboard navigation, run axe
+3	Update docs	Expand README QuickStart, troubleshooting, test instructions
+4	Enforce coverage	Add coverage to CI, ensure >90% or fail build
+5	Prepare i18n	npm install react-i18next i18next, refactor UI strings
+
+Agent: Complete each step in sequence.
+After each, commit your changes with a clear message, and confirm all builds/tests/coverage pass before moving on.
+
