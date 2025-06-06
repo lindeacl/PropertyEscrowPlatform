@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">76.92% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>10/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -142,46 +142,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,46 +211,46 @@ export interface ToastProps {
   autoClose?: number;
 }
 &nbsp;
-const Toast: React.FC&lt;ToastProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({ </span></span>
+const Toast: React.FC&lt;ToastProps&gt; = ({ 
   type, 
   message, 
   onClose, 
-  autoClose = <span class="branch-0 cbranch-no" title="branch not covered" >5000 </span>
+  autoClose = 5000 
 }) =&gt; {
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (autoClose &gt; 0) {</span>
-      const timer = <span class="cstat-no" title="statement not covered" >setTimeout(onClose, autoClose);</span>
-<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >clearTimeout(timer);</span></span>
+  useEffect(() =&gt; {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (autoClose &gt; 0) {
+      const timer = setTimeout(onClose, autoClose);
+      return () =&gt; clearTimeout(timer);
     }
   }, [autoClose, onClose]);
 &nbsp;
-  const getIcon = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    switch (type) {</span>
+  const getIcon = () =&gt; {
+    switch (type) {
       case 'success':
-<span class="cstat-no" title="statement not covered" >        return &lt;CheckCircle className="w-5 h-5 text-green-600" /&gt;;</span>
+        return &lt;CheckCircle className="w-5 h-5 text-green-600" /&gt;;
       case 'error':
-<span class="cstat-no" title="statement not covered" >        return &lt;XCircle className="w-5 h-5 text-red-600" /&gt;;</span>
-      case 'warning':
+        return &lt;XCircle className="w-5 h-5 text-red-600" /&gt;;
+<span class="branch-2 cbranch-no" title="branch not covered" >      case 'warning':</span>
 <span class="cstat-no" title="statement not covered" >        return &lt;AlertCircle className="w-5 h-5 text-yellow-600" /&gt;;</span>
       case 'info':
-<span class="cstat-no" title="statement not covered" >        return &lt;Info className="w-5 h-5 text-blue-600" /&gt;;</span>
+        return &lt;Info className="w-5 h-5 text-blue-600" /&gt;;
     }
   };
 &nbsp;
-  const getStyles = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    switch (type) {</span>
+  const getStyles = () =&gt; {
+    switch (type) {
       case 'success':
-<span class="cstat-no" title="statement not covered" >        return 'bg-green-50 border-green-200 text-green-800 toast-success';</span>
+        return 'bg-green-50 border-green-200 text-green-800 toast-success';
       case 'error':
-<span class="cstat-no" title="statement not covered" >        return 'bg-red-50 border-red-200 text-red-800 toast-error';</span>
-      case 'warning':
+        return 'bg-red-50 border-red-200 text-red-800 toast-error';
+<span class="branch-2 cbranch-no" title="branch not covered" >      case 'warning':</span>
 <span class="cstat-no" title="statement not covered" >        return 'bg-yellow-50 border-yellow-200 text-yellow-800 toast-warning';</span>
       case 'info':
-<span class="cstat-no" title="statement not covered" >        return 'bg-blue-50 border-blue-200 text-blue-800 toast-info';</span>
+        return 'bg-blue-50 border-blue-200 text-blue-800 toast-info';
     }
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div
       role="alert"
       aria-live={type === 'error' ? 'assertive' : 'polite'}
@@ -277,7 +277,7 @@ export default Toast;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-06T16:32:50.310Z
+                at 2025-06-06T16:42:22.865Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

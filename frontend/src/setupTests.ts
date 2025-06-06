@@ -1,5 +1,9 @@
 // Jest DOM setup for testing
 import '@testing-library/jest-dom';
+import { toHaveNoViolations } from 'jest-axe';
+
+// Extend Jest matchers
+expect.extend(toHaveNoViolations);
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
