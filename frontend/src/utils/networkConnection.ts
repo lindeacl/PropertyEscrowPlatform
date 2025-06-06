@@ -4,6 +4,11 @@ import { getProvider } from './provider';
 export const testBlockchainConnection = async (): Promise<boolean> => {
   try {
     const provider = getProvider();
+    if (!provider) {
+      console.error('No provider available');
+      return false;
+    }
+    
     const blockNumber = await provider.getBlockNumber();
     const network = await provider.getNetwork();
     
@@ -23,6 +28,13 @@ export const testBlockchainConnection = async (): Promise<boolean> => {
 export const getNetworkInfo = async () => {
   try {
     const provider = getProvider();
+    if (!provider) {
+      return {
+        connected: false,
+        error: 'No provider available'
+      };
+    }
+    
     const network = await provider.getNetwork();
     const blockNumber = await provider.getBlockNumber();
     

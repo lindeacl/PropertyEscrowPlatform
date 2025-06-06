@@ -51,18 +51,18 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       // Request account access from MetaMask first
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       
-      const provider = getWalletProvider();
-      if (!provider) {
+      const walletProvider = await getWalletProvider();
+      if (!walletProvider) {
         throw new Error('No wallet provider available');
       }
       
-      const signer = await provider.getSigner();
+      const signer = await walletProvider.getSigner();
       const address = await signer.getAddress();
       
       // Try to get network info, but don't fail if it's not available
       let chainId = 1; // Default to mainnet
       try {
-        const network = await provider.getNetwork();
+        const network = await walletProvider.getNetwork();
         chainId = Number(network.chainId);
       } catch (networkError) {
         console.warn('Could not get network info, using default');
@@ -71,7 +71,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setWalletState({
         isConnected: true,
         address,
-        provider,
+        provider: walletProvider,
         signer,
         chainId,
         balance: '0'
@@ -79,7 +79,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
       // Try to update balance, but don't fail connection if it doesn't work
       try {
-        await updateBalance(address, provider);
+        await updateBalance(address, walletProvider);
       } catch (balanceError) {
         console.warn('Could not fetch balance:', balanceError);
       }

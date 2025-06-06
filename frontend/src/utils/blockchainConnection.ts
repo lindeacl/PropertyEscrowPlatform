@@ -17,6 +17,10 @@ export const initializeBlockchainConnection = async (): Promise<BlockchainConnec
   try {
     const provider = getProvider();
     
+    if (!provider) {
+      throw new Error('No provider available');
+    }
+    
     // Test with a simple call that doesn't require JSON parsing
     await Promise.race([
       provider.getBlockNumber(),
@@ -41,7 +45,7 @@ export const initializeBlockchainConnection = async (): Promise<BlockchainConnec
     
     // Return fallback without attempting provider calls
     const fallbackConnection: BlockchainConnection = {
-      provider: null as any, // Don't use provider if connection failed
+      provider: null as any,
       isConnected: false,
       chainId: 31337
     };
