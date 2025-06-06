@@ -1,48 +1,8 @@
 import { ethers } from 'ethers';
 import { getProvider, getConnectionStatus } from './provider';
+import { ESCROW_FACTORY_ABI, PROPERTY_ESCROW_ABI, MOCK_ERC20_ABI } from './contractABI';
 
-// Contract ABIs - these would typically be imported from compiled artifacts
-const ESCROW_FACTORY_ABI = [
-  'function createEscrow(address _buyer, address _seller, address _arbiter, address _token, uint256 _amount, string memory _propertyDetails) external returns (address)',
-  'function getEscrowCount() external view returns (uint256)',
-  'function getEscrowAddress(uint256 _index) external view returns (address)',
-  'function getAllEscrows() external view returns (address[])',
-  'function owner() external view returns (address)',
-  'event EscrowCreated(address indexed escrowAddress, address indexed buyer, address indexed seller, uint256 amount)'
-];
 
-const PROPERTY_ESCROW_ABI = [
-  'function buyer() external view returns (address)',
-  'function seller() external view returns (address)',
-  'function arbiter() external view returns (address)',
-  'function amount() external view returns (uint256)',
-  'function token() external view returns (address)',
-  'function status() external view returns (uint8)',
-  'function propertyDetails() external view returns (string)',
-  'function deposit() external payable',
-  'function release() external',
-  'function cancel() external',
-  'function dispute() external',
-  'function resolveDispute(bool _releaseFunds) external',
-  'event FundsDeposited(address indexed depositor, uint256 amount)',
-  'event FundsReleased(address indexed recipient, uint256 amount)',
-  'event EscrowCancelled()',
-  'event DisputeRaised()',
-  'event DisputeResolved(bool releaseFunds)'
-];
-
-const MOCK_ERC20_ABI = [
-  'function name() external view returns (string)',
-  'function symbol() external view returns (string)',
-  'function decimals() external view returns (uint8)',
-  'function totalSupply() external view returns (uint256)',
-  'function balanceOf(address account) external view returns (uint256)',
-  'function transfer(address to, uint256 amount) external returns (bool)',
-  'function allowance(address owner, address spender) external view returns (uint256)',
-  'function approve(address spender, uint256 amount) external returns (bool)',
-  'function transferFrom(address from, address to, uint256 amount) external returns (bool)',
-  'function mint(address to, uint256 amount) external'
-];
 
 // Default contract addresses for local development
 const DEFAULT_ADDRESSES = {
@@ -142,10 +102,15 @@ export class ContractInteractionService {
   async createEscrow(params: {
     buyer: string;
     seller: string;
-    arbiter: string;
+    agent?: string;
+    arbiter?: string;
     token: string;
     amount: string;
+    propertyId: string;
     propertyDetails: string;
+    salePrice?: string;
+    agentFee?: string;
+    platformFee?: string;
   }): Promise<{ success: boolean; escrowAddress?: string; transactionHash?: string; error?: string }> {
     try {
       if (!this.signer) {
@@ -157,14 +122,33 @@ export class ContractInteractionService {
         return { success: false, error: 'Contract not available' };
       }
 
-      const tx = await contract.createEscrow(
-        params.buyer,
-        params.seller,
-        params.arbiter,
-        params.token,
-        ethers.parseEther(params.amount),
-        params.propertyDetails
-      );
+      // Calculate deadlines (24 hours for deposit, 7 days for verification)
+      const now = Math.floor(Date.now() / 1000);
+      const depositDeadline = now + (24 * 60 * 60); // 24 hours
+      const verificationDeadline = now + (7 * 24 * 60 * 60); // 7 days
+
+      // Create the structured parameters matching CreateEscrowParams
+      const createEscrowParams = {
+        buyer: params.buyer,
+        seller: params.seller,
+        agent: params.agent || ethers.ZeroAddress, // Will use default if zero address
+        arbiter: params.arbiter || ethers.ZeroAddress, // Will use default if zero address
+        tokenAddress: params.token,
+        depositAmount: ethers.parseEther(params.amount),
+        agentFee: ethers.parseEther(params.agentFee || "0.01"), // Default 0.01 ETH
+        platformFee: ethers.parseEther(params.platformFee || "0.005"), // Default 0.005 ETH
+        property: {
+          propertyId: params.propertyId,
+          description: params.propertyDetails,
+          salePrice: ethers.parseEther(params.salePrice || params.amount),
+          documentHash: "QmDefault123", // Default IPFS hash
+          verified: false
+        },
+        depositDeadline: depositDeadline,
+        verificationDeadline: verificationDeadline
+      };
+
+      const tx = await contract.createEscrow(createEscrowParams);
 
       const receipt = await tx.wait();
       
