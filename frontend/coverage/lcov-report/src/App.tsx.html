@@ -116,7 +116,24 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,6 +186,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -179,6 +211,7 @@ import { Toaster } from 'react-hot-toast';
 import './styles/index.css';
 &nbsp;
 // Pages
+import StaticLanding from './pages/StaticLanding';
 import PureStaticHomepage from './pages/PureStaticHomepage';
 import Dashboard from './pages/Dashboard';
 import CreateEscrow from './pages/CreateEscrow';
@@ -188,36 +221,51 @@ import Settings from './pages/Settings';
 function <span class="fstat-no" title="function not covered" >App(</span>) {
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;ErrorBoundary&gt;
-      &lt;ConnectionStatus&gt;
-        &lt;ThemeProvider&gt;
-          &lt;WalletProvider&gt;
-            &lt;Router&gt;
-              &lt;div className="App"&gt;
-                &lt;Routes&gt;
-                  &lt;Route path="/" element={&lt;PureStaticHomepage /&gt;} /&gt;
-                  &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;} /&gt;
-                  &lt;Route path="/create" element={&lt;CreateEscrow /&gt;} /&gt;
-                  &lt;Route path="/escrow/:id" element={&lt;EscrowDetails /&gt;} /&gt;
-                  &lt;Route path="/settings" element={&lt;Settings /&gt;} /&gt;
-                &lt;/Routes&gt;
-                &lt;Toaster 
-                  position="top-right"
-                  toastOptions={{
-                    duration: 4000,
-                    style: {
-                      background: 'var(--color-bg-primary)',
-                      color: 'var(--color-text-primary)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: '8px',
-                      boxShadow: '0 2px 16px rgba(41, 98, 255, 0.07)',
-                    },
-                  }}
-                /&gt;
-              &lt;/div&gt;
-            &lt;/Router&gt;
-          &lt;/WalletProvider&gt;
-        &lt;/ThemeProvider&gt;
-      &lt;/ConnectionStatus&gt;
+      &lt;ThemeProvider&gt;
+        &lt;Router&gt;
+          &lt;div className="App"&gt;
+            &lt;Routes&gt;
+              &lt;Route path="/" element={&lt;StaticLanding /&gt;} /&gt;
+              &lt;Route path="/home" element={&lt;PureStaticHomepage /&gt;} /&gt;
+              &lt;Route path="/dashboard" element={
+                &lt;WalletProvider&gt;
+                  &lt;ConnectionStatus&gt;
+                    &lt;Dashboard /&gt;
+                  &lt;/ConnectionStatus&gt;
+                &lt;/WalletProvider&gt;
+              } /&gt;
+              &lt;Route path="/create" element={
+                &lt;WalletProvider&gt;
+                  &lt;ConnectionStatus&gt;
+                    &lt;CreateEscrow /&gt;
+                  &lt;/ConnectionStatus&gt;
+                &lt;/WalletProvider&gt;
+              } /&gt;
+              &lt;Route path="/escrow/:id" element={
+                &lt;WalletProvider&gt;
+                  &lt;ConnectionStatus&gt;
+                    &lt;EscrowDetails /&gt;
+                  &lt;/ConnectionStatus&gt;
+                &lt;/WalletProvider&gt;
+              } /&gt;
+              &lt;Route path="/settings" element={&lt;Settings /&gt;} /&gt;
+            &lt;/Routes&gt;
+            &lt;Toaster 
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: '#ffffff',
+                  color: '#374151',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 16px rgba(0, 0, 0, 0.1)',
+                },
+              }}
+            /&gt;
+          &lt;/div&gt;
+        &lt;/Router&gt;
+      &lt;/ThemeProvider&gt;
     &lt;/ErrorBoundary&gt;
   );
 }
@@ -229,7 +277,7 @@ export default App;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-06T17:22:23.527Z
+                at 2025-06-06T17:24:57.450Z
             </div>
         <script src="../prettify.js"></script>
         <script>

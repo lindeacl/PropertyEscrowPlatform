@@ -6,11 +6,8 @@ import {
   CheckCircle, 
   ArrowRight,
   DollarSign,
-  Clock,
-  Users,
   FileText,
-  TrendingUp,
-  Award
+  TrendingUp
 } from 'lucide-react';
 
 const StaticLanding: React.FC = () => {

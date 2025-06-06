@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import './styles/index.css';
 
 // Pages
+import StaticLanding from './pages/StaticLanding';
 import PureStaticHomepage from './pages/PureStaticHomepage';
 import Dashboard from './pages/Dashboard';
 import CreateEscrow from './pages/CreateEscrow';
@@ -17,36 +18,51 @@ import Settings from './pages/Settings';
 function App() {
   return (
     <ErrorBoundary>
-      <ConnectionStatus>
-        <ThemeProvider>
-          <WalletProvider>
-            <Router>
-              <div className="App">
-                <Routes>
-                  <Route path="/" element={<PureStaticHomepage />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/create" element={<CreateEscrow />} />
-                  <Route path="/escrow/:id" element={<EscrowDetails />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Routes>
-                <Toaster 
-                  position="top-right"
-                  toastOptions={{
-                    duration: 4000,
-                    style: {
-                      background: 'var(--color-bg-primary)',
-                      color: 'var(--color-text-primary)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: '8px',
-                      boxShadow: '0 2px 16px rgba(41, 98, 255, 0.07)',
-                    },
-                  }}
-                />
-              </div>
-            </Router>
-          </WalletProvider>
-        </ThemeProvider>
-      </ConnectionStatus>
+      <ThemeProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<StaticLanding />} />
+              <Route path="/home" element={<PureStaticHomepage />} />
+              <Route path="/dashboard" element={
+                <WalletProvider>
+                  <ConnectionStatus>
+                    <Dashboard />
+                  </ConnectionStatus>
+                </WalletProvider>
+              } />
+              <Route path="/create" element={
+                <WalletProvider>
+                  <ConnectionStatus>
+                    <CreateEscrow />
+                  </ConnectionStatus>
+                </WalletProvider>
+              } />
+              <Route path="/escrow/:id" element={
+                <WalletProvider>
+                  <ConnectionStatus>
+                    <EscrowDetails />
+                  </ConnectionStatus>
+                </WalletProvider>
+              } />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+            <Toaster 
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: '#ffffff',
+                  color: '#374151',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 16px rgba(0, 0, 0, 0.1)',
+                },
+              }}
+            />
+          </div>
+        </Router>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
