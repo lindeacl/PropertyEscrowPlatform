@@ -1,101 +1,67 @@
-import React from 'react';
-import { CheckCircle, AlertCircle, AlertTriangle, X, Info } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info';
-
-interface ToastProps {
-  id: string;
-  type: ToastType;
-  title?: string;
+export interface ToastProps {
+  type: 'success' | 'error' | 'warning' | 'info';
   message: string;
-  duration?: number;
-  onClose: (id: string) => void;
+  onClose: () => void;
+  autoClose?: number;
 }
 
-const Toast: React.FC<ToastProps> = ({
-  id,
-  type,
-  title,
-  message,
-  onClose
+const Toast: React.FC<ToastProps> = ({ 
+  type, 
+  message, 
+  onClose, 
+  autoClose = 5000 
 }) => {
-  const getToastConfig = () => {
+  useEffect(() => {
+    if (autoClose > 0) {
+      const timer = setTimeout(onClose, autoClose);
+      return () => clearTimeout(timer);
+    }
+  }, [autoClose, onClose]);
+
+  const getIcon = () => {
     switch (type) {
       case 'success':
-        return {
-          icon: CheckCircle,
-          bgColor: 'bg-success-50',
-          borderColor: 'border-success-200',
-          iconColor: 'text-success-600',
-          titleColor: 'text-success-800',
-          messageColor: 'text-success-700'
-        };
+        return <CheckCircle className="w-5 h-5 text-green-600" />;
       case 'error':
-        return {
-          icon: AlertCircle,
-          bgColor: 'bg-danger-50',
-          borderColor: 'border-danger-200',
-          iconColor: 'text-danger-600',
-          titleColor: 'text-danger-800',
-          messageColor: 'text-danger-700'
-        };
+        return <XCircle className="w-5 h-5 text-red-600" />;
       case 'warning':
-        return {
-          icon: AlertTriangle,
-          bgColor: 'bg-accent-50',
-          borderColor: 'border-accent-200',
-          iconColor: 'text-accent-600',
-          titleColor: 'text-accent-800',
-          messageColor: 'text-accent-700'
-        };
+        return <AlertCircle className="w-5 h-5 text-yellow-600" />;
       case 'info':
-        return {
-          icon: Info,
-          bgColor: 'bg-primary-50',
-          borderColor: 'border-primary-200',
-          iconColor: 'text-primary-600',
-          titleColor: 'text-primary-800',
-          messageColor: 'text-primary-700'
-        };
-      default:
-        return {
-          icon: Info,
-          bgColor: 'bg-gray-50',
-          borderColor: 'border-gray-200',
-          iconColor: 'text-gray-600',
-          titleColor: 'text-gray-800',
-          messageColor: 'text-gray-700'
-        };
+        return <Info className="w-5 h-5 text-blue-600" />;
     }
   };
 
-  const config = getToastConfig();
-  const Icon = config.icon;
+  const getStyles = () => {
+    switch (type) {
+      case 'success':
+        return 'bg-green-50 border-green-200 text-green-800 toast-success';
+      case 'error':
+        return 'bg-red-50 border-red-200 text-red-800 toast-error';
+      case 'warning':
+        return 'bg-yellow-50 border-yellow-200 text-yellow-800 toast-warning';
+      case 'info':
+        return 'bg-blue-50 border-blue-200 text-blue-800 toast-info';
+    }
+  };
 
   return (
-    <div className={`
-      flex items-start p-4 rounded-lg border shadow-lg max-w-sm w-full
-      ${config.bgColor} ${config.borderColor}
-      animate-in slide-in-from-right duration-300
-    `}>
-      <Icon className={`h-5 w-5 mt-0.5 mr-3 ${config.iconColor}`} />
-      
-      <div className="flex-1 min-w-0">
-        {title && (
-          <h4 className={`text-sm font-semibold ${config.titleColor}`}>
-            {title}
-          </h4>
-        )}
-        <p className={`text-sm ${title ? 'mt-1' : ''} ${config.messageColor}`}>
-          {message}
-        </p>
-      </div>
-      
+    <div
+      role="alert"
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
+      aria-atomic="true"
+      className={`flex items-center gap-3 p-4 border rounded-lg shadow-lg ${getStyles()}`}
+    >
+      {getIcon()}
+      <p className="flex-1 text-sm font-medium">{message}</p>
       <button
-        onClick={() => onClose(id)}
-        className="ml-3 text-gray-400 hover:text-gray-600 transition-colors"
+        onClick={onClose}
+        className="p-1 hover:bg-black/10 rounded"
+        aria-label="Close notification"
       >
-        <X className="h-4 w-4" />
+        <X className="w-4 h-4" />
       </button>
     </div>
   );
