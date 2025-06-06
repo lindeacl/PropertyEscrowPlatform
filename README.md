@@ -15,7 +15,7 @@ A blockchain-powered property escrow platform that simplifies complex real estat
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd PropertyEscrow
+cd PropertyEscrowPlatform
 ```
 
 2. **Install dependencies**
