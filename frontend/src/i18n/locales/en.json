@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "createEscrow": "Create Escrow",
+    "settings": "Settings",
+    "connectWallet": "Connect Wallet",
+    "disconnectWallet": "Disconnect"
+  },
+  "escrow": {
+    "create": "Create Property Escrow",
+    "propertyName": "Property Name",
+    "buyerAddress": "Buyer Address",
+    "sellerAddress": "Seller Address",
+    "agentAddress": "Agent Address",
+    "arbiterAddress": "Arbiter Address",
+    "amount": "Escrow Amount",
+    "tokenAddress": "Token Address",
+    "deadline": "Deadline",
+    "description": "Property Description",
+    "deposit": "Deposit Funds",
+    "approve": "Approve Release",
+    "release": "Release Funds",
+    "cancel": "Cancel Escrow",
+    "dispute": "Dispute Resolution"
+  },
+  "status": {
+    "pending": "Pending",
+    "funded": "Funded",
+    "approved": "Approved",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "disputed": "Disputed"
+  },
+  "messages": {
+    "walletConnected": "Wallet connected successfully",
+    "transactionSubmitted": "Transaction submitted",
+    "transactionConfirmed": "Transaction confirmed",
+    "transactionFailed": "Transaction failed",
+    "insufficientBalance": "Insufficient balance",
+    "invalidAddress": "Invalid address format",
+    "networkError": "Network connection error"
+  },
+  "forms": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidAmount": "Invalid amount",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loading": "Loading..."
+  }
+}
