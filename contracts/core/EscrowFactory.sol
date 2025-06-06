@@ -183,30 +183,7 @@ contract EscrowFactory is IEscrowFactory, Ownable, ReentrancyGuard {
      * @dev Gets the total number of escrows created
      * @return The escrow counter
      */
-    function getEscrowCount() external view override returns (uint256) {
-        return escrowCounter;
-    }
-}
-     * @dev Gets the default arbiter address
-     * @return The default arbiter address
-     */
-    function getDefaultArbiter() external view override returns (address) {
-        return defaultArbiter;
-    }
-
-    /**
-     * @dev Gets the platform fee
-     * @return The platform fee in basis points
-     */
-    function getPlatformFee() external view override returns (uint256) {
-        return platformFee;
-    }
-
-    /**
-     * @dev Gets the total number of escrow contracts created
-     * @return The total number of escrow contracts
-     */
-    function getTotalEscrowContracts() external view returns (uint256) {
+    function getEscrowCount() external view returns (uint256) {
         return escrowCounter;
     }
 }
