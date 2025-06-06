@@ -244,6 +244,31 @@ describe("PropertyEscrow - Enhanced Coverage", function () {
       expect(difference <= tolerance).to.be.true;
       expect(finalPlatformBalance - initialPlatformBalance).to.equal(platformFee);
     });
+
+    it("approveRelease should mirror giveApproval behavior", async function () {
+      // Cannot approve before verification
+      try {
+        await propertyEscrow.connect(buyer).approveRelease();
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Invalid escrow state");
+      }
+
+      await propertyEscrow.connect(agent).completeVerification(escrowId);
+
+      // First approval succeeds
+      await propertyEscrow.connect(buyer).approveRelease();
+      let escrow = await propertyEscrow.getEscrow(escrowId);
+      expect(escrow.buyerApproval).to.be.true;
+
+      // Second approval should revert
+      try {
+        await propertyEscrow.connect(buyer).approveRelease();
+        expect.fail("Should have reverted");
+      } catch (error) {
+        expect(error.message).to.include("Buyer already approved");
+      }
+    });
   });
 
   describe("Cancellation and Refunds", function () {
