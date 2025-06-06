@@ -3,17 +3,22 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import WalletConnection from '../components/ui/WalletConnection';
 
+// Mock functions
+const mockConnect = jest.fn();
+const mockDisconnect = jest.fn();
+const mockSwitchToPolygon = jest.fn();
+
 // Mock the useWallet hook
 jest.mock('../hooks/useWallet', () => ({
   useWallet: () => ({
     account: null,
     isConnected: false,
     isConnecting: false,
-    connect: jest.fn(),
-    disconnect: jest.fn(),
+    connect: mockConnect,
+    disconnect: mockDisconnect,
     balance: '0',
     chainId: null,
-    switchToPolygon: jest.fn(),
+    switchToPolygon: mockSwitchToPolygon,
   })
 }));
 
@@ -199,6 +204,12 @@ describe('WalletConnection Component', () => {
   });
 
   test('has proper accessibility attributes', () => {
+    // Mock window.ethereum for this test
+    Object.defineProperty(window, 'ethereum', {
+      value: { isMetaMask: true },
+      writable: true
+    });
+
     render(<WalletConnection />);
     
     const connectButton = screen.getByRole('button', { name: /connect wallet/i });
@@ -207,6 +218,12 @@ describe('WalletConnection Component', () => {
   });
 
   test('keyboard navigation works correctly', async () => {
+    // Mock window.ethereum
+    Object.defineProperty(window, 'ethereum', {
+      value: { isMetaMask: true },
+      writable: true
+    });
+
     const user = userEvent.setup();
     render(<WalletConnection />);
     
